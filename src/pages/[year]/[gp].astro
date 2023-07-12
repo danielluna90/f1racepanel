@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+    return [{ params: { year: 2023, gp: "british" } }];
+}
+
+const { year, gp } = Astro.params;
+
+function convertToTitleCase(str: string | undefined) {
+    if (!str) {
+        return "";
+    }
+    return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
+}
+
+const gpTitle = convertToTitleCase(gp);
+---
+
+<BaseLayout title=`${year} ${gpTitle} GP`>
+    <h1>
+        {`${year} ${gpTitle} GP`}
+    </h1>
+</BaseLayout>
