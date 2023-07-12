@@ -5,7 +5,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout>
 	<main>
 		<h1>Welcome to F1 Race View</h1>
+
+		<div id="test">
+			<h2>British GP Weekend</h2>
+		</div>
 	</main>
 </BaseLayout>
 
-<style></style>
+<style>
+	#test {
+		background-color: rgb(var(--primary-color-rgb) / 0.15);
+		border-radius: 1rem;
+		text-align: center;
+
+		padding: 2rem;
+
+		width: 250px;
+		height: 200px;
+	}
+</style>
