@@ -1,10 +1,21 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
-export function getStaticPaths() {
-    return [{ params: { year: 2023, gp: "british" } }];
+import { CollectionEntry, getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+    const gpEntries = await getCollection("2023");
+    return gpEntries.map((entry) => ({
+        params: { year: entry.collection, gp: entry.id },
+        props: { entry },
+    }));
 }
 
+interface Props {
+    entry: CollectionEntry<"2023">;
+}
+
+const { entry } = Astro.props;
 const { year, gp } = Astro.params;
 
 function convertToTitleCase(str: string | undefined) {
@@ -17,8 +28,8 @@ function convertToTitleCase(str: string | undefined) {
 const gpTitle = convertToTitleCase(gp);
 ---
 
-<BaseLayout title=`${year} ${gpTitle} GP`>
+<BaseLayout title={`${year} ${gpTitle} GP`}>
     <h1>
-        {`${year} ${gpTitle} GP`}
+        {`${year} ${entry.data.name} GP`}
     </h1>
 </BaseLayout>
