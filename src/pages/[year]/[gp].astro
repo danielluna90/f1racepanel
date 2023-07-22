@@ -4,15 +4,21 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { CollectionEntry, getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-    const gpEntries = await getCollection("2023");
-    return gpEntries.map((entry) => ({
-        params: { year: entry.collection, gp: entry.id },
-        props: { entry },
-    }));
+    const gpEntries = await getCollection("gpData");
+
+    return gpEntries.map((entry) => {
+        const [year, gp] = entry.id.split("/");
+        const [_, gpName] = gp.split("-");
+
+        return {
+            params: { year: year, gp: gpName },
+            props: { entry },
+        };
+    });
 }
 
 interface Props {
-    entry: CollectionEntry<"2023">;
+    entry: CollectionEntry<"gpData">;
 }
 
 const { entry } = Astro.props;
