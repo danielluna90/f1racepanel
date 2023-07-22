@@ -1,7 +1,32 @@
 ---
+import ArchiveCard from "../components/cards/ArchiveCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { CollectionEntry, getCollection } from "astro:content";
+
+const gpEntries = await getCollection("gpData");
+const gpByYear: Map<string, CollectionEntry<"gpData">[]> = new Map();
+
+gpEntries.forEach((gpEntry) => {
+  const [year, _] = gpEntry.id.split("/");
+
+  if (!gpByYear.get(year)) gpByYear.set(year, [gpEntry]);
+  else gpByYear.get(year)!.push(gpEntry);
+});
 ---
 
 <BaseLayout title="Archive">
-    <h1>Race Archive</h1>
+  <h1>Race Archive</h1>
+  {
+    Array.from(gpByYear).map(([year, races]) => {
+      return (
+        <>
+          <h2>{year}</h2>
+          {races.map((race) => {
+            return <ArchiveCard race={race} />;
+          })}
+        </>
+      );
+    })
+  }
 </BaseLayout>

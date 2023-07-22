@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+export interface Props {
+  race: CollectionEntry<"gpData">;
+}
+
+const { race } = Astro.props;
+
+const [year, gp] = race.id.split("/");
+const [_, gpName] = gp.split("-");
+
+const raceSlug = `${year}/${gpName}`;
+---
+
+<>
+  {
+    race.data.status === "Completed" && (
+      <div>
+        <h3>
+          <a href={raceSlug}>{race.data.name}</a>
+        </h3>
+      </div>
+    )
+  }
+</>
