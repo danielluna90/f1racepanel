@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import Card from "../Card.astro";
 
 export interface Props {
   race: CollectionEntry<"gpData">;
@@ -15,12 +16,15 @@ const raceSlug = `${year}/${gpName}`;
 
 <>
   {
-    race.data.status === "Completed" && (
-      <div>
+    race.data.status !== "Upcoming" && (
+      <Card interactive>
         <h3>
           <a href={raceSlug}>{race.data.name}</a>
         </h3>
-      </div>
+        <p>{race.data.status}</p>
+      </Card>
     )
   }
 </>
+
+<style></style>

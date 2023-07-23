@@ -1,0 +1,130 @@
+{
+    "drivers": [
+        {
+            "name": "Max Verstappen",
+            "num": 1,
+            "abr": "VER",
+            "team": "Red Bull"
+        },
+        {
+            "name": "Logan Sargeant",
+            "num": 2,
+            "abr": "SAR",
+            "team": "Williams"
+        },
+        {
+            "name": "Daniel Ricciardo",
+            "num": 3,
+            "abr": "RIC",
+            "team": "AlphaTauri"
+        },
+        {
+            "name": "Lando Norris",
+            "num": 4,
+            "abr": "NOR",
+            "team": "Mclaren"
+        },
+        {
+            "name": "Pierre Gasly",
+            "num": 10,
+            "abr": "GAS",
+            "team": "Alpine"
+        },
+        {
+            "name": "Sergio Pérez",
+            "num": 11,
+            "abr": "PER",
+            "team": "Red Bull"
+        },
+        {
+            "name": "Fernando Alonso",
+            "num": 14,
+            "abr": "ALO",
+            "team": "Aston Martin"
+        },
+        {
+            "name": "Charles Leclerc",
+            "num": 16,
+            "abr": "LEC",
+            "team": "Ferrari"
+        },
+        {
+            "name": "Lance Stroll",
+            "num": 18,
+            "abr": "STR",
+            "team": "Aston Martin"
+        },
+        {
+            "name": "Kevin Magnussen",
+            "num": 20,
+            "abr": "MAG",
+            "team": "Haas"
+        },
+        {
+            "name": "Nyck de Vries",
+            "num": 21,
+            "abr": "DEV",
+            "team": "AlphaTauri"
+        },
+        {
+            "name": "Yuki Tsunoda",
+            "num": 22,
+            "abr": "TSU",
+            "team": "AlphaTauri"
+        },
+        {
+            "name": "Alexander Albon",
+            "num": 23,
+            "abr": "ALB",
+            "team": "Williams"
+        },
+        {
+            "name": "Zhou Guanyu",
+            "num": 24,
+            "abr": "ZHO",
+            "team": "Alfa Romeo"
+        },
+        {
+            "name": "Nico Hülkenberg",
+            "num": 27,
+            "abr": "HUL",
+            "team": "Haas"
+        },
+        {
+            "name": "Esteban Ocon",
+            "num": 31,
+            "abr": "OCO",
+            "team": "Alpine"
+        },
+        {
+            "name": "Lewis Hamilton",
+            "num": 44,
+            "abr": "HAM",
+            "team": "Mercedes"
+        },
+        {
+            "name": "Carlos Sainz",
+            "num": 55,
+            "abr": "SAI",
+            "team": "Ferrari"
+        },
+        {
+            "name": "George Russell",
+            "num": 63,
+            "abr": "RUS",
+            "team": "Mercedes"
+        },
+        {
+            "name": "Valtteri Bottas",
+            "num": 77,
+            "abr": "BOT",
+            "team": "Alfa Romeo"
+        },
+        {
+            "name": "Oscar Piastri",
+            "num": 81,
+            "abr": "PIA",
+            "team": "Mclaren"
+        }
+    ]
+}
