@@ -10,12 +10,16 @@ export default defineConfig({
         sitemap()
     ],
     experimental: {
-        assets: true
+        assets: true,
+        viewTransitions: true
     },
     image: {
         service: sharpImageService()
     },
     server: {
         port: 3001
+    },
+    build: {
+        inlineStylesheets: 'auto'
     }
 });
