@@ -23,18 +23,28 @@ const sprintGPSchedule = z.object({
     race: z.string().transform((str)=>new Date(str))
 })
 
+const driver = z.object({
+    name: z.string(),
+    num: z.number(),
+    abr: z.string().max(3),
+    team: z.string()
+})
+
 const gpCollection = defineCollection({
     type: 'data',
     schema: z.object({
         name: z.string(),
         status: z.union([z.literal('Upcoming'), z.literal('Completed'), z.literal('Canceled'), z.literal('TBD')]).default('TBD'),
-        schedule: z.union([normalGPSchedule, sprint2022GPSchedule, sprintGPSchedule]).optional()
+        schedule: z.union([normalGPSchedule, sprint2022GPSchedule, sprintGPSchedule]).optional(),
+        standings: z.array(z.object({pos: z.number(), driverNum: z.number()})).optional()
     })
 })
 
 const metadataCollection = defineCollection({
     type: 'data',
-    schema: z.object({})
+    schema: z.object({
+        drivers: z.array(driver)
+    })
 })
 
 export const collections = {

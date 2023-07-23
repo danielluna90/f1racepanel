@@ -1,0 +1,23 @@
+---
+export interface Props {
+  interactive?: boolean;
+}
+
+const { interactive } = Astro.props;
+---
+
+<div class="card" class:list={{ interactive }}>
+  <slot />
+</div>
+
+<style>
+  .card {
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+  }
+
+  .card.interactive:hover {
+    cursor: pointer;
+  }
+</style>
