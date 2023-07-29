@@ -7,7 +7,10 @@ export interface Props {
 const { interactive, href } = Astro.props;
 ---
 
-<div class="card" class:list={{ interactive, padding: !href }}>
+<div
+  class="card"
+  class:list={{ interactive: interactive || href, padding: !href }}
+>
   {
     href ? (
       <a href={href}>
