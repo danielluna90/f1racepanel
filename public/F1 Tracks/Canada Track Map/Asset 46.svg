@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1436.4 708.49">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #00a6ff;
+      }
+
+      .cls-1, .cls-2, .cls-3 {
+        stroke-width: 6px;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10, .cls-11 {
+        stroke-miterlimit: 10;
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-9, .cls-10, .cls-11 {
+        fill: none;
+      }
+
+      .cls-2 {
+        stroke: #ffd600;
+      }
+
+      .cls-3 {
+        stroke: red;
+      }
+
+      .cls-4, .cls-5, .cls-10, .cls-11 {
+        stroke-linecap: round;
+      }
+
+      .cls-4, .cls-10 {
+        stroke-dasharray: 0 15.5;
+      }
+
+      .cls-4, .cls-11 {
+        stroke: lime;
+        stroke-width: 4px;
+      }
+
+      .cls-5, .cls-6, .cls-7, .cls-8, .cls-9, .cls-10 {
+        stroke: #000;
+      }
+
+      .cls-5, .cls-10 {
+        stroke-width: 8px;
+      }
+
+      .cls-5, .cls-11 {
+        stroke-dasharray: 0 16;
+      }
+
+      .cls-12 {
+        fill: #fff;
+      }
+
+      .cls-13, .cls-8 {
+        fill: #ff73cb;
+      }
+
+      .cls-14, .cls-7 {
+        fill: #0df400;
+      }
+
+      .cls-6 {
+        stroke-width: 9px;
+      }
+
+      .cls-15 {
+        font-size: 15.11px;
+      }
+
+      .cls-15, .cls-16, .cls-17 {
+        font-family: Poppins-Bold, Poppins;
+        font-weight: 700;
+      }
+
+      .cls-7, .cls-8 {
+        stroke-width: 3px;
+      }
+
+      .cls-16 {
+        font-size: 16px;
+      }
+
+      .cls-17 {
+        font-size: 18px;
+      }
+
+      .cls-9 {
+        stroke-width: 18px;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <circle class="cls-6" cx="363.11" cy="288.89" r="8.23"/>
+    <circle class="cls-6" cx="749.06" cy="203.11" r="8.23"/>
+    <circle class="cls-6" cx="898.79" cy="536.31" r="8.23"/>
+    <g>
+      <path class="cls-9" d="m1186.21,324.36s87.41,15.57,167.29,79.37c0,0,13.08,10.75,30.24-12.38,2.43-3.27,5.23-6.27,8.51-8.68,7.16-5.26,18.98-10.41,29.57,1.47,16.58,18.59-9.04,51.74-9.04,51.74-8.82,12.62-17.82,22.4-25.8,29.9-16.37,15.39-35.42,25.93-73.5,47.02-18.7,10.36-12.31,6.1-35.62,18.76,0,0-11.08,6.02-37.21,17.41-10.97,4.78-16.05,5.89-21.66,4.5-10.66-2.64-11.38-12.28-20.13-19.07-11.03-8.56-32.19-3.31-74.5,7.19-20.12,4.99-32.34,9.3-45.31,16.87-3.2,1.87-6.09,3.73-8.66,5.5-14.36,9.89-31.14,15.83-48.56,16.52-.52.02-1.03.04-1.52.05-13.34.31-27.28-2.16-79.63-24.97-17.02-7.41-31.28-14.01-41.88-19.02"/>
+      <path class="cls-9" d="m898.79,536.53s-26.46-17.95-40.58-7.57c-3.42,2.51-5.53,6.44-6.06,10.65-1.42,11.21-9.43,49.15-52.54,47.94-50.57-1.42-161.08-50.57-161.08-50.57,0,0-92.38-39.56-131.46-69.77l-103.87-85.1c-.91-.75-1.84-1.47-2.82-2.14-2.83-1.95-10.49-8.2-5.02-15.66.94-1.29,1.84-2.62,2.53-4.06,3.83-8.02,11.6-31.51-14.4-54.15,0,0-75.26-68.16-139.17-107.74,0,0-50.12-34.35-88.07-48.08"/>
+      <path class="cls-9" d="m1186.21,324.36l-288.19-61.04c-7.58-1.6-10.59-4.6-11.92-7.12-.64-1.22-2.37-3.94-1.53-9.23,2.35-14.89-8.75-15.48-8.75-15.48-263.13-58.87-453.45-101.34-476.27-106.75-7.09-1.68-23.33-5.79-38.3-6.15-2.14-.05-10.84-.18-22.91-.82,0,0-4.1-.16-8.29-.49-32.7-2.58-165.27-12.79-177.64-9.69-14.12,3.53-43.25,1.94-43.25,1.94-18.03-.47-63.9-15.59-75.58-19.53-3.33-1.12-6.87-1.58-10.36-1.14-5.37.68-11.94,3.43-13.94,12.49-3.16,14.33,22.41,17.57,28.08,18.11.96.09,1.91.2,2.86.33,17.18,2.4,36.19,5.95,56.57,11.21,15.69,4.05,35.97,10.22,59.47,19.32"/>
+    </g>
+    <g>
+      <path class="cls-3" d="m1186.21,324.36s87.41,15.57,167.29,79.37c0,0,13.08,10.75,30.24-12.38,2.43-3.27,5.23-6.27,8.51-8.68,7.16-5.26,18.98-10.41,29.57,1.47,16.58,18.59-9.04,51.74-9.04,51.74-8.82,12.62-17.82,22.4-25.8,29.9-16.37,15.39-35.42,25.93-73.5,47.02-18.7,10.36-12.31,6.1-35.62,18.76,0,0-11.08,6.02-37.21,17.41-10.97,4.78-16.05,5.89-21.66,4.5-10.66-2.64-11.38-12.28-20.13-19.07-11.03-8.56-32.19-3.31-74.5,7.19-20.12,4.99-32.34,9.3-45.31,16.87-3.2,1.87-6.09,3.73-8.66,5.5-14.36,9.89-31.14,15.83-48.56,16.52-.52.02-1.03.04-1.52.05-13.34.31-27.28-2.16-79.63-24.97-17.02-7.41-31.28-14.01-41.88-19.02"/>
+      <path class="cls-1" d="m898.79,536.53s-26.46-17.95-40.58-7.57c-3.42,2.51-5.53,6.44-6.06,10.65-1.42,11.21-9.43,49.15-52.54,47.94-50.57-1.42-161.08-50.57-161.08-50.57,0,0-92.38-39.56-131.46-69.77l-103.87-85.1c-.91-.75-1.84-1.47-2.82-2.14-2.83-1.95-10.49-8.2-5.02-15.66.94-1.29,1.84-2.62,2.53-4.06,3.83-8.02,11.6-31.51-14.4-54.15,0,0-75.26-68.16-139.17-107.74,0,0-50.12-34.35-88.07-48.08"/>
+      <path class="cls-2" d="m1186.21,324.36l-288.19-61.04c-7.58-1.6-10.59-4.6-11.92-7.12-.64-1.22-2.37-3.94-1.53-9.23,2.35-14.89-8.75-15.48-8.75-15.48-263.13-58.87-453.45-101.34-476.27-106.75-7.09-1.68-23.33-5.79-38.3-6.15-2.14-.05-10.84-.18-22.91-.82,0,0-4.1-.16-8.29-.49-32.7-2.58-165.27-12.79-177.64-9.69-14.12,3.53-43.25,1.94-43.25,1.94-18.03-.47-63.9-15.59-75.58-19.53-3.33-1.12-6.87-1.58-10.36-1.14-5.37.68-11.94,3.43-13.94,12.49-3.16,14.33,22.41,17.57,28.08,18.11.96.09,1.91.2,2.86.33,17.18,2.4,36.19,5.95,56.57,11.21,15.69,4.05,35.97,10.22,59.47,19.32"/>
+    </g>
+    <g>
+      <g>
+        <path class="cls-5" d="m1186.1,297.39s87.41,15.57,167.29,79.37"/>
+        <path class="cls-10" d="m1201.09,301.16l-265.23-56.18-22.96-4.86"/>
+      </g>
+      <path class="cls-11" d="m1186.1,297.39s87.41,15.57,167.29,79.37"/>
+      <path class="cls-4" d="m1201.09,301.16l-265.23-56.18-22.96-4.86"/>
+    </g>
+    <g>
+      <path class="cls-10" d="m397.99,406.72c.97.67,1.9,1.39,2.82,2.14l103.87,85.1c39.08,30.2,131.46,69.77,131.46,69.77,0,0,110.51,49.15,161.08,50.57"/>
+      <path class="cls-4" d="m397.99,406.72c.97.67,1.9,1.39,2.82,2.14l103.87,85.1c39.08,30.2,131.46,69.77,131.46,69.77,0,0,110.51,49.15,161.08,50.57"/>
+    </g>
+    <g>
+      <path class="cls-10" d="m149.8,87.43c12.37-3.09,144.94,7.11,177.64,9.69,4.19.33,8.29.49,8.29.49,12.07.64,20.78.77,22.91.82,14.97.36,31.21,4.47,38.3,6.15,22.82,5.41,213.14,47.89,476.27,106.75"/>
+      <path class="cls-4" d="m149.8,87.43c12.37-3.09,144.94,7.11,177.64,9.69,4.19.33,8.29.49,8.29.49,12.07.64,20.78.77,22.91.82,14.97.36,31.21,4.47,38.3,6.15,22.82,5.41,213.14,47.89,476.27,106.75"/>
+    </g>
+    <circle class="cls-14" cx="898.79" cy="536.31" r="8.23"/>
+    <circle class="cls-13" cx="749.06" cy="203.11" r="8.23"/>
+    <circle class="cls-14" cx="363.11" cy="288.89" r="8.23"/>
+    <polygon points="1302.24 394.73 1282.51 372.33 1274.02 385.01 1302.24 394.73"/>
+    <rect class="cls-8" x="743.06" y="91.44" width="12" height="75" rx="6" ry="6"/>
+    <path class="cls-7" d="m353.12,304.96c-2.34-2.34-6.14-2.34-8.49,0l-62.23,62.23c-1.33,1.33-1.88,3.13-1.7,4.87-.02.18-.03.36-.03.55v88c0,3.31,2.69,6,6,6s6-2.69,6-6v-86.73l60.44-60.44c2.34-2.34,2.34-6.14,0-8.49Z"/>
+    <rect class="cls-7" x="229.94" y="472.11" width="120" height="85" rx="12" ry="12"/>
+    <rect class="cls-8" x="689.06" y="1.5" width="120" height="85" rx="12" ry="12"/>
+    <rect class="cls-7" x="892.79" y="557.11" width="12" height="63.06" rx="6" ry="6"/>
+    <rect class="cls-7" x="843.7" y="628.95" width="110.17" height="78.04" rx="12" ry="12"/>
+    <text class="cls-15" transform="translate(882.13 656.48)"><tspan x="0" y="0">DRS </tspan><tspan x="-22.57" y="18.13">Detection </tspan><tspan x="-6.84" y="36.25">Zone 1</tspan></text>
+    <text class="cls-16" transform="translate(272.29 500.1)"><tspan x="0" y="0">DRS </tspan><tspan x="-23.9" y="19.2">Detection </tspan><tspan x="-8.8" y="38.4">Zone 2</tspan></text>
+    <text class="cls-17" transform="translate(696.91 49.31)"><tspan x="0" y="0">Speed Trap</tspan></text>
+    <text class="cls-17" transform="translate(601.46 143.45) rotate(12.47)"><tspan x="0" y="0">D</tspan></text>
+    <text class="cls-17" transform="translate(614.24 146.28) rotate(12.47)"><tspan x="0" y="0">R</tspan></text>
+    <text class="cls-17" transform="translate(625.7 148.81) rotate(12.47)"><tspan x="0" y="0">S</tspan></text>
+    <text class="cls-17" transform="translate(636.5 151.2) rotate(12.47)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(640.24 152.03) rotate(12.47)"><tspan x="0" y="0">Z</tspan></text>
+    <text class="cls-17" transform="translate(650.71 154.34) rotate(12.47)"><tspan x="0" y="0">o</tspan></text>
+    <text class="cls-17" transform="translate(661.92 156.82) rotate(12.47)"><tspan x="0" y="0">n</tspan></text>
+    <text class="cls-17" transform="translate(673.76 159.44) rotate(12.47)"><tspan x="0" y="0">e</tspan></text>
+    <text class="cls-17" transform="translate(684.6 161.84) rotate(12.47)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(688.31 162.66) rotate(12.47)"><tspan x="0" y="0">2</tspan></text>
+    <text class="cls-17" transform="translate(698.36 164.88) rotate(12.47)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(502.05 527.52) rotate(33.83)"><tspan x="0" y="0">D</tspan></text>
+    <text class="cls-17" transform="translate(512.87 534.76) rotate(32.32)"><tspan x="0" y="0">R</tspan></text>
+    <text class="cls-17" transform="translate(522.73 541) rotate(30.92)"><tspan x="0" y="0">S</tspan></text>
+    <text class="cls-17" transform="translate(532.21 546.64) rotate(29.99)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(535.45 548.54) rotate(29.07)"><tspan x="0" y="0">Z</tspan></text>
+    <text class="cls-17" transform="translate(544.76 553.73) rotate(27.65)"><tspan x="0" y="0">o</tspan></text>
+    <text class="cls-17" transform="translate(554.85 559.02) rotate(26.1)"><tspan x="0" y="0">n</tspan></text>
+    <text class="cls-17" transform="translate(565.67 564.32) rotate(24.55)"><tspan x="0" y="0">e</tspan></text>
+    <text class="cls-17" transform="translate(575.74 568.88) rotate(23.54)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(579.17 570.39) rotate(22.82)"><tspan x="0" y="0">1</tspan></text>
+    <text class="cls-17" transform="translate(585.39 572.99) rotate(22.08)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(995.82 249.35) rotate(11.76)"><tspan x="0" y="0">D</tspan></text>
+    <text class="cls-17" transform="translate(1008.64 252.02) rotate(11.76)"><tspan x="0" y="0">R</tspan></text>
+    <text class="cls-17" transform="translate(1020.13 254.41) rotate(11.76)"><tspan x="0" y="0">S</tspan></text>
+    <text class="cls-17" transform="translate(1030.96 256.67) rotate(11.76)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(1034.7 257.45) rotate(11.76)"><tspan x="0" y="0">Z</tspan></text>
+    <text class="cls-17" transform="translate(1045.2 259.63) rotate(11.76)"><tspan x="0" y="0">o</tspan></text>
+    <text class="cls-17" transform="translate(1056.43 261.97) rotate(11.76)"><tspan x="0" y="0">n</tspan></text>
+    <text class="cls-17" transform="translate(1068.32 264.45) rotate(11.76)"><tspan x="0" y="0">e</tspan></text>
+    <text class="cls-17" transform="translate(1079.18 266.71) rotate(11.76)"><tspan x="0" y="0"> </tspan></text>
+    <text class="cls-17" transform="translate(1082.93 267.49) rotate(11.76)"><tspan x="0" y="0">3</tspan></text>
+    <text class="cls-17" transform="translate(1093.56 269.7) rotate(11.76)"><tspan x="0" y="0"> </tspan></text>
+    <g>
+      <rect x="1191.3" y="336.85" width="5.01" height="5.01" transform="translate(2300.43 901.25) rotate(-168.95)"/>
+      <rect class="cls-12" x="1186.38" y="335.89" width="5.01" height="5.01" transform="translate(2290.86 898.41) rotate(-168.95)"/>
+      <rect class="cls-12" x="1176.54" y="333.97" width="5.01" height="5.01" transform="translate(2271.73 892.71) rotate(-168.95)"/>
+      <rect x="1181.46" y="334.93" width="5.01" height="5.01" transform="translate(2281.3 895.56) rotate(-168.95)"/>
+      <rect x="1171.61" y="333.01" width="5.01" height="5.01" transform="translate(86.08 -218.84) rotate(11.05)"/>
+      <rect x="1189.36" y="346.77" width="5.01" height="5.01" transform="translate(2294.69 920.54) rotate(-168.95)"/>
+      <rect class="cls-12" x="1184.44" y="345.81" width="5.01" height="5.01" transform="translate(2285.12 917.7) rotate(-168.95)"/>
+      <rect class="cls-12" x="1174.6" y="343.89" width="5.01" height="5.01" transform="translate(2265.99 912) rotate(-168.95)"/>
+      <rect x="1179.52" y="344.85" width="5.01" height="5.01" transform="translate(2275.55 914.85) rotate(-168.95)"/>
+      <rect x="1169.68" y="342.93" width="5.01" height="5.01" transform="translate(87.95 -218.28) rotate(11.05)"/>
+      <rect x="1175.57" y="338.93" width="5.01" height="5.01" transform="translate(87.29 -219.48) rotate(11.05)"/>
+      <rect class="cls-12" x="1180.49" y="339.89" width="5.01" height="5.01" transform="translate(87.57 -220.41) rotate(11.05)"/>
+      <rect class="cls-12" x="1190.33" y="341.81" width="5.01" height="5.01" transform="translate(88.12 -222.26) rotate(11.05)"/>
+      <rect class="cls-12" x="1170.65" y="337.97" width="5.01" height="5.01" transform="translate(87.02 -218.56) rotate(11.05)"/>
+      <rect x="1185.41" y="340.85" width="5.01" height="5.01" transform="translate(87.84 -221.33) rotate(11.05)"/>
+    </g>
+  </g>
+</svg>
