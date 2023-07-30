@@ -1,0 +1,89 @@
+---
+import Card from "../components/Card.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="About Us">
+  <h1>About Us</h1>
+
+  <div id="about-us-container">
+    <Card>
+      <h2 class="name">Daniel Luna</h2>
+      <h3 class="title">Software Developer</h3>
+      <p>
+        I am a Second Year student at The University of Chicago studying
+        Computer Science and Mathematics. I started watching Formula 1 with the
+        2020 season. I always did think that it would be cool to have a site
+        which could quickly provide information about a weekend. Not only that,
+        it would be cool to have an archive of past races and the context around
+        them. I used my ability and passion to code in order to bring this idea
+        to reality.
+      </p>
+    </Card>
+    <Card>
+      <h2 class="name">David Luna</h2>
+      <h3 class="title">Graphic Designer</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+        voluptates veniam porro doloremque explicabo. Eum nulla ipsa quam eius
+        harum animi neque. Corporis debitis error reiciendis sint. Autem tenetur
+        amet, assumenda voluptate alias, quod maxime accusantium pariatur,
+        mollitia eos impedit.
+      </p>
+    </Card>
+  </div>
+
+  <h1>Why?</h1>
+  <Card>
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Assumenda labore
+      corrupti illum officia, velit iusto nobis distinctio amet. Vitae molestiae
+      iusto enim odio quisquam assumenda maiores quia. At pariatur totam
+      quisquam et, quidem molestiae nostrum facere veritatis illum dicta maxime
+      nulla facilis provident laboriosam commodi maiores. Facilis quaerat cum
+      laudantium voluptatum! Magni saepe voluptate explicabo mollitia
+      repudiandae voluptatibus laborum ipsum quae placeat, maiores ut qui
+      necessitatibus esse et, ipsa vel sit officia. Recusandae, temporibus! Eos
+      vitae dicta tempore facere odio at officiis deserunt ut reiciendis. Ab,
+      saepe? Voluptatem autem possimus voluptas in doloremque illo labore eaque
+      corrupti modi. Delectus expedita tempora non. Voluptatem sapiente quaerat
+      dolorum eius cum ipsa doloremque, provident odit consequatur suscipit
+      eveniet! Doloremque reprehenderit dicta ipsa nobis eum neque molestias
+      magni incidunt eius expedita, veritatis placeat qui reiciendis pariatur
+      consectetur eligendi tenetur voluptatum quasi maxime, nesciunt
+      repudiandae? Odit nobis voluptatibus recusandae excepturi eos pariatur
+      atque, incidunt ad dolores consequatur nesciunt praesentium quibusdam
+      sequi alias voluptas minus, eveniet molestiae nisi, accusamus sunt nostrum
+      mollitia qui at? Id sit facilis inventore, illo sint expedita odio facere
+      dolore voluptatibus repellat saepe minima quidem asperiores nostrum
+      dolorum consectetur impedit recusandae praesentium aliquam? Perspiciatis
+      velit doloribus distinctio delectus vero quisquam suscipit sequi fugiat
+      harum numquam asperiores sapiente porro quae rerum, minus, repellat cum
+      neque eius repudiandae voluptas dolore assumenda minima? Itaque natus
+      tenetur eum ducimus maiores aliquam. Ipsa aperiam, voluptatum neque illum
+      corporis excepturi unde consectetur earum, atque rem odit quia voluptatem
+      veniam aspernatur mollitia, optio error nisi ullam porro soluta explicabo?
+    </p>
+  </Card>
+</BaseLayout>
+
+<style>
+  #about-us-container {
+    display: grid;
+
+    gap: 2rem;
+
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  }
+
+  .name,
+  .title {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 640px) {
+    #about-us-container {
+      flex-direction: column;
+    }
+  }
+</style>

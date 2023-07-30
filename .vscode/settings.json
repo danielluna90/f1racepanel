@@ -1,0 +1,14 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["src/content/gpData/**/*.json"],
+      "url": "./schemas/gpSchema.json"
+    },
+    {
+      "fileMatch": ["src/content/metadata/**/*.json"],
+      "url": "./schemas/metadataSchema.json"
+    }
+  ],
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2
+}

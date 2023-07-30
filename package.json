@@ -7,10 +7,25 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+  
+    "genSchedules": "nodemon --watch \"tools/genSchedules.ts\" --exec \"ts-node-esm tools/genSchedules.ts\"",
+    "genJsonSchemas": "ts-node-esm tools/genJsonSchemas.ts",
+
+    "prepare": "yarn genJsonSchemas"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^1.3.3",
-    "astro": "^2.8.0"
+    "@astrojs/sitemap": "^2.0.1",
+    "astro": "^2.9.1",
+    "dateformat": "^5.0.3",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1",
+    "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "@types/dateformat": "^5.0.0",
+    "@types/node": "^20.4.5",
+    "typescript": "^5.1.6",
+    "zod-to-json-schema": "^3.21.4"
   }
 }

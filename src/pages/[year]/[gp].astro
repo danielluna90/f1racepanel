@@ -1,0 +1,67 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import { CollectionEntry, getCollection, getEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const gpEntries = await getCollection("gpData", (race) => {
+    if (race.data.status != "Upcoming" && race.data.status != "TBD")
+      return race;
+  });
+
+  return await Promise.all(
+    gpEntries.map(async (entry) => {
+      const [year, gp] = entry.id.split("/");
+      const [_, gpName] = gp.split("-");
+
+      const metadata = await getEntry("metadata", year);
+
+      return {
+        params: { year: year, gp: gpName },
+        props: { entry, metadata },
+      };
+    })
+  );
+}
+
+interface Props {
+  entry: CollectionEntry<"gpData">;
+  metadata: CollectionEntry<"metadata">;
+}
+
+const { entry, metadata } = Astro.props;
+const { year, gp } = Astro.params;
+
+function convertToTitleCase(str: string | undefined) {
+  if (!str) {
+    return "";
+  }
+  return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
+}
+
+function getDriverNameFromNumber(driverNum: number): string | undefined {
+  return metadata.data.drivers.filter(
+    (driverInfo) => driverInfo.num === driverNum
+  )[0].name;
+}
+
+const gpTitle = convertToTitleCase(gp);
+---
+
+<BaseLayout title={`${year} ${gpTitle} GP`}>
+  <h1>
+    {`${year} ${entry.data.name} GP`}
+  </h1>
+  {
+    entry.data.standings && (
+      <>
+        <h2>Standings</h2>
+        <ol>
+          <li>{getDriverNameFromNumber(entry.data.standings[0].driverNum)}</li>
+          <li>{getDriverNameFromNumber(entry.data.standings[1].driverNum)}</li>
+          <li>{getDriverNameFromNumber(entry.data.standings[2].driverNum)}</li>
+        </ol>
+      </>
+    )
+  }
+</BaseLayout>

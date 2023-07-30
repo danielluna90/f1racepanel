@@ -1,0 +1,44 @@
+---
+export interface Props {
+  interactive?: boolean;
+  href?: string;
+}
+
+const { interactive, href } = Astro.props;
+---
+
+<div
+  class="card"
+  class:list={{ interactive: interactive || href, padding: !href }}
+>
+  {
+    href ? (
+      <a href={href}>
+        <slot />
+      </a>
+    ) : (
+      <slot />
+    )
+  }
+</div>
+
+<style>
+  .card {
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+  }
+
+  .card.interactive:hover {
+    cursor: pointer;
+  }
+
+  .card.padding {
+    padding: 1rem;
+  }
+
+  a {
+    display: block;
+    height: 100%;
+    padding: 1rem;
+  }
+</style>
