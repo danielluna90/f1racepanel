@@ -11,11 +11,13 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       <h2 class="name">Daniel Luna</h2>
       <h3 class="title">Software Developer</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium,
-        animi. Soluta beatae quas quo ab ex molestias assumenda tenetur
-        similique, facere error. Dolores dolorum et eius ex ullam culpa,
-        assumenda exercitationem debitis, autem dicta vel minima blanditiis sint
-        harum consequatur?
+        I am a Second Year student at The University of Chicago studying
+        Computer Science and Mathematics. I started watching Formula 1 with the
+        2020 season. I always did think that it would be cool to have a site
+        which could quickly provide information about a weekend. Not only that,
+        it would be cool to have an archive of past races and the context around
+        them. I used my ability and passion to code in order to bring this idea
+        to reality.
       </p>
     </Card>
     <Card>
@@ -67,9 +69,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <style>
   #about-us-container {
-    display: flex;
+    display: grid;
 
-    gap: 1rem;
+    gap: 2rem;
+
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   }
 
   .name,

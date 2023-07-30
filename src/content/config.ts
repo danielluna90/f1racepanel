@@ -36,7 +36,8 @@ const gpCollection = defineCollection({
         name: z.string(),
         status: z.union([z.literal('Upcoming'), z.literal('Completed'), z.literal('Canceled'), z.literal('TBD')]).default('TBD'),
         schedule: z.union([normalGPSchedule, sprint2022GPSchedule, sprintGPSchedule]).optional(),
-        standings: z.array(z.object({pos: z.number(), driverNum: z.number()})).optional()
+        standings: z.array(z.object({pos: z.number(), driverNum: z.number()})).optional(),
+        map: z.string().optional()
     })
 })
 
