@@ -8,8 +8,11 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+  
     "genSchedules": "nodemon --watch \"tools/genSchedules.ts\" --exec \"ts-node-esm tools/genSchedules.ts\"",
-    "genJsonSchemas": "ts-node-esm tools/genJsonSchemas.ts"
+    "genJsonSchemas": "ts-node-esm tools/genJsonSchemas.ts",
+
+    "prepare": "yarn genJsonSchemas"
   },
   "dependencies": {
     "@astrojs/sitemap": "^2.0.1",
