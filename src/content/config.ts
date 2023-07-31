@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 
-import { gpSchema, metadataSchema } from './schemas';
+import { gpSchema, metadataSchema } from './_schemas';
 
 const gpCollection = defineCollection({
     type: 'data',
