@@ -4,7 +4,10 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { CollectionEntry, getCollection, getEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const gpEntries = await getCollection("gpData");
+  const gpEntries = await getCollection("gpData", (race) => {
+    if (race.data.status != "Upcoming" && race.data.status != "TBD")
+      return race;
+  });
 
   return await Promise.all(
     gpEntries.map(async (entry) => {
