@@ -1,4 +1,24 @@
 {
     "name": "Singapore",
-    "status": "Upcoming"
+    "status": "Upcoming",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-09-15T17:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-09-015T21:00:00Z"
+            },
+            "fp3": {
+                "time": "2023-09-16T17:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-09-16T21:00:00Z"
+            },
+            "race": {
+                "time": "2023-09-17T20:00:00Z"
+            }
+        }
+    }
 }

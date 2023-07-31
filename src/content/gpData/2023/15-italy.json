@@ -1,4 +1,24 @@
 {
     "name": "Italy",
-    "status": "Upcoming"
+    "status": "Upcoming",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-09-01T7:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-09-01T11:00:00Z"
+            },
+            "fp3": {
+                "time": "2023-09-02T6:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-09-02T10:00:00Z"
+            },
+            "race": {
+                "time": "2023-09-03T09:00:00Z"
+            }
+        }
+    }
 }
