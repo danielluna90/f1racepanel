@@ -55,7 +55,13 @@ export const gpSchema = z
       ])
       .optional(),
     standings: z
-      .array(z.object({ pos: z.number(), driverNum: z.number() }))
+      .array(z.object({ pos: z.number(), driverNum: z.number(), gap: z.discriminatedUnion("status", [
+        z.object({ status: z.literal("DNF") }),
+        z.object({ status: z.literal("DNS") }),
+        z.object({ status: z.literal("Leader") }),
+        z.object({ status: z.literal("Lapped"), behind: z.number().int().positive().finite() }),
+        z.object({ status: z.literal("SameLapAsLeader"), behind: z.number().positive().finite() }),
+      ]) }))
       .optional(),
     map: z.string().optional(),
   })
