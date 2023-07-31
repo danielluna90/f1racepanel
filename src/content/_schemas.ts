@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const sessionInfo = z.object({
-  time: z.date(),
+  time: z.coerce.date(),
   timeOfDay: z.union([z.literal('day'), z.literal('night')]).default('day'),
   weather: z.union([z.literal('clear'), z.literal('partlyclear'), z.literal('cloudy'), z.literal('rain'), z.literal('heavyrain')]).optional()
 })
