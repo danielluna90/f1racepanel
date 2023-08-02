@@ -24,15 +24,26 @@
     "standings": [
         {
             "pos": 1,
-            "driverNum": 11
+            "driverNum": 11,
+            "gap": {
+                "status": "Leader"
+            }
         },
         {
             "pos": 2,
-            "driverNum": 1
+            "driverNum": 1,
+            "gap": {
+                "status": "SameLapAsLeader",
+                "behind": 5.355
+            }
         },
         {
             "pos": 3,
-            "driverNum": 14
+            "driverNum": 14,
+            "gap": {
+                "status": "SameLapAsLeader",
+                "behind": 20.728
+            }
         }
     ]
 }

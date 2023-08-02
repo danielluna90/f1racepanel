@@ -63,6 +63,13 @@ export const gpSchema = z
         z.object({ status: z.literal("SameLapAsLeader"), behind: z.number().positive().finite() }),
       ]) }))
       .optional(),
+    raceInfo: z.object({
+      raceDistance: z.object({
+        numOfLaps: z.number().int().positive().finite(),
+        lapDistance: z.number().positive().finite(),
+        raceDistance: z.number().positive().finite()
+      })
+    }).optional(),
     map: z.string().optional(),
   })
   .describe("This describes a Formula 1 Weekend");
