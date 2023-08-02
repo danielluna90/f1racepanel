@@ -1,4 +1,38 @@
 {
     "name": "Australia",
-    "status": "Completed"
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2022-04-08T3:00:00Z"
+            },
+            "fp2": {
+                "time": "2022-04-08T6:00:00Z"
+            },
+            "fp3": {
+                "time": "2022-04-09T3:00:00Z"
+            },
+            "qualifying": {
+                "time": "2022-04-09T6:00:00Z"
+            },
+            "race": {
+                "time": "2022-04-10T5:00:00Z"
+            }
+        }
+    },
+    "standings": [
+        {
+            "pos": 1,
+            "driverNum": 16
+        },
+        {
+            "pos": 2,
+            "driverNum": 11
+        },
+        {
+            "pos": 3,
+            "driverNum": 63
+        }
+    ]
 }
