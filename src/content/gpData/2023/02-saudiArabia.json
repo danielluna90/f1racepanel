@@ -1,4 +1,38 @@
 {
     "name": "Saudi Arabia",
-    "status": "Completed"
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-03-17T16:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-03-18T21:30:00Z"
+            },
+            "fp3": {
+                "time": "2023-03-19T16:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-03-19T20:00:00Z"
+            },
+            "race": {
+                "time": "2023-03-20T20:00::00Z"
+            }
+        }
+    },
+    "standings": [
+        {
+            "pos": 1,
+            "driverNum": 11
+        },
+        {
+            "pos": 2,
+            "driverNum": 1
+        },
+        {
+            "pos": 3,
+            "driverNum": 14
+        }
+    ]
 }
