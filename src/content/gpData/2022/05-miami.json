@@ -1,4 +1,38 @@
 {
     "name": "Miami",
-    "status": "Completed"
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2022-05-06T18:30:00Z"
+            },
+            "fp2": {
+                "time": "2022-05-06T21:30:00Z"
+            },
+            "fp3": {
+                "time": "2022-05-07T17:00:00Z"
+            },
+            "qualifying": {
+                "time": "2022-05-07T20:00:00Z"
+            },
+            "race": {
+                "time": "2022-05-08T19:30:00Z"
+            }
+        }
+    },
+    "standings": [
+        {
+            "pos": 1,
+            "driverNum": 1
+        },
+        {
+            "pos": 2,
+            "driverNum": 16
+        },
+        {
+            "pos": 3,
+            "driverNum": 55
+        }
+    ]
 }
