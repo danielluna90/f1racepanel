@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import Card from "../Card.astro";
+import Badge from "../Badge.astro";
 
 export interface Props {
   race: CollectionEntry<"gpData">;
@@ -11,15 +12,16 @@ const { race } = Astro.props;
 const [year, gp] = race.id.split("/");
 const [_, gpName] = gp.split("-");
 
-const raceSlug = `${year}/${gpName}`;
+const raceSlug =
+  race.data.status != "Completed" ? undefined : `${year}/${gpName}`;
 ---
 
 <>
   {
-    race.data.status !== "Upcoming" && (
+    (
       <Card href={raceSlug} nonselectable>
         <h3>{race.data.name}</h3>
-        <p>{race.data.status}</p>
+        <Badge type={race.data.status} />
       </Card>
     )
   }

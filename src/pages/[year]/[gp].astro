@@ -39,10 +39,21 @@ function convertToTitleCase(str: string | undefined) {
   return str.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
 }
 
-function getDriverNameFromNumber(driverNum: number): string | undefined {
+function getDriverNameFromNumber(
+  driverNum: number | undefined
+): string | undefined {
   return metadata.data.drivers.filter(
     (driverInfo) => driverInfo.num === driverNum
   )[0].name;
+}
+
+function getDriverNameWithEntryIndex(
+  entry: CollectionEntry<"gpData">,
+  index: number
+): string | undefined {
+  return getDriverNameFromNumber(
+    entry.data.weekendInfo?.sessionInfo.race.session?.results[index].driverNum
+  );
 }
 
 const gpTitle = convertToTitleCase(gp);
@@ -57,24 +68,9 @@ const gpTitle = convertToTitleCase(gp);
       <>
         <h2>Standings</h2>
         <ol>
-          <li>
-            {getDriverNameFromNumber(
-              entry.data.weekendInfo?.sessionInfo.race.session?.results[0]
-                .driverNum ?? 0
-            )}
-          </li>
-          <li>
-            {getDriverNameFromNumber(
-              entry.data.weekendInfo?.sessionInfo.race.session?.results[1]
-                .driverNum ?? 0
-            )}
-          </li>
-          <li>
-            {getDriverNameFromNumber(
-              entry.data.weekendInfo?.sessionInfo.race.session?.results[2]
-                .driverNum ?? 0
-            )}
-          </li>
+          <li>{getDriverNameWithEntryIndex(entry, 0)}</li>
+          <li>{getDriverNameWithEntryIndex(entry, 1)}</li>
+          <li>{getDriverNameWithEntryIndex(entry, 2)}</li>
         </ol>
       </>
     )

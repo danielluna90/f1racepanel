@@ -9,20 +9,35 @@ export interface Props {
 const { type } = Astro.props;
 ---
 
-<div class:list={{ type }}>
+<div class=`badge ${type}`>
   <h4>{type}</h4>
 </div>
 
 <style>
+  .badge {
+    padding: 1rem;
+    border-radius: 0.5rem;
+
+    display: inline-block;
+  }
+
+  .badge > h4 {
+    margin: 0;
+  }
+
   .Upcoming {
+    background-color: darkgray;
   }
 
   .Completed {
+    background-color: green;
   }
 
   .Canceled {
+    background-color: red;
   }
 
   .TBD {
+    background-color: yellow;
   }
 </style>
