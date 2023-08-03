@@ -46,14 +46,14 @@ export const qualSessionResults = z
   .array(
     sessionResults.merge(
       z.object({
-        gap: qualifyingGap,
+        gap: qualifyingGap.optional(),
       })
     )
   )
   .min(3);
 
 export const raceSessionResults = z
-  .array(sessionResults.merge(z.object({ gap: raceGap })))
+  .array(sessionResults.merge(z.object({ gap: raceGap.optional() })))
   .min(3);
 
 export const competitiveSessionInfo = sessionInfo.merge(
