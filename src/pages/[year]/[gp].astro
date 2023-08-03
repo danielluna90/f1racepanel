@@ -53,13 +53,28 @@ const gpTitle = convertToTitleCase(gp);
     {`${year} ${entry.data.name} GP`}
   </h1>
   {
-    entry.data.standings && (
+    entry.data.weekendInfo?.sessionInfo.race.session && (
       <>
         <h2>Standings</h2>
         <ol>
-          <li>{getDriverNameFromNumber(entry.data.standings[0].driverNum)}</li>
-          <li>{getDriverNameFromNumber(entry.data.standings[1].driverNum)}</li>
-          <li>{getDriverNameFromNumber(entry.data.standings[2].driverNum)}</li>
+          <li>
+            {getDriverNameFromNumber(
+              entry.data.weekendInfo?.sessionInfo.race.session?.results[0]
+                .driverNum ?? 0
+            )}
+          </li>
+          <li>
+            {getDriverNameFromNumber(
+              entry.data.weekendInfo?.sessionInfo.race.session?.results[1]
+                .driverNum ?? 0
+            )}
+          </li>
+          <li>
+            {getDriverNameFromNumber(
+              entry.data.weekendInfo?.sessionInfo.race.session?.results[2]
+                .driverNum ?? 0
+            )}
+          </li>
         </ol>
       </>
     )
