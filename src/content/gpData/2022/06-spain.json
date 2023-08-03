@@ -24,7 +24,10 @@
     "standings": [
         {
             "pos": 1,
-            "driverNum": 1
+            "driverNum": 1,
+            "gap": {
+                "status": "Leader"
+            }
         },
         {
             "pos": 2,
