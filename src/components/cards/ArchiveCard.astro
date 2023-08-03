@@ -17,7 +17,7 @@ const raceSlug = `${year}/${gpName}`;
 <>
   {
     race.data.status !== "Upcoming" && (
-      <Card href={raceSlug}>
+      <Card href={raceSlug} nonselectable>
         <h3>{race.data.name}</h3>
         <p>{race.data.status}</p>
       </Card>

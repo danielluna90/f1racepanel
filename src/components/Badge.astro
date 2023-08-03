@@ -1,0 +1,28 @@
+---
+import type { z } from "astro:content";
+import type { raceStatus } from "../content/_schemas";
+
+export interface Props {
+  type: z.infer<typeof raceStatus>;
+}
+
+const { type } = Astro.props;
+---
+
+<div class:list={{ type }}>
+  <h4>{type}</h4>
+</div>
+
+<style>
+  .Upcoming {
+  }
+
+  .Completed {
+  }
+
+  .Canceled {
+  }
+
+  .TBD {
+  }
+</style>

@@ -17,22 +17,25 @@
                 "time": "2023-05-06T20:00:00Z"
             },
             "race": {
-                "time": "2023-05-07T19:30:00Z"
+                "time": "2023-05-07T19:30:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 11
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 14
+                        }
+                    ]
+                }
             }
         }
-    },
-    "standings": [
-        {
-            "pos": 1,
-            "driverNum": 1
-        },
-        {
-            "pos": 2,
-            "driverNum": 11
-        },
-        {
-            "pos": 3,
-            "driverNum": 14
-        }
-    ]
+    }
 }

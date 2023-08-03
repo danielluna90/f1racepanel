@@ -2,14 +2,19 @@
 export interface Props {
   interactive?: boolean;
   href?: string;
+  nonselectable?: boolean;
 }
 
-const { interactive, href } = Astro.props;
+const { interactive, href, nonselectable } = Astro.props;
 ---
 
 <div
   class="card"
-  class:list={{ interactive: interactive || href, padding: !href }}
+  class:list={{
+    interactive: interactive || href,
+    padding: !href,
+    nonselectable,
+  }}
 >
   {
     href ? (
@@ -26,6 +31,15 @@ const { interactive, href } = Astro.props;
   .card {
     background-color: var(--primary-color);
     border-radius: 0.5rem;
+  }
+
+  .card.nonselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .card.interactive:hover {

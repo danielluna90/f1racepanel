@@ -17,22 +17,25 @@
                 "time": "2023-04-01T05:00:00Z"
             },
             "race": {
-                "time": "2023-04-02T05:00:00Z"
+                "time": "2023-04-02T05:00:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 44
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 14
+                        }
+                    ]
+                }
             }
         }
-    },
-    "standings": [
-        {
-            "pos": 1,
-            "driverNum": 1
-        },
-        {
-            "pos": 2,
-            "driverNum": 44
-        },
-        {
-            "pos": 3,
-            "driverNum": 14
-        }
-    ]
+    }
 }
