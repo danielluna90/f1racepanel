@@ -24,7 +24,7 @@ const sprint2022GP = z.object({
 const sprintGP = z.object({
   practice: sessionInfo,
   qualifying: sessionInfo,
-  sprintQualifying: sessionInfo,
+  sprintShootout: sessionInfo,
   sprint: sessionInfo,
   race: sessionInfo,
 });
@@ -36,17 +36,17 @@ const driver = z.object({
   team: z.string(),
 });
 
+export const raceStatus = z.union([
+  z.literal("Upcoming"),
+  z.literal("Completed"),
+  z.literal("Canceled"),
+  z.literal("TBD"),
+]);
+
 export const gpSchema = z
   .object({
     name: z.string(),
-    status: z
-      .union([
-        z.literal("Upcoming"),
-        z.literal("Completed"),
-        z.literal("Canceled"),
-        z.literal("TBD"),
-      ])
-      .default("TBD"),
+    status: raceStatus.default("TBD"),
     weekendInfo: z
       .discriminatedUnion("weekendType", [
         z.object({ weekendType: z.literal("Normal"), sessionInfo: normalGP }),
@@ -62,7 +62,7 @@ export const gpSchema = z
         z.object({ status: z.literal("Lapped"), behind: z.number().int().positive().finite() }),
         z.object({ status: z.literal("SameLapAsLeader"), behind: z.number().positive().finite() }),
       ]) }))
-      .optional(),
+      .min(3).optional(),
     raceInfo: z.object({
       raceDistance: z.object({
         numOfLaps: z.number().int().positive().finite(),
