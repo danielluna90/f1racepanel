@@ -17,22 +17,25 @@
                 "time": "2022-03-26T14:00:00Z"
             },
             "race": {
-                "time": "2022-03-27T15:00:00Z"
+                "time": "2022-03-27T15:00:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 16
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 11
+                        }
+                    ]
+                }
             }
         }
-    },
-    "standings": [
-        {
-            "pos": 1,
-            "driverNum": 1
-        },
-        {
-            "pos": 2,
-            "driverNum": 16
-        },
-        {
-            "pos": 3,
-            "driverNum": 11
-        }
-    ]
+    }
 }
