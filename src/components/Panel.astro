@@ -1,4 +1,18 @@
 ---
+export interface props {}
+
+const {} = Astro.props;
 ---
 
-<div></div>
+<div class="panel">
+  <slot />
+</div>
+
+<style>
+  .panel {
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+
+    padding: 1rem;
+  }
+</style>
