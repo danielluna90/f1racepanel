@@ -3,9 +3,10 @@ export interface Props {
   interactive?: boolean;
   href?: string;
   nonselectable?: boolean;
+  animate?: boolean;
 }
 
-const { interactive, href, nonselectable } = Astro.props;
+const { interactive, href, nonselectable, animate } = Astro.props;
 ---
 
 <div
@@ -14,6 +15,7 @@ const { interactive, href, nonselectable } = Astro.props;
     interactive: interactive || href,
     padding: !href,
     nonselectable,
+    animate,
   }}
 >
   {
@@ -48,6 +50,14 @@ const { interactive, href, nonselectable } = Astro.props;
 
   .card.padding {
     padding: 1rem;
+  }
+
+  .card.animate {
+    transition: 0.25s ease;
+  }
+
+  .card.animate:hover {
+    transform: translate(-5px, -5px);
   }
 
   a {

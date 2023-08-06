@@ -19,7 +19,7 @@ const raceSlug =
 <>
   {
     (
-      <Card href={raceSlug} nonselectable>
+      <Card href={raceSlug} nonselectable animate={raceSlug ? true : false}>
         <h3>{race.data.name}</h3>
         <Badge type={race.data.status} />
       </Card>
