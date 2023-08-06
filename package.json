@@ -8,10 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-  
-    "genSchedules": "nodemon --watch \"tools/genSchedules.ts\" --exec \"ts-node-esm tools/genSchedules.ts\"",
+    "genSchedules": "ts-node-esm tools/genSchedules.ts",
     "genJsonSchemas": "ts-node-esm tools/genJsonSchemas.ts",
-
     "prepare": "yarn genJsonSchemas"
   },
   "dependencies": {
@@ -23,7 +21,9 @@
     "zod": "^3.21.4"
   },
   "devDependencies": {
+    "@inquirer/prompts": "^3.0.1",
     "@types/dateformat": "^5.0.0",
+    "@types/inquirer": "^9.0.3",
     "@types/node": "^20.4.5",
     "typescript": "^5.1.6",
     "zod-to-json-schema": "^3.21.4"
