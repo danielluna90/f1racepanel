@@ -1,9 +1,53 @@
 ---
+import type { CollectionEntry } from "astro:content";
+
 import Panel from "../Panel.astro";
+
+export interface Props {
+  entry: CollectionEntry<"gpData">;
+}
+
+const { entry } = Astro.props;
+
+const weekendInfo = entry.data.weekendInfo;
 ---
 
 <Panel>
-  <div>
-    <h2>Test</h2>
-  </div>
+  <h2>Schedule</h2>
+  {
+    weekendInfo?.weekendType === "Normal" && (
+      <ul>
+        <li data-time={weekendInfo.sessionInfo.fp1.time.getTime()}>
+          Free Practice 1:
+        </li>
+        <time-element data-time={weekendInfo.sessionInfo.fp1.time.getTime()}>
+          <li>Free Practice 2:</li>
+        </time-element>
+        <li>Free Practice 3:</li>
+        <li>Qualifying:</li>
+        <li>Race:</li>
+      </ul>
+    )
+  }
+
+  <script>
+    import dateFormat from "dateformat";
+
+    function getFormattedDateTime(date: Date): string {
+      return dateFormat(date, "mmm dd yyyy, hh:MMTT");
+    }
+
+    class TimeElement extends HTMLElement {
+      constructor() {
+        super();
+
+        const message = new Date(this.dataset.time * 1);
+        console.log(message);
+        const li = this.querySelector("li");
+        li.innerHTML = getFormattedDateTime(message);
+      }
+    }
+
+    customElements.define("time-element", TimeElement);
+  </script>
 </Panel>

@@ -50,10 +50,17 @@ const gpTitle = convertToTitleCase(gp);
   </h1>
   {
     entry.data.weekendInfo?.sessionInfo.race.session && (
-      <>
+      <div class="panel-wrapper">
         <StandingsPanel entry={entry} metadata={metadata} />
-        <SchedulePanel />
-      </>
+        <SchedulePanel entry={entry} />
+      </div>
     )
   }
 </BaseLayout>
+
+<style>
+  .panel-wrapper {
+    display: grid;
+    gap: 2rem;
+  }
+</style>
