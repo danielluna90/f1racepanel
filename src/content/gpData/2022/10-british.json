@@ -1,4 +1,24 @@
 {
     "name": "British",
-    "status": "Completed"
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2022-07-01T12:00:00Z"
+            },
+            "fp2": {
+                "time": "2022-07-01T15:00:00Z"
+            },
+            "fp3": {
+                "time": "2022-07-02T11:00:00Z"
+            },
+            "qualifying": {
+                "time": "2022-07-02T14:00:00Z"
+            },
+            "race": {
+                "time": "2022-07-03T14:00:00Z"
+            }
+        }
+    }
 }

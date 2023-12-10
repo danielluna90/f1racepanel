@@ -23,15 +23,26 @@
                     "results": [
                         {
                             "pos": 1,
-                            "driverNum": 1
+                            "driverNum": 1,
+                            "gap": {
+                                "status": "Leader"
+                            }
                         },
                         {
                             "pos": 2,
-                            "driverNum": 16
+                            "driverNum": 16,
+                            "gap": {
+                                "status": "SameLapAsLeader",
+                                "behind": 0.549
+                            }
                         },
                         {
                             "pos": 3,
-                            "driverNum": 11
+                            "driverNum": 11,
+                            "gap": {
+                                "status": "SameLapAsLeader",
+                                "behind": 8.097
+                            }
                         }
                     ]
                 }

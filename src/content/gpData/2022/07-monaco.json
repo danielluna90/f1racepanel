@@ -1,4 +1,24 @@
 {
     "name": "Monaco",
-    "status": "Completed"
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2022-05-27T12:00:00Z"
+            },
+            "fp2": {
+                "time": "2022-05-27T15:00:00Z"
+            },
+            "fp3": {
+                "time": "2022-05-28T11:00:00Z"
+            },
+            "qualifying": {
+                "time": "2022-05-28T14:00:00Z"
+            },
+            "race": {
+                "time": "2022-05-29T13:00:00Z"
+            }
+        }
+    }
 }
