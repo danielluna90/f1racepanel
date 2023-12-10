@@ -8,24 +8,24 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "genSchedules": "ts-node-esm tools/genSchedules.ts",
-    "genJsonSchemas": "ts-node-esm tools/genJsonSchemas.ts",
+    "genSchedules": "node --loader ts-node/esm tools/genSchedules.ts",
+    "genJsonSchemas": "node --loader ts-node/esm tools/genJsonSchemas.ts",
     "prepare": "yarn genJsonSchemas"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^2.0.1",
-    "astro": "^2.10.7",
+    "@astrojs/sitemap": "^3.0.0",
+    "astro": "^3.0.12",
     "dateformat": "^5.0.3",
     "nodemon": "^3.0.1",
     "ts-node": "^10.9.1",
-    "zod": "^3.21.4"
+    "zod": "^3.22.2"
   },
   "devDependencies": {
-    "@inquirer/prompts": "^3.0.2",
+    "@inquirer/prompts": "^3.1.0",
     "@types/dateformat": "^5.0.0",
     "@types/inquirer": "^9.0.3",
-    "@types/node": "^20.4.10",
-    "typescript": "^5.1.6",
+    "@types/node": "^20.6.0",
+    "typescript": "^5.2.2",
     "zod-to-json-schema": "^3.21.4"
   }
 }
