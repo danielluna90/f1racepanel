@@ -1,6 +1,10 @@
 # F1 Race Panel
 
-## 🧞 Commands
+## Project Layout
+* `\packages\client` - 
+* `\packages\server` - 
+
+## Commands
 
 All commands are run from the root of the project, from a terminal:
 
