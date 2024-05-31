@@ -14,12 +14,14 @@ servers:
     description: Development
 
 paths:
-  "/drivers/{id}":
+  "/drivers/{DriverID}":
+    parameters:
+      - $ref: "#/components/parameters/driverID"
     get:
       summary: "Get Driver"
       description: "Get information for a specific Driver."
       tags:
-        - "Driver"
+        - "Drivers"
       responses:
         200:
           $ref: "#/components/responses/Driver"
@@ -30,7 +32,7 @@ paths:
       security:
         - AdminAuth: []
       tags:
-        - "Driver"
+        - "Drivers"
       responses:
         200:
           $ref: "#/components/responses/Driver"
@@ -43,7 +45,7 @@ paths:
     get:
       summary: "Get Multiple Drivers"
       tags:
-        - "Driver"
+        - "Drivers"
       parameters:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
@@ -63,6 +65,34 @@ paths:
       responses:
         404:
           $ref: "#/components/responses/NotFound"
+
+  "/season/{Year}":
+    get:
+      summary: "Get Season Info"
+      tags:
+        - "Grand Prix Weekend"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/gp/{GPID}":
+    get:
+      summary: "Get Grand Prix Weekend"
+      tags:
+        - "Grand Prix Weekend"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/gp/{GPID}/{Session}":
+    get:
+      summary: "Get Grand Prix Session"
+      tags:
+        - "Grand Prix Weekend"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
   "/login":
     get:
       summary: "Log In"
@@ -82,11 +112,11 @@ components:
 
   responses:
     Driver:
-      description: "A driver"
+      description: "A driver."
       content:
         "application/json":
           schema:
-            $ref: "#/components/schemas/Drivers"
+            $ref: "#/components/schemas/Driver"
 
     MultipleDrivers:
       description: "An array of drivers."
@@ -110,6 +140,15 @@ components:
             $ref: "#/components/schemas/Error"
 
   parameters:
+    driverID:
+      in: path
+      name: DriverID
+      description: "UUID of a specific driver."
+      schema:
+        type: string
+        format: uuid
+      required: true
+
     limit:
       in: query
       name: limit
