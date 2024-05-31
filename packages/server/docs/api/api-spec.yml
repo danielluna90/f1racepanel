@@ -1,0 +1,185 @@
+openapi: '3.0.0'
+info:
+  title: F1 Race Panel API
+  description: The API used for F1 Race Panel (f1racepanel.com)
+  contact:
+    name: Daniel Luna
+    email: api-support@f1racepanel.com
+    url: https://danielluna.nyc
+  version: 'v1'
+servers:
+  - url: https://api.f1racepanel.com/v1
+    description: Production
+  - url: https://staging.api.f1racepanel.com/v1
+    description: Development
+
+paths:
+  "/drivers/{id}":
+    get:
+      summary: "Get Driver"
+      description: "Get information for a specific Driver."
+      tags:
+        - "Driver"
+      responses:
+        200:
+          $ref: "#/components/responses/Driver"
+        404:
+          $ref: "#/components/responses/NotFound"
+    post:
+      summary: "Edit Driver"
+      security:
+        - AdminAuth: []
+      tags:
+        - "Driver"
+      responses:
+        200:
+          $ref: "#/components/responses/Driver"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+      
+  "/drivers":
+    get:
+      summary: "Get Multiple Drivers"
+      tags:
+        - "Driver"
+      parameters:
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        200:
+          $ref: "#/components/responses/MultipleDrivers"
+        404:
+          $ref: "#/components/responses/NotFound"
+  "/circuits":
+    get:
+      summary: "Get Circuits"
+      tags:
+        - "Circuits"
+      parameters:
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+  "/login":
+    get:
+      summary: "Log In"
+      tags:
+        - "Admin"
+      responses:
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+components:
+  securitySchemes:
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Auth
+      description: "Authentication Token recieved after logging in."
+
+  responses:
+    Driver:
+      description: "A driver"
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Drivers"
+
+    MultipleDrivers:
+      description: "An array of drivers."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Drivers"
+
+    Unauthorized:
+      description: "API Key is missing or invalid."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotFound:
+      description: "The specified resource was not found."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  parameters:
+    limit:
+      in: query
+      name: limit
+      description: "The number of drivers to return."
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+    offset:
+      in: query
+      name: offset
+      description: "The number of items to skip before starting to collect the result set."
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+
+  schemas:
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "F1 Race Panel Driver ID Number."
+        name:
+          type: string
+          description: "Name of the driver."
+        nationality:
+          type: string
+          description: "Nationality of the driver."
+        dob:
+          type: string
+          format: date
+          description: "Date of Birth of the driver."
+      required:
+        - id
+        - name
+        - nationality
+        - dob
+
+    Drivers:
+      type: object
+      properties:
+        drivers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Driver"
+        count:
+          type: integer
+          description: "Number of drivers in the array."
+          minimum: 1
+        offset:
+          type: integer
+          description: "Number of items skipped before starting the result set."
+          minimum: 0
+      required:
+        - drivers
+        - count
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: "The HTTP status code."
+          minimum: 400
+          maximum: 599
+        description:
+          type: string
+          description: "A short description of the cause of the error."
+      required:
+        - "code"
+        - "description"

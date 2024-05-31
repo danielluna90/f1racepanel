@@ -1,0 +1,69 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "F1 Race Panel API",
+    "description": "The API used for F1 Race Panel (f1racepanel.com)",
+    "contact": {
+      "name": "Daniel Luna",
+      "email": "api-support@f1racepanel.com",
+      "url": "https://danielluna.nyc"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.f1racepanel.com/v1",
+      "description": "Main API Endpoint"
+    },
+    {
+      "url": "https://staging.api.f1racepanel.com/v1",
+      "description": "Development API Endpoint"
+    }
+  ],
+  "paths": {
+    "/drivers": {
+      "get": {
+        "summary": "Get Driver",
+        "tags": [
+          "Drivers"
+        ],
+        "responses": {
+          "404": {
+            "$ref": "#/components/responses/NotFound"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "responses": {
+      "NotFound": {
+        "description": "The specified resource was not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Error"
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "description"
+        ]
+      }
+    }
+  }
+}
