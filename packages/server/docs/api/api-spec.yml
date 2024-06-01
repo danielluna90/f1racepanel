@@ -276,7 +276,7 @@ components:
     Circuits:
       type: object
       properties:
-        drivers:
+        circuits:
           type: array
           items:
             $ref: "#/components/schemas/Circuit"
