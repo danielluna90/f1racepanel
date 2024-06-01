@@ -7,6 +7,7 @@ info:
     email: api-support@f1racepanel.com
     url: https://danielluna.nyc
   version: 'v1'
+
 servers:
   - url: https://api.f1racepanel.com/v1
     description: Production
@@ -19,7 +20,7 @@ paths:
       - $ref: "#/components/parameters/driverID"
     get:
       summary: "Get Driver"
-      description: "Get information for a specific Driver."
+      description: "Get information for a specific driver."
       tags:
         - "Drivers"
       responses:
@@ -54,6 +55,7 @@ paths:
           $ref: "#/components/responses/MultipleDrivers"
         404:
           $ref: "#/components/responses/NotFound"
+
   "/circuits":
     get:
       summary: "Get Circuits"
@@ -63,6 +65,8 @@ paths:
         - $ref: "#/components/parameters/limit"
         - $ref: "#/components/parameters/offset"
       responses:
+        200:
+          $ref: "#/components/responses/MultipleCircuits"
         404:
           $ref: "#/components/responses/NotFound"
 
@@ -75,7 +79,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
-  "/gp/{GPID}":
+  "/gp/{Year}/{Round}":
     get:
       summary: "Get Grand Prix Weekend"
       tags:
@@ -84,7 +88,7 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
-  "/gp/{GPID}/{Session}":
+  "/gp/{Year}/{Round}/{Session}":
     get:
       summary: "Get Grand Prix Session"
       tags:
@@ -124,6 +128,20 @@ components:
         "application/json":
           schema:
             $ref: "#/components/schemas/Drivers"
+
+    Circuit:
+      description: "A circuit."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Circuit"
+
+    MultipleCircuits:
+      description: "An array of circuits."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Circuits"
 
     Unauthorized:
       description: "API Key is missing or invalid."
@@ -172,6 +190,7 @@ components:
       properties:
         id:
           type: string
+          format: uuid
           description: "F1 Race Panel Driver ID Number."
         name:
           type: string
@@ -199,6 +218,71 @@ components:
         count:
           type: integer
           description: "Number of drivers in the array."
+          minimum: 1
+        offset:
+          type: integer
+          description: "Number of items skipped before starting the result set."
+          minimum: 0
+      required:
+        - drivers
+        - count
+
+    CircuitLayout:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of layout."
+        first_year:
+          type: integer
+          description: "First year of the layout."
+        last_year:
+          type: integer
+          description: "Last year of usage of the layout (if applicable)."
+        track_length:
+          type: number
+          description: "Length of circuit in KM"
+        race_lap_record:
+          type: object
+          properties:
+            time:  
+              type: string
+              pattern: '^\d{1}:\d{2}.\d{3}$'
+              example: '1:21.500'
+              description: "Race lap record of the layout. Format is {minutes}:{seconds}.{milliseconds}"
+            driver_id:
+              type: string
+              format: uuid
+              description: "DriverID of the driver who set the fastest time"
+
+    Circuit:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of the circuit."
+        country:
+          type: string
+          description: "ISO 3166-1 alpha-2 country code."
+        date_opened:
+          type: string
+          format: date
+          description: "Date the track first opened."
+        layouts:
+          type: array
+          items:
+            $ref: "#/components/schemas/CircuitLayout"
+
+    Circuits:
+      type: object
+      properties:
+        drivers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Circuit"
+        count:
+          type: integer
+          description: "Number of circuits in the array."
           minimum: 1
         offset:
           type: integer
