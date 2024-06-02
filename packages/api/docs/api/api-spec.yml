@@ -56,11 +56,13 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
-  "/circuits/{circuitID}":
+  "/circuits/{CircuitID}":
     get:
       summary: "Get Circuit"
       tags:
         - "Circuits"
+      parameters:
+        - $ref: "#/components/parameters/circuitID"
       responses:
         200:
           $ref: "#/components/responses/Circuit"
@@ -204,7 +206,14 @@ components:
         type: string
         format: uuid
       required: true
-
+    circuitID:
+      in: path
+      name: CircuitID
+      description: "UUID of a specific circuit."
+      schema:
+        type: string
+        format: uuid
+      required: true
     limit:
       in: query
       name: limit
@@ -398,7 +407,7 @@ components:
           type: boolean
           default: false
         point_system:
-          $ref: "#/components/schemas/PointSystem"
+          $ref: "#/components/schemas/PagedResponse"
 
     PointSystem:
       type: object
