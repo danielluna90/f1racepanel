@@ -56,6 +56,17 @@ paths:
         404:
           $ref: "#/components/responses/NotFound"
 
+  "/circuits/{circuitID}":
+    get:
+      summary: "Get Circuit"
+      tags:
+        - "Circuits"
+      responses:
+        200:
+          $ref: "#/components/responses/Circuit"
+        404:
+          $ref: "#/components/responses/NotFound"
+
   "/circuits":
     get:
       summary: "Get Circuits"
@@ -76,6 +87,8 @@ paths:
       tags:
         - "Grand Prix Weekend"
       responses:
+        200:
+          $ref: "#/components/responses/Season"
         404:
           $ref: "#/components/responses/NotFound"
 
@@ -85,14 +98,25 @@ paths:
       tags:
         - "Grand Prix Weekend"
       responses:
+        200:
+          $ref: "#/components/responses/GPWeekend"
         404:
           $ref: "#/components/responses/NotFound"
 
   "/gp/{Year}/{Round}/{Session}":
     get:
-      summary: "Get Grand Prix Session"
+      summary: "Get Session with Year and Round"
       tags:
-        - "Grand Prix Weekend"
+        - "GP Session"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/session/{SessionID}":
+    get:
+      tags:
+        - "GP Session"
+      summary: "Get Session with SessionID"
       responses:
         404:
           $ref: "#/components/responses/NotFound"
@@ -142,6 +166,20 @@ components:
         "application/json":
           schema:
             $ref: "#/components/schemas/Circuits"
+
+    GPWeekend:
+      description: "A Grand Prix Weekend."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/GPWeekend"
+
+    Season:
+      description: "A season."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Season"
 
     Unauthorized:
       description: "API Key is missing or invalid."
@@ -209,23 +247,17 @@ components:
         - dob
 
     Drivers:
-      type: object
-      properties:
-        drivers:
-          type: array
-          items:
-            $ref: "#/components/schemas/Driver"
-        count:
-          type: integer
-          description: "Number of drivers in the array."
-          minimum: 1
-        offset:
-          type: integer
-          description: "Number of items skipped before starting the result set."
-          minimum: 0
-      required:
-        - drivers
-        - count
+      allOf:
+        - $ref: "#/components/schemas/PagedResponse"
+        - type: object
+          properties:
+            drivers:
+              type: array
+              nullable: true
+              items:
+                $ref: "#/components/schemas/Driver"
+          required:
+            - drivers
 
     CircuitLayout:
       type: object
@@ -241,7 +273,7 @@ components:
           description: "Last year of usage of the layout (if applicable)."
         track_length:
           type: number
-          description: "Length of circuit in KM"
+          description: "Length of circuit in KM."
         race_lap_record:
           type: object
           properties:
@@ -249,15 +281,23 @@ components:
               type: string
               pattern: '^\d{1}:\d{2}.\d{3}$'
               example: '1:21.500'
-              description: "Race lap record of the layout. Format is {minutes}:{seconds}.{milliseconds}"
+              description: "Race lap record of the layout. Format is `{minutes}:{seconds}.{milliseconds}`."
             driver_id:
               type: string
               format: uuid
-              description: "DriverID of the driver who set the fastest time"
+              description: "DriverID of the driver who set the fastest time."
+      required:
+        - name
+        - first_year
+        - track_length
+        - race_lap_record
 
     Circuit:
       type: object
       properties:
+        id:
+          type: string
+          description: "F1 Race Panel CircuitID number."
         name:
           type: string
           description: "Name of the circuit."
@@ -270,27 +310,121 @@ components:
           description: "Date the track first opened."
         layouts:
           type: array
+          minItems: 1
           items:
             $ref: "#/components/schemas/CircuitLayout"
+      required:
+        - name
+        - country
+        - date_opened
+        - layouts
 
     Circuits:
+      allOf:
+        - $ref: "#/components/schemas/PagedResponse"
+        - type: object
+          properties:
+            circuits:
+              type: array
+              nullable: true
+              items:
+                $ref: "#/components/schemas/Circuit"
+          required:
+            - circuits
+
+    GPWeekend:
       type: object
       properties:
-        circuits:
+        id:
+          type: string
+          format: uuid
+          description: "F1 Race Panel GP Weekend ID Number."
+        start_date:
+          type: string
+          format: date
+          description: "Date of the first session of the Grand Prix Weekend."
+        end_date:
+          type: string
+          format: date
+          description: "Date of the last session of the Grand Prix Weekend."
+        sessions:
           type: array
+          description: "Array of Session IDs. Order is the order in which the sessions took place."
+          minItems: 1
           items:
-            $ref: "#/components/schemas/Circuit"
-        count:
+            type: string
+            format: uuid
+        driver_entries:
+          type: array
+          description: "DriverIDs of the drivers who took part in at least one session of the weekend."
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+        team_entries:
+          type: array
+          description: "TeamIDs of the teams who took part in at least one session of the weekend."
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+      required:
+        - id
+        - start_date
+        - end_date
+        - sessions
+        - driver_entries
+        - team_entries
+
+    Season:
+      type: object
+      properties:
+        drivers:
+          type: array
+          description: "UUID of all of the drivers who took part in the given season."
+          items:
+            type: string
+            format: uuid
+        num_of_rounds:
           type: integer
-          description: "Number of circuits in the array."
+          description: "Number of rounds in the given season."
+        is_current_season:
+          type: boolean
+          default: false
+        point_system:
+          $ref: "#/components/schemas/PointSystem"
+
+    PointSystem:
+      type: object
+      properties:
+        awards_extra_point_for_fastest_lap_t10:
+          type: boolean
+
+    PagedResponse:
+      x-internal: true
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          description: "A link to the API endpoint returning the full request."
+        limit:
+          type: integer
           minimum: 1
+          description: "The maximum number of items in the response."
+        next:
+          type: string
+          format: url
+          description: "URL to the next page of items."
         offset:
           type: integer
-          description: "Number of items skipped before starting the result set."
           minimum: 0
+          description: "The offset of the items returned."
       required:
-        - drivers
-        - count
+        - href
+        - limit
+        - next
+        - offset
 
     Error:
       type: object
