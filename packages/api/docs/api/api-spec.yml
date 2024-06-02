@@ -37,6 +37,8 @@ paths:
       responses:
         200:
           $ref: "#/components/responses/Driver"
+        400:
+          $ref: "#/components/responses/BadRequest"
         401:
           $ref: "#/components/responses/Unauthorized"
         404:
@@ -182,6 +184,13 @@ components:
         "application/json":
           schema:
             $ref: "#/components/schemas/Season"
+
+    BadRequest:
+      description: "The request to the API is invalid."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
 
     Unauthorized:
       description: "API Key is missing or invalid."
@@ -407,7 +416,7 @@ components:
           type: boolean
           default: false
         point_system:
-          $ref: "#/components/schemas/PagedResponse"
+          $ref: "#/components/schemas/PointSystem"
 
     PointSystem:
       type: object
