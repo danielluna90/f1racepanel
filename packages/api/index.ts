@@ -1,13 +1,25 @@
+import { PrismaClient } from "f1racepanel-common";
 import express, { Request, Response } from "express";
-import dotenv from "dotenv";
 
+import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
 
-app.get("/", (request: Request, response: Response) => {
-  response.status(200).send("Hello World");
+const prisma = new PrismaClient();
+
+app.get("/", async (request: Request, response: Response) => {
+  const driver = await prisma.driver.findFirst({
+    include: {
+      gp_weekends: {
+        select: {
+          id: true,
+        },
+      },
+    },
+  });
+  driver?.gp_weekends;
 });
 
 app.use("/docs", express.static("docs"));

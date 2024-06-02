@@ -1,8 +1,9 @@
 # F1 Race Panel
 
 ## Project Layout
-* `\packages\client` - 
-* `\packages\server` - 
+* `\packages\api` - Contains the soruce code for api.f1racepanel.com
+* `\packages\client` - Contains the source code for f1racepanel.com
+* `\packages\common` - Contains common source code (In particular, Prisma and Zod types)
 
 ## Commands
 

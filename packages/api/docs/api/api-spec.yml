@@ -235,7 +235,7 @@ components:
           description: "Name of the driver."
         nationality:
           type: string
-          description: "Nationality of the driver."
+          description: "Nationality of the driver in an ISO 3166-1 alpha-2 country code."
         dob:
           type: string
           format: date
@@ -276,6 +276,7 @@ components:
           description: "Length of circuit in KM."
         race_lap_record:
           type: object
+          nullable: true
           properties:
             time:  
               type: string
@@ -347,6 +348,10 @@ components:
           type: string
           format: date
           description: "Date of the last session of the Grand Prix Weekend."
+        circuit:
+          type: string
+          format: uuid
+          description: "CircuitID number of the circuit where this weekend is taking place."
         sessions:
           type: array
           description: "Array of Session IDs. Order is the order in which the sessions took place."
@@ -372,6 +377,7 @@ components:
         - id
         - start_date
         - end_date
+        - circuit
         - sessions
         - driver_entries
         - team_entries
