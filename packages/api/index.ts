@@ -1,5 +1,6 @@
-import { PrismaClient } from "f1racepanel-common";
 import express, { Request, Response } from "express";
+
+import APIRouter from "./src/api.ts";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -7,21 +8,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
-const prisma = new PrismaClient();
-
-app.get("/", async (request: Request, response: Response) => {
-  const driver = await prisma.driver.findFirst({
-    include: {
-      gp_weekends: {
-        select: {
-          id: true,
-        },
-      },
-    },
-  });
-  driver?.gp_weekends;
-});
-
+app.use("/v1", APIRouter);
 app.use("/docs", express.static("docs"));
 
 app

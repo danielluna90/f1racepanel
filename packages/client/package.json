@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.3",
-    "@prisma/client": "5.11.0",
     "astro": "^4.0.3",
     "dateformat": "^5.0.3",
     "nodemon": "^3.0.2",
@@ -27,7 +26,6 @@
     "@types/dateformat": "^5.0.2",
     "@types/inquirer": "^9.0.7",
     "@types/node": "^20.10.4",
-    "prisma": "^5.11.0",
     "typescript": "^5.3.3",
     "zod-to-json-schema": "^3.22.1"
   }
