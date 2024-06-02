@@ -1,6 +1,7 @@
-import express, { Request, Response } from "express";
+import express from "express";
 
 import APIRouter from "./src/api.ts";
+import { prisma } from "./src/prisma.ts";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -17,5 +18,9 @@ app
   })
   .on("error", (error) => {
     // gracefully handle error
+    prisma.$disconnect();
     throw new Error(error.message);
+  })
+  .on("close", () => {
+    prisma.$disconnect();
   });

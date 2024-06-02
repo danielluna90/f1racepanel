@@ -1,13 +1,38 @@
 import express, { Request, Response } from "express";
 const DriverRoutes = express.Router();
 
-import { PrismaClient } from "f1racepanel-common";
-const prisma = new PrismaClient();
+import { prisma } from "./prisma";
 
-DriverRoutes.get("/", (req: Request, res: Response) => {
-  res.send("Hellooooo!");
+DriverRoutes.get("/", async (req: Request, res: Response) => {
+  const drivers = await prisma.driver.findMany();
+
+  res.send(drivers);
 });
 
-DriverRoutes.get("/:DriverID", (req: Request, res: Response) => {});
+DriverRoutes.get("/:DriverID", async (req: Request, res: Response) => {
+  const driverID = req.params.DriverID;
+
+  const driver = await prisma.driver.findUnique({
+    where: {
+      id: driverID,
+    },
+  });
+
+  res.send(driver);
+});
+
+DriverRoutes.post("/:DriverID", async (req: Request, res: Response) => {
+  const driverID = req.params.DriverID;
+
+  const driver = await prisma.driver.create({
+    data: {
+      name: "Test Driver",
+      dob: "06-02-2024",
+      nationality: "US",
+    },
+  });
+
+  res.send(driver);
+});
 
 export default DriverRoutes;
