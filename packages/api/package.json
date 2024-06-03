@@ -7,8 +7,9 @@
     "dev": "bun --watch index.ts"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "f1racepanel-common": "workspace:*",
-    "@types/bun": "latest"
+    "zod-validation-error": "^3.3.0"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"

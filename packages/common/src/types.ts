@@ -6,7 +6,7 @@ const ErrorResponse = z.object({
 });
 
 const Driver = z.object({
-  id: z.string().uuid(),
+  id: z.string().uuid().optional(),
   name: z.string(),
   nationality: z.string().length(2),
   dob: z.string().date(),

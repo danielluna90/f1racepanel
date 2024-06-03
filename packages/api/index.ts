@@ -9,6 +9,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT;
 
+app.disable("x-powered-by");
+
+app.use(express.json());
+
 app.use("/v1", APIRouter);
 app.use("/docs", express.static("docs"));
 
