@@ -1,5 +1,4 @@
 import express, { Request, Response } from "express";
-const DriverRoutes = express.Router();
 
 import { prisma, Prisma } from "./prisma";
 
@@ -7,6 +6,8 @@ import z from "zod";
 import { fromZodError } from "zod-validation-error";
 
 import { ErrorResponse, Driver } from "f1racepanel-common/src/types";
+
+const DriverRoutes = express.Router();
 
 DriverRoutes.get(
   "/",
@@ -117,20 +118,19 @@ DriverRoutes.post(
               description: `Unknown DB error: ${error.code}`,
             });
           }
+        } else {
+          res.status(500).send({
+            code: 500,
+            description: "Unknown Server Error",
+          });
         }
 
-        console.log(error);
         return null;
       });
 
     if (driver != null) {
       res.send(driver);
     }
-
-    res.status(500).send({
-      code: 500,
-      description: "Unknown Server Error",
-    });
   }
 );
 
