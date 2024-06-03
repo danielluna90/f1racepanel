@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 const DriverRoutes = express.Router();
 
-import { prisma } from "./prisma";
+import { prisma, Prisma } from "./prisma";
 
 import z from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -26,7 +26,7 @@ DriverRoutes.post(
     req: Request,
     res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>, {}>
   ) => {
-    const driverData = Driver.safeParse(req.body);
+    const driverData = Driver.omit({ id: true }).safeParse(req.body);
 
     if (driverData.success == false) {
       res.status(400).send({
@@ -37,11 +37,9 @@ DriverRoutes.post(
       return;
     }
 
-    const { id, ...driverDBData } = driverData.data;
-
     const driver = await prisma.driver.create({
       data: {
-        ...driverDBData,
+        ...driverData.data,
       },
     });
 
@@ -86,29 +84,53 @@ DriverRoutes.post(
   ) => {
     const driverID = req.params.DriverID;
 
-    let driver = await prisma.driver.findUnique({ where: { id: driverID } });
+    const driverData = Driver.omit({ id: true }).partial().safeParse(req.body);
 
-    if (driver == null) {
-      res.status(404).send({
-        code: 404,
-        description: `Could not find driver with DriverID: ${driverID}`,
+    if (driverData.success == false) {
+      res.status(400).send({
+        code: 400,
+        description: fromZodError(driverData.error).toString(),
       });
 
       return;
     }
 
-    driver = await prisma.driver.update({
-      where: {
-        id: driverID,
-      },
-      data: {
-        name: "Test Driver",
-        dob: "06-02-2024",
-        nationality: "US",
-      },
-    });
+    const driver = await prisma.driver
+      .update({
+        where: {
+          id: driverID,
+        },
+        data: {
+          ...driverData.data,
+        },
+      })
+      .catch((error) => {
+        if (error instanceof Prisma.PrismaClientKnownRequestError) {
+          if (error.code == "P2025") {
+            res.status(404).send({
+              code: 404,
+              description: `Could not find driver with DriverID: ${driverID}`,
+            });
+          } else {
+            res.status(500).send({
+              code: 500,
+              description: `Unknown DB error: ${error.code}`,
+            });
+          }
+        }
 
-    res.send(driver);
+        console.log(error);
+        return null;
+      });
+
+    if (driver != null) {
+      res.send(driver);
+    }
+
+    res.status(500).send({
+      code: 500,
+      description: "Unknown Server Error",
+    });
   }
 );
 
