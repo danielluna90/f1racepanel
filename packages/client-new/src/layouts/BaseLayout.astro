@@ -8,9 +8,10 @@ import "@fontsource-variable/open-sans";
 
 interface Props {
   title?: string;
+  admin?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, admin = false } = Astro.props;
 ---
 
 <!doctype html>
@@ -24,8 +25,8 @@ const { title } = Astro.props;
     <title>{title ? `F1 Race Panel - ${title}` : "F1 Race Panel"}</title>
   </head>
   <body>
-    <Sidebar />
-    <Navbar />
+    <Sidebar admin={admin} />
+    <Navbar admin={admin} />
     <main>
       <slot />
     </main>
