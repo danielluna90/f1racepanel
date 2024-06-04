@@ -13,6 +13,7 @@
     "@astrojs/check": "^0.7.0",
     "@fontsource-variable/montserrat": "^5.0.19",
     "@fontsource-variable/open-sans": "^5.0.29",
+    "@playwright/test": "^1.44.1",
     "astro": "^4.9.2",
     "typescript": "^5.4.5"
   },
