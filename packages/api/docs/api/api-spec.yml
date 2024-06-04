@@ -147,6 +147,15 @@ paths:
         401:
           $ref: "#/components/responses/Unauthorized"
 
+  "/search":
+    post:
+      summary: "Search"
+      tags:
+        - "Search"
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequest"
+
 components:
   securitySchemes:
     AdminAuth:
