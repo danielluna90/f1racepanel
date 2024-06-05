@@ -1,7 +1,7 @@
 import express from 'express';
 
-import APIRouter from './src/api.ts';
-import { prisma } from './src/prisma.ts';
+import APIRouter from './api.ts';
+import { prisma } from './prisma.ts';
 
 import dotenv from 'dotenv';
 dotenv.config();
