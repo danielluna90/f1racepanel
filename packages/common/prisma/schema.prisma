@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Driver {
+  id          String @id @default(uuid())
+  name        String @unique
+  nationality String @db.VarChar(2)
+  dob         String
+
+  gp_weekends GPWeekend[]
+  seasons     Season[]
+}
+
+model RaceLapRecord {
+  id        String @id @default(uuid())
+  time      String
+  driver_id String
+
+  circuit_layout CircuitLayout?
+}
+
+model CircuitLayout {
+  id                 String        @id @default(uuid())
+  first_year         Int
+  last_year          Int
+  track_length       Float
+  race_lap_record    RaceLapRecord @relation(fields: [race_lap_record_id], references: [id])
+  race_lap_record_id String        @unique
+  Circuit            Circuit?      @relation(fields: [circuitId], references: [id])
+  circuitId          String?
+}
+
+model Circuit {
+  id          String          @id @default(uuid())
+  name        String
+  country     String          @db.VarChar(2)
+  date_opened String
+  layouts     CircuitLayout[]
+  gp_weekends GPWeekend[]
+}
+
+model GPWeekend {
+  id             String    @id @default(uuid())
+  start_date     String
+  end_date       String
+  circuit        Circuit[]
+  // sessions Sessions[] <- One-to-Many
+  driver_entries Driver[]
+  // team_entries Team[] <- Many-to-Many
+}
+
+model Season {
+  year Int @id @unique
+
+  drivers           Driver[]
+  num_of_rounds     Int
+  is_current_season Boolean
+  // point_system
+}

@@ -1,0 +1,16 @@
+{
+  "name": "f1racepanel-common",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^5.14.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "5.14.0",
+    "zod": "^3.23.8"
+  }
+}

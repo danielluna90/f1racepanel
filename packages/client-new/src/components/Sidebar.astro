@@ -1,0 +1,11 @@
+---
+interface Props {
+  admin: boolean;
+}
+
+const { admin } = Astro.props;
+---
+
+<div>
+  {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
+</div>
