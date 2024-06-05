@@ -2,7 +2,7 @@
 node_modules/
 
 # settings
-.vscode/
+# .vscode/
 
 **/.DS_Store
 

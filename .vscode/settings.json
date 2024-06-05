@@ -10,5 +10,10 @@
     }
   ],
   "editor.formatOnSave": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+  "eslint.workingDirectories": [
+    {"mode": "auto"}
+  ]
 }
