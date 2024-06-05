@@ -1,7 +1,8 @@
 // @ts-check
 
-import eslint from '@eslint/js';
-import tseslint from 'typescript-eslint';
+import eslint from "@eslint/js";
+import tseslint from "typescript-eslint";
+import prettierConfig from "eslint-config-prettier";
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -10,12 +11,15 @@ export default tseslint.config(
   ...tseslint.configs.recommendedTypeChecked,
   {
     rules: {
-      "@typescript-eslint/no-misused-promises": ["off", {
-        checksVoidReturn: {
-          arguments: false
-        }
-      }]
-    }
+      "@typescript-eslint/no-misused-promises": [
+        "off",
+        {
+          checksVoidReturn: {
+            arguments: false,
+          },
+        },
+      ],
+    },
   },
   {
     languageOptions: {
@@ -25,4 +29,5 @@ export default tseslint.config(
       },
     },
   },
+  prettierConfig,
 );

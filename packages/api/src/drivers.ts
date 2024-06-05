@@ -15,12 +15,12 @@ DriverRoutes.get(
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>[],
       Record<string, unknown>
-    >
+    >,
   ) => {
     const drivers = await prisma.driver.findMany();
 
     res.send(drivers);
-  }
+  },
 );
 
 DriverRoutes.post(
@@ -30,11 +30,11 @@ DriverRoutes.post(
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
       Record<string, unknown>
-    >
+    >,
   ) => {
     const driverData = Driver.omit({ id: true }).safeParse(req.body);
 
-    if (driverData.success == false) {
+    if (!driverData.success) {
       res.status(400).send({
         code: 400,
         description: fromZodError(driverData.error).toString(),
@@ -50,7 +50,7 @@ DriverRoutes.post(
     });
 
     res.status(200).send(driver);
-  }
+  },
 );
 
 DriverRoutes.get(
@@ -60,7 +60,7 @@ DriverRoutes.get(
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
       Record<string, unknown>
-    >
+    >,
   ) => {
     const driverID = req.params.DriverID;
 
@@ -82,7 +82,7 @@ DriverRoutes.get(
     res.status(200).send({
       ...driver,
     });
-  }
+  },
 );
 
 DriverRoutes.post(
@@ -92,13 +92,13 @@ DriverRoutes.post(
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
       Record<string, unknown>
-    >
+    >,
   ) => {
     const driverID = req.params.DriverID;
 
     const driverData = Driver.omit({ id: true }).partial().safeParse(req.body);
 
-    if (driverData.success == false) {
+    if (!driverData.success) {
       res.status(400).send({
         code: 400,
         description: fromZodError(driverData.error).toString(),
@@ -116,7 +116,7 @@ DriverRoutes.post(
           ...driverData.data,
         },
       })
-      .catch((error) => {
+      .catch((error: unknown) => {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
           if (error.code == "P2025") {
             res.status(404).send({
@@ -142,7 +142,7 @@ DriverRoutes.post(
     if (driver != null) {
       res.send(driver);
     }
-  }
+  },
 );
 
 export default DriverRoutes;

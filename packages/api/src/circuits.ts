@@ -1,4 +1,4 @@
-import express, { Request, RequestHandler, Response } from "express";
+import express, { Request, Response } from "express";
 const CircuitRoutes = express.Router();
 
 import { prisma } from "./prisma";

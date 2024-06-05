@@ -13,7 +13,7 @@ GPRoutes.get("/:year/:round/:session", async (req: Request, res: Response) => {
   const { year, round, session } = req.params;
 
   res.send(
-    `Obtaining Session ${session} of Round ${round} of the ${year} F1 Season!`
+    `Obtaining Session ${session} of Round ${round} of the ${year} F1 Season!`,
   );
 });
 
