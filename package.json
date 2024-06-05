@@ -1,31 +1,14 @@
 {
   "name": "f1racepanel",
-  "type": "module",
-  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "genSchedules": "node --loader ts-node/esm tools/genSchedules.ts",
-    "genJsonSchemas": "node --loader ts-node/esm tools/genJsonSchemas.ts",
-    "prepare": "yarn genJsonSchemas"
+    "build:client": "cd packages/client && bun run build && mv dist ../../dist",
+    "build": "npm-run-all2 build:*"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.0.0",
-    "astro": "^3.0.12",
-    "dateformat": "^5.0.3",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "zod": "^3.22.2"
-  },
-  "devDependencies": {
-    "@inquirer/prompts": "^3.1.0",
-    "@types/dateformat": "^5.0.0",
-    "@types/inquirer": "^9.0.3",
-    "@types/node": "^20.6.0",
-    "typescript": "^5.2.2",
-    "zod-to-json-schema": "^3.21.4"
+    "npm-run-all2": "^6.2.0"
   }
 }

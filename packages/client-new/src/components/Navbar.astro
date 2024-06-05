@@ -1,0 +1,17 @@
+---
+interface Props {
+  admin: boolean;
+}
+
+const { admin } = Astro.props;
+---
+
+<nav>
+  <ul>
+    <li>Home</li>
+    <li>Archive</li>
+    <li>Query Builder</li>
+    <li>About</li>
+    {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
+  </ul>
+</nav>

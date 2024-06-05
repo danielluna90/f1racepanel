@@ -20,7 +20,7 @@ const weekendInfo = entry.data.weekendInfo;
         <li data-time={weekendInfo.sessionInfo.fp1.time.getTime()}>
           Free Practice 1:
         </li>
-        <time-element data-time={weekendInfo.sessionInfo.fp1.time.getTime()}>
+        <time-element data-time={weekendInfo.sessionInfo.fp2.time.getTime()}>
           <li>Free Practice 2:</li>
         </time-element>
         <li>Free Practice 3:</li>
@@ -41,10 +41,10 @@ const weekendInfo = entry.data.weekendInfo;
       constructor() {
         super();
 
-        const message = new Date(this.dataset.time * 1);
+        const message = new Date(this.dataset.time ? this.dataset.time : 0 * 1);
         console.log(message);
         const li = this.querySelector("li");
-        li.innerHTML = getFormattedDateTime(message);
+        (li as HTMLLIElement).innerHTML = getFormattedDateTime(message);
       }
     }
 

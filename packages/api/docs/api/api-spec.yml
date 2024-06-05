@@ -1,0 +1,488 @@
+openapi: '3.0.0'
+info:
+  title: F1 Race Panel API
+  description: The API used for F1 Race Panel (f1racepanel.com)
+  contact:
+    name: Daniel Luna
+    email: api-support@f1racepanel.com
+    url: https://danielluna.nyc
+  version: 'v1'
+
+servers:
+  - url: https://api.f1racepanel.com/v1
+    description: Production
+  - url: https://staging.api.f1racepanel.com/v1
+    description: Development
+
+paths:
+  "/drivers/{DriverID}":
+    parameters:
+      - $ref: "#/components/parameters/driverID"
+    get:
+      summary: "Get Driver"
+      description: "Get information for a specific driver."
+      tags:
+        - "Drivers"
+      responses:
+        200:
+          $ref: "#/components/responses/Driver"
+        404:
+          $ref: "#/components/responses/NotFound"
+    post:
+      summary: "Edit Driver"
+      security:
+        - AdminAuth: []
+      tags:
+        - "Drivers"
+      responses:
+        200:
+          $ref: "#/components/responses/Driver"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+        404:
+          $ref: "#/components/responses/NotFound"
+      
+  "/drivers":
+    get:
+      summary: "Get Multiple Drivers"
+      tags:
+        - "Drivers"
+      parameters:
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        200:
+          $ref: "#/components/responses/MultipleDrivers"
+        404:
+          $ref: "#/components/responses/NotFound"
+    post:
+      summary: "Create Driver"
+      security:
+        - AdminAuth: []
+      tags:
+        - "Drivers"
+      responses:
+        200:
+          $ref: "#/components/responses/Driver"
+        400:
+          $ref: "#/components/responses/BadRequest"
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  "/circuits/{CircuitID}":
+    get:
+      summary: "Get Circuit"
+      tags:
+        - "Circuits"
+      parameters:
+        - $ref: "#/components/parameters/circuitID"
+      responses:
+        200:
+          $ref: "#/components/responses/Circuit"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/circuits":
+    get:
+      summary: "Get Circuits"
+      tags:
+        - "Circuits"
+      parameters:
+        - $ref: "#/components/parameters/limit"
+        - $ref: "#/components/parameters/offset"
+      responses:
+        200:
+          $ref: "#/components/responses/MultipleCircuits"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/season/{Year}":
+    get:
+      summary: "Get Season Info"
+      tags:
+        - "Grand Prix Weekend"
+      responses:
+        200:
+          $ref: "#/components/responses/Season"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/gp/{Year}/{Round}":
+    get:
+      summary: "Get Grand Prix Weekend"
+      tags:
+        - "Grand Prix Weekend"
+      responses:
+        200:
+          $ref: "#/components/responses/GPWeekend"
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/gp/{Year}/{Round}/{Session}":
+    get:
+      summary: "Get Session with Year and Round"
+      tags:
+        - "GP Session"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/session/{SessionID}":
+    get:
+      tags:
+        - "GP Session"
+      summary: "Get Session with SessionID"
+      responses:
+        404:
+          $ref: "#/components/responses/NotFound"
+
+  "/login":
+    get:
+      summary: "Log In"
+      tags:
+        - "Admin"
+      responses:
+        401:
+          $ref: "#/components/responses/Unauthorized"
+
+  "/search":
+    post:
+      summary: "Search"
+      tags:
+        - "Search"
+      responses:
+        400:
+          $ref: "#/components/responses/BadRequest"
+
+components:
+  securitySchemes:
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Auth
+      description: "Authentication Token recieved after logging in."
+
+  responses:
+    Driver:
+      description: "A driver."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Driver"
+
+    MultipleDrivers:
+      description: "An array of drivers."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Drivers"
+
+    Circuit:
+      description: "A circuit."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Circuit"
+
+    MultipleCircuits:
+      description: "An array of circuits."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Circuits"
+
+    GPWeekend:
+      description: "A Grand Prix Weekend."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/GPWeekend"
+
+    Season:
+      description: "A season."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Season"
+
+    BadRequest:
+      description: "The request to the API is invalid."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    Unauthorized:
+      description: "API Key is missing or invalid."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+
+    NotFound:
+      description: "The specified resource was not found."
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/Error"
+
+  parameters:
+    driverID:
+      in: path
+      name: DriverID
+      description: "UUID of a specific driver."
+      schema:
+        type: string
+        format: uuid
+      required: true
+    circuitID:
+      in: path
+      name: CircuitID
+      description: "UUID of a specific circuit."
+      schema:
+        type: string
+        format: uuid
+      required: true
+    limit:
+      in: query
+      name: limit
+      description: "The number of drivers to return."
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+    offset:
+      in: query
+      name: offset
+      description: "The number of items to skip before starting to collect the result set."
+      schema:
+        type: integer
+        default: 0
+        minimum: 0
+
+  schemas:
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "F1 Race Panel Driver ID Number."
+        name:
+          type: string
+          description: "Name of the driver."
+        nationality:
+          type: string
+          description: "Nationality of the driver in an ISO 3166-1 alpha-2 country code."
+        dob:
+          type: string
+          format: date
+          description: "Date of Birth of the driver."
+      required:
+        - id
+        - name
+        - nationality
+        - dob
+
+    Drivers:
+      allOf:
+        - $ref: "#/components/schemas/PagedResponse"
+        - type: object
+          properties:
+            drivers:
+              type: array
+              nullable: true
+              items:
+                $ref: "#/components/schemas/Driver"
+          required:
+            - drivers
+
+    CircuitLayout:
+      type: object
+      properties:
+        name:
+          type: string
+          description: "Name of layout."
+        first_year:
+          type: integer
+          description: "First year of the layout."
+        last_year:
+          type: integer
+          description: "Last year of usage of the layout (if applicable)."
+        track_length:
+          type: number
+          description: "Length of circuit in KM."
+        race_lap_record:
+          type: object
+          nullable: true
+          properties:
+            time:  
+              type: string
+              pattern: '^\d{1}:\d{2}.\d{3}$'
+              example: '1:21.500'
+              description: "Race lap record of the layout. Format is `{minutes}:{seconds}.{milliseconds}`."
+            driver_id:
+              type: string
+              format: uuid
+              description: "DriverID of the driver who set the fastest time."
+      required:
+        - name
+        - first_year
+        - track_length
+        - race_lap_record
+
+    Circuit:
+      type: object
+      properties:
+        id:
+          type: string
+          description: "F1 Race Panel CircuitID number."
+        name:
+          type: string
+          description: "Name of the circuit."
+        country:
+          type: string
+          description: "ISO 3166-1 alpha-2 country code."
+        date_opened:
+          type: string
+          format: date
+          description: "Date the track first opened."
+        layouts:
+          type: array
+          minItems: 1
+          items:
+            $ref: "#/components/schemas/CircuitLayout"
+      required:
+        - name
+        - country
+        - date_opened
+        - layouts
+
+    Circuits:
+      allOf:
+        - $ref: "#/components/schemas/PagedResponse"
+        - type: object
+          properties:
+            circuits:
+              type: array
+              nullable: true
+              items:
+                $ref: "#/components/schemas/Circuit"
+          required:
+            - circuits
+
+    GPWeekend:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "F1 Race Panel GP Weekend ID Number."
+        start_date:
+          type: string
+          format: date
+          description: "Date of the first session of the Grand Prix Weekend."
+        end_date:
+          type: string
+          format: date
+          description: "Date of the last session of the Grand Prix Weekend."
+        circuit:
+          type: string
+          format: uuid
+          description: "CircuitID number of the circuit where this weekend is taking place."
+        sessions:
+          type: array
+          description: "Array of Session IDs. Order is the order in which the sessions took place."
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+        driver_entries:
+          type: array
+          description: "DriverIDs of the drivers who took part in at least one session of the weekend."
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+        team_entries:
+          type: array
+          description: "TeamIDs of the teams who took part in at least one session of the weekend."
+          minItems: 1
+          items:
+            type: string
+            format: uuid
+      required:
+        - id
+        - start_date
+        - end_date
+        - circuit
+        - sessions
+        - driver_entries
+        - team_entries
+
+    Season:
+      type: object
+      properties:
+        drivers:
+          type: array
+          description: "UUID of all of the drivers who took part in the given season."
+          items:
+            type: string
+            format: uuid
+        num_of_rounds:
+          type: integer
+          description: "Number of rounds in the given season."
+        is_current_season:
+          type: boolean
+          default: false
+        point_system:
+          $ref: "#/components/schemas/PointSystem"
+
+    PointSystem:
+      type: object
+      properties:
+        awards_extra_point_for_fastest_lap_t10:
+          type: boolean
+
+    PagedResponse:
+      x-internal: true
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          description: "A link to the API endpoint returning the full request."
+        limit:
+          type: integer
+          minimum: 1
+          description: "The maximum number of items in the response."
+        next:
+          type: string
+          format: url
+          description: "URL to the next page of items."
+        offset:
+          type: integer
+          minimum: 0
+          description: "The offset of the items returned."
+      required:
+        - href
+        - limit
+        - next
+        - offset
+
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: "The HTTP status code."
+          minimum: 400
+          maximum: 599
+        description:
+          type: string
+          description: "A short description of the cause of the error."
+      required:
+        - "code"
+        - "description"
