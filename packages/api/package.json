@@ -5,7 +5,10 @@
   "scripts": {
     "start": "bun index.ts",
     "dev": "bun --watch index.ts",
-    "test": "playwright test"
+    "test": "playwright test",
+    "lint:eslint": "eslint .",
+    "lint:prettier": "prettier . --check",
+    "lint": "npm-run-all --parallel lint:*"
   },
   "devDependencies": {
     "@eslint/js": "^9.4.0",
@@ -15,6 +18,7 @@
     "eslint": "^9.4.0",
     "eslint-config-prettier": "^9.1.0",
     "f1racepanel-common": "workspace:*",
+    "npm-run-all2": "^6.2.0",
     "prettier": "3.3.1",
     "typescript": "^5.4.5",
     "typescript-eslint": "^7.12.0",

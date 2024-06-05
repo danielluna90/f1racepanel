@@ -1,36 +1,36 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response } from 'express';
 
-import z from "zod";
-import { fromZodError } from "zod-validation-error";
+import z from 'zod';
+import { fromZodError } from 'zod-validation-error';
 
-import { prisma, Prisma } from "./prisma";
-import { ErrorResponse, Driver } from "f1racepanel-common/src/types";
+import { prisma, Prisma } from './prisma';
+import { ErrorResponse, Driver } from 'f1racepanel-common/src/types';
 
 const DriverRoutes = express.Router();
 
 DriverRoutes.get(
-  "/",
+  '/',
   async (
     req: Request,
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>[],
       Record<string, unknown>
-    >,
+    >
   ) => {
     const drivers = await prisma.driver.findMany();
 
     res.send(drivers);
-  },
+  }
 );
 
 DriverRoutes.post(
-  "/",
+  '/',
   async (
     req: Request,
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
-      Record<string, unknown>
-    >,
+      Record<string, any>
+    >
   ) => {
     const driverData = Driver.omit({ id: true }).safeParse(req.body);
 
@@ -50,17 +50,17 @@ DriverRoutes.post(
     });
 
     res.status(200).send(driver);
-  },
+  }
 );
 
 DriverRoutes.get(
-  "/:DriverID",
+  '/:DriverID',
   async (
     req: Request,
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
       Record<string, unknown>
-    >,
+    >
   ) => {
     const driverID = req.params.DriverID;
 
@@ -82,17 +82,17 @@ DriverRoutes.get(
     res.status(200).send({
       ...driver,
     });
-  },
+  }
 );
 
 DriverRoutes.post(
-  "/:DriverID",
+  '/:DriverID',
   async (
     req: Request,
     res: Response<
       z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
       Record<string, unknown>
-    >,
+    >
   ) => {
     const driverID = req.params.DriverID;
 
@@ -118,7 +118,7 @@ DriverRoutes.post(
       })
       .catch((error: unknown) => {
         if (error instanceof Prisma.PrismaClientKnownRequestError) {
-          if (error.code == "P2025") {
+          if (error.code == 'P2025') {
             res.status(404).send({
               code: 404,
               description: `Could not find driver with DriverID: ${driverID}`,
@@ -132,7 +132,7 @@ DriverRoutes.post(
         } else {
           res.status(500).send({
             code: 500,
-            description: "Unknown Server Error",
+            description: 'Unknown Server Error',
           });
         }
 
@@ -142,7 +142,7 @@ DriverRoutes.post(
     if (driver != null) {
       res.send(driver);
     }
-  },
+  }
 );
 
 export default DriverRoutes;
