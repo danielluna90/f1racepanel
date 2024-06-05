@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 const GPRoutes = express.Router();
 
-import { prisma } from "./prisma";
+// import { prisma } from "./prisma";
 
 GPRoutes.get("/:year/:round", async (req: Request, res: Response) => {
   const { year, round } = req.params;

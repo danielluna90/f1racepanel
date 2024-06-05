@@ -12,7 +12,10 @@ DriverRoutes.get(
   "/",
   async (
     req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>[], {}>
+    res: Response<
+      z.infer<typeof ErrorResponse> | z.infer<typeof Driver>[],
+      Record<string, unknown>
+    >
   ) => {
     const drivers = await prisma.driver.findMany();
 
@@ -24,7 +27,10 @@ DriverRoutes.post(
   "/",
   async (
     req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>, {}>
+    res: Response<
+      z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
+      Record<string, unknown>
+    >
   ) => {
     const driverData = Driver.omit({ id: true }).safeParse(req.body);
 
@@ -51,7 +57,10 @@ DriverRoutes.get(
   "/:DriverID",
   async (
     req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>, {}>
+    res: Response<
+      z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
+      Record<string, unknown>
+    >
   ) => {
     const driverID = req.params.DriverID;
 
@@ -80,7 +89,10 @@ DriverRoutes.post(
   "/:DriverID",
   async (
     req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>, {}>
+    res: Response<
+      z.infer<typeof ErrorResponse> | z.infer<typeof Driver>,
+      Record<string, unknown>
+    >
   ) => {
     const driverID = req.params.DriverID;
 

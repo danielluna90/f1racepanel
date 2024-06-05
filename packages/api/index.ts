@@ -20,11 +20,11 @@ app
   .listen(port, () => {
     console.log("Server running at PORT: ", port);
   })
-  .on("error", (error) => {
+  .on("error", async (error) => {
     // gracefully handle error
-    prisma.$disconnect();
+    await prisma.$disconnect();
     throw new Error(error.message);
   })
-  .on("close", () => {
-    prisma.$disconnect();
+  .on("close", async () => {
+    await prisma.$disconnect();
   });
