@@ -3,13 +3,13 @@ const GPRoutes = express.Router();
 
 // import { prisma } from "./prisma";
 
-GPRoutes.get('/:year/:round', async (req: Request, res: Response) => {
+GPRoutes.get('/:year/:round', (req: Request, res: Response) => {
   const { year, round } = req.params;
 
   res.send(`Obtaining Round ${round} of the ${year} F1 Season!`);
 });
 
-GPRoutes.get('/:year/:round/:session', async (req: Request, res: Response) => {
+GPRoutes.get('/:year/:round/:session', (req: Request, res: Response) => {
   const { year, round, session } = req.params;
 
   res.send(
