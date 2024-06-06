@@ -6,14 +6,14 @@ import { fromZodError } from 'zod-validation-error';
 import { prisma, Prisma } from './prisma';
 import { ErrorResponse, Driver } from 'f1racepanel-common/src/types';
 
+type ErrorResponse = z.infer<typeof ErrorResponse>;
+type Driver = z.infer<typeof Driver>;
+
 const DriverRoutes = express.Router();
 
 DriverRoutes.get(
   '/',
-  async (
-    req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>[]>
-  ) => {
+  async (req: Request, res: Response<ErrorResponse | Driver[]>) => {
     const drivers = await prisma.driver.findMany();
 
     res.send(drivers);
@@ -22,10 +22,7 @@ DriverRoutes.get(
 
 DriverRoutes.post(
   '/',
-  async (
-    req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>>
-  ) => {
+  async (req: Request, res: Response<ErrorResponse | Driver>) => {
     const driverData = Driver.omit({ id: true }).safeParse(req.body);
 
     if (!driverData.success) {
@@ -49,10 +46,7 @@ DriverRoutes.post(
 
 DriverRoutes.get(
   '/:DriverID',
-  async (
-    req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>>
-  ) => {
+  async (req: Request, res: Response<ErrorResponse | Driver>) => {
     const driverID = req.params.DriverID;
 
     const driver = await prisma.driver.findUnique({
@@ -78,10 +72,7 @@ DriverRoutes.get(
 
 DriverRoutes.post(
   '/:DriverID',
-  async (
-    req: Request,
-    res: Response<z.infer<typeof ErrorResponse> | z.infer<typeof Driver>>
-  ) => {
+  async (req: Request, res: Response<ErrorResponse | Driver>) => {
     const driverID = req.params.DriverID;
 
     const driverData = Driver.omit({ id: true }).partial().safeParse(req.body);

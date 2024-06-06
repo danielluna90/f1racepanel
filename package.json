@@ -6,9 +6,14 @@
   ],
   "scripts": {
     "build:client": "cd packages/client && bun run build && mv dist ../../dist",
-    "build": "npm-run-all2 build:*"
+    "build": "npm-run-all2 build:*",
+    "pre-commit": "lint-staged",
+    "prepare": "husky"
   },
   "dependencies": {
     "npm-run-all2": "^6.2.0"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11"
   }
 }

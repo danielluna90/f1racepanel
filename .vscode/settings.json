@@ -9,12 +9,13 @@
       "url": "./schemas/metadataSchema.json"
     }
   ],
-  //"editor.formatOnSave": true,
+  "editor.formatOnSave": true,
   "editor.tabSize": 2,
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": false,
   "eslint.workingDirectories": [
     {"mode": "auto"}
   ],
-  "eslint.validate": ["javascript", "typescript"]
+  "eslint.validate": ["javascript", "typescript"],
+  "files.insertFinalNewline": true
 }
