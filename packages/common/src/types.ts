@@ -53,4 +53,16 @@ const Season = z.object({
   point_system: PointSystem,
 });
 
+function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
+  return z.object({
+    href: z.string().url(),
+    limit: z.number().int().positive(),
+    next: z.string(),
+    offset: z.number().int().nonnegative(),
+    items: schema.array()
+  });
+}
+
+const MultipleDrivers = getPagedResponse<typeof Driver>(Driver);
+
 export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season };

@@ -291,7 +291,7 @@ components:
         - $ref: "#/components/schemas/PagedResponse"
         - type: object
           properties:
-            drivers:
+            items:
               type: array
               nullable: true
               items:
@@ -365,7 +365,7 @@ components:
         - $ref: "#/components/schemas/PagedResponse"
         - type: object
           properties:
-            circuits:
+            items:
               type: array
               nullable: true
               items:
