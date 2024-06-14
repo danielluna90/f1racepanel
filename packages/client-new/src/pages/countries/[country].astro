@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (() => {
+  return [
+    { props: { countryName: "United States" }, params: { country: "us" } },
+  ];
+}) satisfies GetStaticPaths;
+
+interface Props {
+  countryName: string;
+}
+
+const { countryName } = Astro.props;
+---
+
+<BaseLayout title=`${countryName}` />
