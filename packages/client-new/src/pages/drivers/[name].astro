@@ -1,0 +1,58 @@
+---
+import type { GetStaticPathsResult } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import { getSecret } from "astro:env/server";
+
+import { Driver, Drivers } from "f1racepanel-common/src/types";
+
+export async function getStaticPaths() {
+  let rv: GetStaticPathsResult = [
+    { props: { name: "Max Verstappen" }, params: { name: "max-verstappen" } },
+  ];
+
+  const API_URL = getSecret("API_URL");
+  const API_DRIVERS_URL = `${API_URL}/drivers`;
+
+  let complete: boolean = false;
+  let url: string = API_DRIVERS_URL;
+
+  while (!complete) {
+    const rawRes = await fetch(url);
+    const resJSON = await rawRes.json();
+
+    try {
+      Drivers.parse(resJSON);
+    } catch (e) {
+      console.log(e);
+    }
+
+    const res = Drivers.parse(resJSON);
+
+    res.items.forEach((driver: Driver) => {
+      rv.push({
+        props: { name: driver.name },
+        params: { name: driver.name.toLowerCase().replace(" ", "-") },
+      });
+    });
+
+    if (res.next == null) {
+      complete = true;
+    } else {
+      url = res.next;
+    }
+  }
+
+  return rv;
+}
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<BaseLayout title=`${name}`>
+  <p>{name}</p>
+</BaseLayout>

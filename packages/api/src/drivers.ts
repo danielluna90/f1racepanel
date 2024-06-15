@@ -3,16 +3,22 @@ import express, { Request, Response } from 'express';
 import { fromZodError } from 'zod-validation-error';
 
 import { prisma, Prisma } from './prisma';
-import { ErrorResponse, Driver } from 'f1racepanel-common/src/types';
+import { ErrorResponse, Driver, Drivers } from 'f1racepanel-common/src/types';
 
 const DriverRoutes = express.Router();
 
 DriverRoutes.get(
   '/',
-  async (req: Request, res: Response<ErrorResponse | Driver[]>) => {
+  async (req: Request, res: Response<ErrorResponse | Drivers>) => {
     const drivers = await prisma.driver.findMany();
 
-    res.send(drivers);
+    res.send({
+      href: 'http://localhost:3000/v1/drivers',
+      limit: 20,
+      next: null,
+      offset: 0,
+      items: drivers,
+    });
   }
 );
 

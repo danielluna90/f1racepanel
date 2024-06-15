@@ -70,7 +70,7 @@ function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
   });
 }
 
-const MultipleDrivers = getPagedResponse<typeof Driver>(Driver);
-type MultipleDrivers = z.infer<typeof MultipleDrivers>;
+const Drivers = getPagedResponse<typeof Driver>(Driver);
+type Drivers = z.infer<typeof Drivers>;
 
-export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season, MultipleDrivers };
+export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season, Drivers };
