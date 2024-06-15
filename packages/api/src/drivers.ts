@@ -1,13 +1,9 @@
 import express, { Request, Response } from 'express';
 
-import z from 'zod';
 import { fromZodError } from 'zod-validation-error';
 
 import { prisma, Prisma } from './prisma';
 import { ErrorResponse, Driver } from 'f1racepanel-common/src/types';
-
-type ErrorResponse = z.infer<typeof ErrorResponse>;
-type Driver = z.infer<typeof Driver>;
 
 const DriverRoutes = express.Router();
 

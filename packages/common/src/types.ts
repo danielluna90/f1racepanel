@@ -4,6 +4,7 @@ const ErrorResponse = z.object({
   code: z.number().int().min(400).max(599),
   description: z.string(),
 });
+type ErrorResponse = z.infer<typeof ErrorResponse>;
 
 const Driver = z.object({
   id: z.string().uuid(),
@@ -11,6 +12,7 @@ const Driver = z.object({
   nationality: z.string().length(2),
   dob: z.string().date(),
 });
+type Driver = z.infer<typeof Driver>;
 
 const CircuitLayout = z.object({
   id: z.string().uuid(),
@@ -23,6 +25,7 @@ const CircuitLayout = z.object({
     driver_id: z.string().uuid(),
   }),
 });
+type CircuitLayout = z.infer<typeof CircuitLayout>;
 
 const Circuit = z.object({
   id: z.string().uuid(),
@@ -31,6 +34,7 @@ const Circuit = z.object({
   date_opened: z.string().date(),
   layout: CircuitLayout.array().min(1),
 });
+type Circuit = z.infer<typeof Circuit>;
 
 const GPWeekend = z.object({
   id: z.string().uuid(),
@@ -41,10 +45,12 @@ const GPWeekend = z.object({
   driver_entries: z.string().uuid().array().min(1),
   team_entries: z.string().uuid().array().min(1),
 });
+type GPWeekend = z.infer<typeof GPWeekend>;
 
 const PointSystem = z.object({
   awards_extra_point_for_fastest_lap_t10: z.boolean(),
 });
+type PointSystem = z.infer<typeof PointSystem>;
 
 const Season = z.object({
   drivers: z.string().uuid().array(),
@@ -52,17 +58,19 @@ const Season = z.object({
   is_current_season: z.boolean().default(false),
   point_system: PointSystem,
 });
+type Season = z.infer<typeof Season>;
 
 function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
   return z.object({
     href: z.string().url(),
     limit: z.number().int().positive(),
-    next: z.string(),
+    next: z.string().url().nullable(),
     offset: z.number().int().nonnegative(),
     items: schema.array()
   });
 }
 
 const MultipleDrivers = getPagedResponse<typeof Driver>(Driver);
+type MultipleDrivers = z.infer<typeof MultipleDrivers>;
 
-export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season };
+export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season, MultipleDrivers };
