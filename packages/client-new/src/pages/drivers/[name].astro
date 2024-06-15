@@ -20,13 +20,6 @@ export async function getStaticPaths() {
   while (!complete) {
     const rawRes = await fetch(url);
     const resJSON = await rawRes.json();
-
-    try {
-      Drivers.parse(resJSON);
-    } catch (e) {
-      console.log(e);
-    }
-
     const res = Drivers.parse(resJSON);
 
     res.items.forEach((driver: Driver) => {
