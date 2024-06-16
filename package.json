@@ -7,6 +7,10 @@
   "scripts": {
     "build:client": "cd packages/client && bun run build && mv dist ../../dist",
     "build": "npm-run-all2 build:*",
+    "dev:server": "cd packages/api && bun run dev",
+    "dev:client": "cd packages/client && bun run dev",
+    "dev:client-new": "cd packages/client-new && bun run dev",
+    "dev": "run-p dev:{server,client-new}",
     "prepare": "husky"
   },
   "dependencies": {
