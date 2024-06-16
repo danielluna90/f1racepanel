@@ -3,7 +3,7 @@ import express, { Request, Response } from 'express';
 import { fromZodError } from 'zod-validation-error';
 
 import { prisma, Prisma } from './prisma';
-import { ErrorResponse, Driver, Drivers } from 'f1racepanel-common/src/types';
+import { ErrorResponse, Driver, Drivers } from 'f1racepanel-common';
 
 const DriverRoutes = express.Router();
 
