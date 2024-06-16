@@ -5,7 +5,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build:client": "cd packages/client && bun run build && mv dist ../../dist",
+    "build:client": "rm -rf dist && cd packages/client && bun run build && mv dist ../../dist",
     "build": "npm-run-all2 build:*",
     "dev:server": "cd packages/api && bun run dev",
     "dev:client": "cd packages/client && bun run dev",
