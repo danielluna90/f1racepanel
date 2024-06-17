@@ -18,6 +18,46 @@ const { admin } = Astro.props;
       <li>Archive</li>
       <li>Query Builder</li>
       <li>About</li>
+
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li>
+
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li>
+
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li>
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li><li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li>
     </ul>
     {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
   </div>
@@ -27,6 +67,8 @@ const { admin } = Astro.props;
   #sidebar-wrapper {
     position: fixed;
     z-index: 999;
+
+    overflow-y: scroll;
     inset: 0;
 
     background-color: #1f1f1f83;
@@ -37,8 +79,49 @@ const { admin } = Astro.props;
   #sidebar {
     background-color: var(--body-light);
     width: 25%;
-    height: 100vh;
+    min-height: 100vh;
     padding: 2rem;
+
+    transform: translateX(-100%);
+    transition: 300ms;
+
+    animation: slide-in 0.5s forwards;
+    -webkit-animation: slide-in 0.5s forwards;
+  }
+
+  @keyframes slide-in {
+    100% {
+      transform: translateX(0%);
+    }
+  }
+
+  @-webkit-keyframes slide-in {
+    100% {
+      -webkit-transform: translateX(0%);
+    }
+  }
+
+  @keyframes slide-out {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  @-webkit-keyframes slide-out {
+    0% {
+      -webkit-transform: translateX(0%);
+    }
+    100% {
+      -webkit-transform: translateX(-100%);
+    }
+  }
+
+  .sidebar-slide-out {
+    animation: slide-out 0.5s forwards !important;
+    -webkit-animation: slide-out 0.5s forwards !important;
   }
 
   body.nav-open > #sidebar-wrapper {
@@ -49,14 +132,26 @@ const { admin } = Astro.props;
 <script>
   const bodyEl = document.getElementsByTagName("body")[0];
   const sidebarWrapper = document.getElementById("sidebar-wrapper");
+  const sidebar = document.getElementById("sidebar");
   const closeBtn = document.getElementById("nav-close-btn");
 
-  closeBtn?.addEventListener("click", () => {
+  function handleSidebarClose() {
+    sidebar?.classList.add("sidebar-slide-out");
+    sidebar?.addEventListener("animationend", handleAnimationEnd);
+  }
+
+  function handleAnimationEnd() {
+    sidebar?.classList.remove("sidebar-slide-out");
     bodyEl?.classList.toggle("nav-open");
+    sidebar?.removeEventListener("animationend", handleAnimationEnd);
+  }
+
+  closeBtn?.addEventListener("click", () => {
+    handleSidebarClose();
   });
 
   sidebarWrapper?.addEventListener("click", (e) => {
     if (e.target !== sidebarWrapper) return;
-    bodyEl?.classList.toggle("nav-open");
+    handleSidebarClose();
   });
 </script>
