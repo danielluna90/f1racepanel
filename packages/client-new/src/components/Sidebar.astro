@@ -6,6 +6,57 @@ interface Props {
 const { admin } = Astro.props;
 ---
 
-<div>
-  {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
+<div id="sidebar-wrapper">
+  <div id="sidebar">
+    <div>
+      <h3>F1 Race Panel</h3>
+      <button id="nav-close-btn">X</button>
+    </div>
+
+    <ul>
+      <li>Home</li>
+      <li>Archive</li>
+      <li>Query Builder</li>
+      <li>About</li>
+    </ul>
+    {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
+  </div>
 </div>
+
+<style>
+  #sidebar-wrapper {
+    position: fixed;
+    z-index: 999;
+    inset: 0;
+
+    background-color: #1f1f1f83;
+
+    display: none;
+  }
+
+  #sidebar {
+    background-color: var(--body-light);
+    width: 25%;
+    height: 100vh;
+    padding: 2rem;
+  }
+
+  body.nav-open > #sidebar-wrapper {
+    display: block;
+  }
+</style>
+
+<script>
+  const bodyEl = document.getElementsByTagName("body")[0];
+  const sidebarWrapper = document.getElementById("sidebar-wrapper");
+  const closeBtn = document.getElementById("nav-close-btn");
+
+  closeBtn?.addEventListener("click", () => {
+    bodyEl?.classList.toggle("nav-open");
+  });
+
+  sidebarWrapper?.addEventListener("click", (e) => {
+    if (e.target !== sidebarWrapper) return;
+    bodyEl?.classList.toggle("nav-open");
+  });
+</script>
