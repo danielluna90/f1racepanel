@@ -68,7 +68,6 @@ const { admin } = Astro.props;
     position: fixed;
     z-index: 999;
 
-    overflow-y: scroll;
     inset: 0;
 
     /*background-color: #1f1f1f83;*/
@@ -80,6 +79,9 @@ const { admin } = Astro.props;
     transition: background-color 0.5s ease-out;
 
     display: none;
+
+    overflow-y: scroll;
+    overscroll-behavior: none;
 
     animation: slide-in-wrapper 0.5s forwards;
     -webkit-animation: slide-in-wrapper 0.5s forwards;
