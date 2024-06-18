@@ -6,7 +6,7 @@ import { getSecret } from "astro:env/server";
 
 import { Driver, Drivers } from "f1racepanel-common";
 
-import Card from "../../components/Card.astro";
+import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
 
 export async function getStaticPaths() {
   let rv: GetStaticPathsResult = [];
@@ -47,7 +47,5 @@ const { driverData } = Astro.props;
 ---
 
 <BaseLayout title=`${driverData.name}`>
-  <Card>
-    <p>{driverData.name}</p>
-  </Card>
+  <DriverBioCard data={driverData} />
 </BaseLayout>
