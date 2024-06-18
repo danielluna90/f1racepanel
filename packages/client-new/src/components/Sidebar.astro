@@ -182,7 +182,8 @@ const { admin } = Astro.props;
 
   function handleSidebarClose() {
     [...document.getElementsByTagName("button")].forEach((element) => {
-      element.tabIndex = 0;
+      //element.tabIndex = 0;
+      element.disabled = false;
     });
 
     sidebar?.classList.add("sidebar-slide-out");

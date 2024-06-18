@@ -42,10 +42,12 @@ const { admin } = Astro.props;
     bodyEl.classList.toggle("nav-open");
 
     [...document.getElementsByTagName("button")].forEach((element) => {
-      element.tabIndex = -1;
+      //element.tabIndex = -1;
+      element.disabled = true;
     });
 
-    (document.getElementById("nav-close-btn") as HTMLButtonElement).tabIndex =
-      0;
+    //(document.getElementById("nav-close-btn") as HTMLButtonElement).tabIndex = 0;
+    (document.getElementById("nav-close-btn") as HTMLButtonElement).disabled =
+      false;
   });
 </script>
