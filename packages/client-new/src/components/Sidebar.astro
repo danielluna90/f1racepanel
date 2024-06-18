@@ -181,6 +181,10 @@ const { admin } = Astro.props;
   const closeBtn = document.getElementById("nav-close-btn");
 
   function handleSidebarClose() {
+    [...document.getElementsByTagName("button")].forEach((element) => {
+      element.tabIndex = 0;
+    });
+
     sidebar?.classList.add("sidebar-slide-out");
     sidebarWrapper?.classList.add("wrapper-slide-out");
     sidebar?.addEventListener("animationend", handleAnimationEnd);

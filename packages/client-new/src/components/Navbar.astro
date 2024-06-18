@@ -40,5 +40,12 @@ const { admin } = Astro.props;
 
   document.getElementById("nav-open-btn")?.addEventListener("click", () => {
     bodyEl.classList.toggle("nav-open");
+
+    [...document.getElementsByTagName("button")].forEach((element) => {
+      element.tabIndex = -1;
+    });
+
+    (document.getElementById("nav-close-btn") as HTMLButtonElement).tabIndex =
+      0;
   });
 </script>
