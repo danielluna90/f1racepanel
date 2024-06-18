@@ -8,7 +8,7 @@ const { admin } = Astro.props;
 
 <div id="sidebar-wrapper">
   <div id="sidebar">
-    <div>
+    <div id="sidebar-header">
       <h3>F1 Race Panel</h3>
       <button id="nav-close-btn">X</button>
     </div>
@@ -171,6 +171,13 @@ const { admin } = Astro.props;
 
   body.nav-open > #sidebar-wrapper {
     display: block;
+  }
+
+  #sidebar-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
   }
 </style>
 
