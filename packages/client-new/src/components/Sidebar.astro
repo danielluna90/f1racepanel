@@ -71,9 +71,18 @@ const { admin } = Astro.props;
     overflow-y: scroll;
     inset: 0;
 
-    background-color: #1f1f1f83;
+    /*background-color: #1f1f1f83;*/
+
+    background-color: rgba(31, 31, 31, 0);
+    -webkit-transition: background-color 0.5s ease-out;
+    -moz-transition: background-color 0.5s ease-out;
+    -o-transition: background-color 0.5s ease-out;
+    transition: background-color 0.5s ease-out;
 
     display: none;
+
+    animation: slide-in-wrapper 0.5s forwards;
+    -webkit-animation: slide-in-wrapper 0.5s forwards;
   }
 
   #sidebar {
@@ -83,10 +92,39 @@ const { admin } = Astro.props;
     padding: 2rem;
 
     transform: translateX(-100%);
-    transition: 300ms;
 
     animation: slide-in 0.5s forwards;
     -webkit-animation: slide-in 0.5s forwards;
+  }
+
+  @keyframes slide-in-wrapper {
+    100% {
+      background-color: rgba(31, 31, 31, 0.514);
+    }
+  }
+
+  @-webkit-keyframes slide-in-wrapper {
+    100% {
+      background-color: rgba(31, 31, 31, 0.514);
+    }
+  }
+
+  @keyframes slide-out-wrapper {
+    0% {
+      background-color: rgba(31, 31, 31, 0.514);
+    }
+    100% {
+      background-color: rgba(31, 31, 31, 0);
+    }
+  }
+
+  @-webkit-keyframes slide-out-wrapper {
+    0% {
+      background-color: rgba(31, 31, 31, 0.514);
+    }
+    100% {
+      background-color: rgba(31, 31, 31, 0);
+    }
   }
 
   @keyframes slide-in {
@@ -119,6 +157,11 @@ const { admin } = Astro.props;
     }
   }
 
+  .wrapper-slide-out {
+    animation: slide-out-wrapper 0.5s forwards !important;
+    -webkit-animation: slide-out-wrapper 0.5s forwards !important;
+  }
+
   .sidebar-slide-out {
     animation: slide-out 0.5s forwards !important;
     -webkit-animation: slide-out 0.5s forwards !important;
@@ -137,11 +180,13 @@ const { admin } = Astro.props;
 
   function handleSidebarClose() {
     sidebar?.classList.add("sidebar-slide-out");
+    sidebarWrapper?.classList.add("wrapper-slide-out");
     sidebar?.addEventListener("animationend", handleAnimationEnd);
   }
 
   function handleAnimationEnd() {
     sidebar?.classList.remove("sidebar-slide-out");
+    sidebarWrapper?.classList.remove("wrapper-slide-out");
     bodyEl?.classList.toggle("nav-open");
     sidebar?.removeEventListener("animationend", handleAnimationEnd);
   }
