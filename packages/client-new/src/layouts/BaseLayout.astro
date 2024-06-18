@@ -57,7 +57,7 @@ const { title, admin = false } = Astro.props;
 
   body {
     margin: var(--page-margin);
-    min-height: 100vh;
+    min-height: calc(100vh - 2 * var(--page-y-margin));
 
     display: grid;
     grid-template-areas:
