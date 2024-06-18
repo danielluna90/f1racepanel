@@ -18,46 +18,6 @@ const { admin } = Astro.props;
       <li>Archive</li>
       <li>Query Builder</li>
       <li>About</li>
-
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
-
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
-
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li><li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
     </ul>
     {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
   </div>
@@ -90,8 +50,11 @@ const { admin } = Astro.props;
   #sidebar {
     background-color: var(--body-light);
     width: 25%;
-    min-height: 100vh;
-    padding: 2rem;
+    padding: var(--page-margin);
+
+    min-height: calc(100vh - 2 * var(--page-y-margin));
+    min-height: -webkit-fill-available;
+    min-height: fill-available;
 
     transform: translateX(-100%);
 
