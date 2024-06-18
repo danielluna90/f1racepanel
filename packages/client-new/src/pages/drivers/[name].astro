@@ -6,10 +6,10 @@ import { getSecret } from "astro:env/server";
 
 import { Driver, Drivers } from "f1racepanel-common";
 
+import Card from "../../components/Card.astro";
+
 export async function getStaticPaths() {
-  let rv: GetStaticPathsResult = [
-    { props: { name: "Max Verstappen" }, params: { name: "max-verstappen" } },
-  ];
+  let rv: GetStaticPathsResult = [];
 
   const API_URL = getSecret("API_URL");
   const API_DRIVERS_URL = `${API_URL}/drivers`;
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 
     res.items.forEach((driver: Driver) => {
       rv.push({
-        props: { name: driver.name },
+        props: { driverData: driver },
         params: { name: driver.name.toLowerCase().replace(" ", "-") },
       });
     });
@@ -40,12 +40,14 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  name: string;
+  driverData: Driver;
 }
 
-const { name } = Astro.props;
+const { driverData } = Astro.props;
 ---
 
-<BaseLayout title=`${name}`>
-  <p>{name}</p>
+<BaseLayout title=`${driverData.name}`>
+  <Card>
+    <p>{driverData.name}</p>
+  </Card>
 </BaseLayout>
