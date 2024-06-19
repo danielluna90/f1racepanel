@@ -25,4 +25,4 @@ bun run dev
 ```
 
 ## Documentation
-For more information about more commands, design considerations, the tech stack used, etc. consult our documentation located in the `docs` folder. For a table of contents, consult [docs/README.md](./docs/README.md).
+For more information about more commands, design considerations, the tech stack used, etc. consult the documentation located in the `docs` folder. For a table of contents, consult [docs/README.md](./docs/README.md).
