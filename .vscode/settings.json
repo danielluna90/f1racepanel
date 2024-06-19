@@ -1,21 +1,19 @@
 {
-  "json.schemas": [
-    {
-      "fileMatch": ["src/content/gpData/**/*.json"],
-      "url": "./schemas/gpSchema.json"
-    },
-    {
-      "fileMatch": ["src/content/metadata/**/*.json"],
-      "url": "./schemas/metadataSchema.json"
-    }
-  ],
   "editor.formatOnSave": true,
   "editor.tabSize": 2,
-  "prettier.requireConfig": true,
-  "prettier.useEditorConfig": false,
+
+  "files.insertFinalNewline": true,
+
+  "eslint.validate": ["javascript", "typescript"],
   "eslint.workingDirectories": [
     {"mode": "auto"}
   ],
-  "eslint.validate": ["javascript", "typescript"],
-  "files.insertFinalNewline": true
+  
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+
+  "cSpell.words": [
+    "Astro",
+    "racepanel"
+  ]
 }
