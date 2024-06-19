@@ -3,28 +3,33 @@ import express from 'express';
 import APIRouter from './api.ts';
 import { prisma } from './prisma.ts';
 
-import dotenv from 'dotenv';
-dotenv.config();
+import { Server, AddressInfo } from 'net';
 
-const app = express();
-const port = process.env.PORT;
+export let connection: Server;
 
-app.disable('x-powered-by');
+export const initializeWebServer = (port?: number): number | undefined => {
+  const app = express();
 
-app.use(express.json());
+  app.disable('x-powered-by');
 
-app.use('/v1', APIRouter);
-app.use('/docs', express.static('docs'));
+  app.use(express.json());
 
-app
-  .listen(port, () => {
-    console.log('Server running at PORT: ', port);
-  })
-  .on('error', async error => {
-    // gracefully handle error
-    await prisma.$disconnect();
-    throw new Error(error.message);
-  })
-  .on('close', async () => {
-    await prisma.$disconnect();
-  });
+  app.use('/v1', APIRouter);
+  app.use('/docs', express.static('src/static'));
+
+  connection = app
+    .listen(port, () => {
+      port = (connection.address() as AddressInfo).port;
+      console.log('Server running at PORT:', port);
+    })
+    .on('error', async error => {
+      // gracefully handle error
+      await prisma.$disconnect();
+      throw new Error(error.message);
+    })
+    .on('close', async () => {
+      await prisma.$disconnect();
+    });
+
+  return port;
+};
