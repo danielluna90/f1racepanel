@@ -15,6 +15,7 @@
 ## Code Standardization & Formatting
 - Linter: [ESLint](https://eslint.org)
 - Formatter: [Prettier](https://prettier.io)
+- Pre-Commit: [Husky](https://typicode.github.io/husky/)
 
 ## API Spec & Documentation
 - API Spec: [OpenAPI Spec 3.0](https://swagger.io/specification/v3/)
