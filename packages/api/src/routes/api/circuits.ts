@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 const CircuitRoutes = express.Router();
 
-import { prisma } from './prisma';
+import { prisma } from '../utils/prisma';
 
 CircuitRoutes.get('/', async (req: Request, res: Response) => {
   const circuit = await prisma.circuit.findMany();

@@ -1,7 +1,7 @@
 import express from 'express';
 
-import APIRouter from './api.ts';
-import { prisma } from './prisma.ts';
+import APIRouter from './routes/api.ts';
+import { prisma } from './routes/utils/prisma.ts';
 
 import { Server, AddressInfo } from 'net';
 
