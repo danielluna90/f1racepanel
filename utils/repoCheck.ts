@@ -10,9 +10,9 @@ const apiENVSchema = z.object({
   IS_DEV_OR_TEST: z.string(),
 });
 
-async function main() {
+function main() {
   console.log("Checking Configuration");
-  if (!await checkENVFileExists(apiENVSchema, Path.join(process.cwd(), "packages", "api"))) {
+  if (!checkENVFileExists(apiENVSchema, Path.join(process.cwd(), "packages", "api"))) {
     process.exit(-1);
   }
   console.log("Repository is set");
