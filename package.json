@@ -7,10 +7,7 @@
   "scripts": {
     "build:client": "rm -rf dist && cd packages/client && bun run build && mv dist ../../dist",
     "build": "npm-run-all2 build:*",
-    "dev:server": "cd packages/api && bun run dev",
-    "dev:client": "cd packages/client && bun run dev",
-    "dev:client-new": "cd packages/client-new && bun run dev",
-    "dev": "run-p dev:{server,client-new}",
+    "dev": "bun --filter '{f1racepanel-server,f1racepanel-client-new}' dev",
     "prepare": "husky",
     "checkRepo": "bun utils/repoCheck.ts",
     "postinstall": "bun run checkRepo",
