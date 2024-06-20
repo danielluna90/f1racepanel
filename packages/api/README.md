@@ -14,3 +14,8 @@ Port found in `.env.dev`: `3000` (This should be the default port whilst in
 development unless altered in .env)
 
 F1 Race Panel API Documentation: `http://localhost:3000/docs`
+
+- Raw OpenAPI spec yaml file can be found in
+  [src/static/api/api-spec.yml](./src/static/api/api-spec.yml)
+
+F1 Race Panel API entry point: `http://localhost:3000/v1/`
