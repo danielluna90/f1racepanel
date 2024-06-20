@@ -1,15 +1,14 @@
-# f1racepanel-common
+# F1 Race Panel Common Package
 
-To install dependencies:
+## Docker Instructions
 
-```bash
-bun install
-```
 
-To run:
+## Development Credentials
+### PostgreSQL
+- Username: `root`
+- Password: `root`
+- Database: `f1racepanel`
 
-```bash
-bun run index.ts
-```
-
-This project was created using `bun init` in bun v1.1.10. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+### pgAdmin 4
+- Email: `root@f1racepanel.com`
+- Password: `root`

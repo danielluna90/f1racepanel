@@ -15,5 +15,7 @@
   "cSpell.words": [
     "Astro",
     "racepanel"
-  ]
+  ],
+  "jest.jestCommandLine": "bun run test",
+  "jest.rootPath": "./packages/api"
 }

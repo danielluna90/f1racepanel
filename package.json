@@ -11,12 +11,17 @@
     "dev:client": "cd packages/client && bun run dev",
     "dev:client-new": "cd packages/client-new && bun run dev",
     "dev": "run-p dev:{server,client-new}",
-    "prepare": "husky"
+    "prepare": "husky",
+    "checkRepo": "bun utils/repoCheck.ts",
+    "postinstall": "bun run checkRepo",
+    "predev": "bun run checkRepo"
   },
   "dependencies": {
     "npm-run-all2": "^6.2.0"
   },
   "devDependencies": {
-    "husky": "^9.0.11"
+    "docker-compose": "^0.24.8",
+    "husky": "^9.0.11",
+    "zod": "^3.23.8"
   }
 }
