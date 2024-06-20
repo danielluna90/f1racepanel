@@ -2,6 +2,10 @@
   "name": "f1racepanel-common",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "prisma:gen": "prisma generate",
+    "postinstall": "bun run prisma:gen"
+  },
   "devDependencies": {
     "@types/bun": "latest",
     "dotenv": "^16.4.5",

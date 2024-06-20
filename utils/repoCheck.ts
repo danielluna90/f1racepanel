@@ -6,7 +6,8 @@ import Path from "node:path";
 
 const apiENVSchema = z.object({
   PORT: z.string(),
-  DATABASE_URL: z.string()
+  DATABASE_URL: z.string(),
+  IS_DEV_OR_TEST: z.string(),
 });
 
 async function main() {
