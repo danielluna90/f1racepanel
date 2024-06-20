@@ -1,13 +1,16 @@
 # F1 Race Panel (API Server)
 
-To install dependencies:
+## Getting Started
 
-```bash
-bun install
-```
+In order to make sure your configuration is correct, you should run
+`bun run dev` from the root of the monorepo. It should be noted that running
+`bun run dev` from this directory should still work, however, at the moment it
+is considered unsupported and therefore may cause undefined behavior. This might
+change in the future.
 
-To run:
+## Important URLs
 
-```bash
-bun run dev
-```
+Port found in `.env.dev`: `3000` (This should be the default port whilst in
+development unless altered in .env)
+
+F1 Race Panel API Documentation: `http://localhost:3000/docs`
