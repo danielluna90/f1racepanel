@@ -14,6 +14,7 @@
 
   "cSpell.words": [
     "Astro",
+    "pgadmin",
     "racepanel"
   ],
   "jest.jestCommandLine": "bun run test",
