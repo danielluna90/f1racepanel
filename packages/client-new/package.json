@@ -15,11 +15,11 @@
     "@fontsource-variable/montserrat": "^5.0.19",
     "@fontsource-variable/open-sans": "^5.0.29",
     "@playwright/test": "^1.44.1",
-    "astro": "^4.10.2",
+    "astro": "^4.11.0",
     "typescript": "^5.4.5"
   },
   "devDependencies": {
-    "@types/bun": "^1.1.4",
+    "@types/bun": "^1.1.5",
     "f1racepanel-common": "workspace:*"
   }
 }
