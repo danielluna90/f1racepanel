@@ -7,6 +7,12 @@ import { Server, AddressInfo } from 'net';
 
 export let connection: Server;
 
+/**
+ * This initializes the web server and does initial setup of ExpressJS. It setups our middleware and also our routes.
+ *
+ * @param port - Port to attempt to use. If, not available, a random port will be assigned.
+ * @returns Port of the server.
+ */
 export const initializeWebServer = (port?: number): number => {
   const app = express();
 

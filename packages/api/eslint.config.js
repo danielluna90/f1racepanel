@@ -3,6 +3,7 @@
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import prettierConfig from 'eslint-config-prettier';
+import tsdoc from 'eslint-plugin-tsdoc';
 
 export default tseslint.config(
   eslint.configs.recommended,
@@ -29,5 +30,13 @@ export default tseslint.config(
       },
     },
   },
-  prettierConfig
+  prettierConfig,
+  {
+    plugins: {
+      tsdoc
+    },
+    rules: {
+      "tsdoc/syntax": "warn"
+    }
+  }
 );
