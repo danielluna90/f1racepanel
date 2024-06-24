@@ -1,10 +1,11 @@
-import express from 'express';
-const APIRouter = express.Router();
-
-import DriverRoutes from './api/drivers.ts';
 import CircuitRoutes from './api/circuits.ts';
-import GPRoutes from './api/gp.ts';
+import DriverRoutes from './api/drivers.ts';
 import ErrorHandler from './utils/errorHandler.ts';
+import GPRoutes from './api/gp.ts';
+
+import express from 'express';
+
+const APIRouter = express.Router();
 
 APIRouter.use('/drivers', DriverRoutes);
 APIRouter.use('/circuits', CircuitRoutes);

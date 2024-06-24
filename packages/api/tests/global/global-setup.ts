@@ -1,6 +1,6 @@
-import { initializeWebServer } from '../../src';
-
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
+
+import { initializeWebServer } from '../../src';
 
 export let axiosAPIClient: AxiosInstance;
 

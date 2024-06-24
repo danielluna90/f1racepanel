@@ -1,13 +1,12 @@
+import { connection, initializeWebServer } from '..';
+import { v2 as compose } from 'docker-compose';
 import dotenv from 'dotenv';
+import path from 'node:path';
+
 dotenv.config();
 
 const port = process.env.PORT ? parseInt(process.env.PORT) : undefined;
-
 const isDev = process.env.IS_DEV_OR_TEST?.toLowerCase() == 'true';
-
-import { v2 as compose } from 'docker-compose';
-import path from 'node:path';
-
 const dockerServices = ['db', 'pgadmin'];
 
 if (isDev) {
@@ -19,8 +18,6 @@ if (isDev) {
     log: true,
   });
 }
-
-import { connection, initializeWebServer } from '../index';
 
 initializeWebServer(port);
 

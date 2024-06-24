@@ -1,9 +1,7 @@
-import express from 'express';
-
+import { AddressInfo, Server } from 'net';
 import APIRouter from './routes/api.ts';
+import express from 'express';
 import { prisma } from './routes/utils/prisma.ts';
-
-import { Server, AddressInfo } from 'net';
 
 export let connection: Server;
 

@@ -1,9 +1,7 @@
+import { Driver, Drivers, ErrorResponse } from 'f1racepanel-common';
 import express, { NextFunction, Request, Response } from 'express';
-
 import { fromZodError } from 'zod-validation-error';
-
 import { prisma } from '../utils/prisma';
-import { ErrorResponse, Driver, Drivers } from 'f1racepanel-common';
 
 const DriverRoutes = express.Router();
 

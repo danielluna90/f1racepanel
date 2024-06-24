@@ -1,5 +1,5 @@
-import { NextFunction, Request, Response } from 'express';
 import { ErrorResponse, Prisma } from 'f1racepanel-common';
+import { NextFunction, Request, Response } from 'express';
 
 export default function ErrorHandler(
   err: unknown,
