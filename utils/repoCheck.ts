@@ -18,4 +18,4 @@ function main() {
   console.log("Repository is set");
 }
 
-await main();
+main();
