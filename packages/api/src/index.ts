@@ -7,7 +7,7 @@ import { Server, AddressInfo } from 'net';
 
 export let connection: Server;
 
-export const initializeWebServer = (port?: number): number | undefined => {
+export const initializeWebServer = (port?: number): number => {
   const app = express();
 
   app.disable('x-powered-by');
@@ -31,5 +31,5 @@ export const initializeWebServer = (port?: number): number | undefined => {
       await prisma.$disconnect();
     });
 
-  return port;
+  return port ? port : 80;
 };
