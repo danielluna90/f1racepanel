@@ -1,5 +1,5 @@
 parameters: 
-  - $ref: ../components/parameters/driverID.yml
+  - $ref: ../components/parameters/DriverID.yml
 
 get:
   summary: Get Driver
