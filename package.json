@@ -1,24 +1,21 @@
 {
   "name": "f1racepanel",
-  "type": "module",
-  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro",
-    "genSchedules": "nodemon --watch \"tools/genSchedules.ts\" --exec \"ts-node-esm tools/genSchedules.ts\""
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^1.3.3",
-    "astro": "^2.8.0",
-    "dateformat": "^5.0.3",
-    "nodemon": "^3.0.1",
-    "ts-node": "^10.9.1",
-    "zod": "^3.21.4"
+    "build:client": "rm -rf dist && cd packages/client && bun run build && mv dist ../../dist",
+    "build": "npm-run-all2 build:*",
+    "dev": "bun --filter '{f1racepanel-server,f1racepanel-client-new}' dev",
+    "prepare": "husky",
+    "checkRepo": "bun utils/repoCheck.ts",
+    "postinstall": "bun run checkRepo",
+    "predev": "bun run checkRepo"
   },
   "devDependencies": {
-    "@types/dateformat": "^5.0.0"
+    "husky": "^9.0.11",
+    "npm-run-all2": "^6.2.0",
+    "zod": "^3.23.8"
   }
 }

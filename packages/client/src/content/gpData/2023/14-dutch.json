@@ -1,0 +1,24 @@
+{
+    "name": "Dutch",
+    "status": "Upcoming",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-08-25T10:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-08-25T14:00:00Z"
+            },
+            "fp3": {
+                "time": "2023-08-26T09:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-08-26T13:00:00Z"
+            },
+            "race": {
+                "time": "2023-08-27T13:00:00Z"
+            }
+        }
+    }
+}

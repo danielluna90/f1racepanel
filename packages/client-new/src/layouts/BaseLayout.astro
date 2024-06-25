@@ -1,0 +1,97 @@
+---
+import Sidebar from "../components/Sidebar.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+import "@fontsource-variable/montserrat";
+import "@fontsource-variable/open-sans";
+
+interface Props {
+  title?: string;
+  admin?: boolean;
+}
+
+const { title, admin = false } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>{title ? `F1 Race Panel - ${title}` : "F1 Race Panel"}</title>
+  </head>
+  <body>
+    <Sidebar admin={admin} />
+    <Navbar admin={admin} />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --body-light: #fafaf8;
+    --body-dark: #151515;
+
+    --header-light: #292b23;
+    --header-dark: #fff;
+
+    --page-x-margin: 2rem;
+    --page-y-margin: 1rem;
+
+    --page-margin: var(--page-y-margin) var(--page-x-margin);
+
+    --widget-bg-light: #fff;
+    --widget-box-shadow: 0 1px 8px rgba(110, 110, 110, 0.1);
+  }
+
+  html {
+    background-color: var(--body-light);
+    color: var(--header-light);
+
+    font-family: "Open Sans Variable", "Montserrat Variable", sans-serif;
+  }
+
+  body {
+    margin: var(--page-margin);
+    min-height: calc(100vh - 2 * var(--page-y-margin));
+
+    display: grid;
+    grid-template-areas:
+      "navbar"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+  }
+
+  nav {
+    grid-area: navbar;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+
+  button {
+    all: unset;
+    cursor: pointer;
+  }
+
+  button:focus {
+    outline: #000 5px solid;
+  }
+
+  .nav-open {
+    overflow: hidden;
+  }
+</style>

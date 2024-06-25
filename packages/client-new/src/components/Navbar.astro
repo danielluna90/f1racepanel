@@ -1,0 +1,53 @@
+---
+interface Props {
+  admin: boolean;
+}
+
+const { admin } = Astro.props;
+---
+
+<nav>
+  <div class="left">
+    <button id="nav-open-btn">Open Navbar</button>
+    <h1>F1 Race Panel{admin ? " - Admin" : ""}</h1>
+  </div>
+
+  <div>
+    <button>Theme</button>
+  </div>
+</nav>
+
+<style>
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .left {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+</style>
+
+<script>
+  const bodyEl: HTMLBodyElement = document.getElementsByTagName(
+    "body"
+  )[0] as HTMLBodyElement;
+
+  document.getElementsByTagName("nav");
+
+  document.getElementById("nav-open-btn")?.addEventListener("click", () => {
+    bodyEl.classList.toggle("nav-open");
+
+    [...document.getElementsByTagName("button")].forEach((element) => {
+      //element.tabIndex = -1;
+      element.disabled = true;
+    });
+
+    //(document.getElementById("nav-close-btn") as HTMLButtonElement).tabIndex = 0;
+    (document.getElementById("nav-close-btn") as HTMLButtonElement).disabled =
+      false;
+  });
+</script>

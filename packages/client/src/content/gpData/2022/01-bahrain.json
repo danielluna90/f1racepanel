@@ -1,0 +1,52 @@
+{
+    "name": "Bahrain",
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2022-03-18T12:00:00Z"
+            },
+            "fp2": {
+                "time": "2022-03-18T15:00:00Z"
+            },
+            "fp3": {
+                "time": "2022-03-19T12:00:00Z"
+            },
+            "qualifying": {
+                "time": "2022-03-19T15:00:00Z"
+            },
+            "race": {
+                "time": "2022-03-20T15:00:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 16,
+                            "gap": {
+                                "status": "Leader"
+                            }
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 55,
+                            "gap": {
+                                "status": "SameLapAsLeader",
+                                "behind": 5.598
+                            }
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 44,
+                            "gap": {
+                                "status": "SameLapAsLeader",
+                                "behind": 9.675
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+
+export const getStaticPaths = (() => {
+  return [
+    { params: { year: 2024, round: 1 } },
+    { params: { year: 2024, round: 2 } },
+  ];
+}) satisfies GetStaticPaths;
+
+const { year, round } = Astro.params;
+---
+
+<BaseLayout title=`${year}: Round ${round}`>
+  <p>Test Page</p>
+</BaseLayout>

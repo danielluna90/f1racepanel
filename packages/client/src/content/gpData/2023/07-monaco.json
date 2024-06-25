@@ -1,0 +1,41 @@
+{
+    "name": "Monaco",
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-05-26T11:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-05-26T15:00:00Z"
+            },
+            "fp3": {
+                "time": "2023-05-27T10:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-05-27T14:00:00Z"
+            },
+            "race": {
+                "time": "2023-05-28T13:00:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 14
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 31
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
