@@ -14,8 +14,10 @@ servers:
 security: 
   -  AdminAuth: []
 paths:
-  /driver/{DriverID}:
+  /driver:
     $ref: paths/driver.yml
+  /driver/{DriverID}:
+    $ref: paths/driver-DriverID.yml
   /drivers:
     $ref: paths/drivers.yml
 components: 

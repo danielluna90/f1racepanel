@@ -1,0 +1,216 @@
+openapi: 3.1.0
+info:
+  title: F1 Race Panel API
+  version: v1
+  contact:
+    name: Daniel Luna
+    email: api-support@f1racepanel.com
+    url: https://danielluna.nyc
+servers:
+  - url: https://api.f1racepanel.com/v1
+    description: Production Endpoint
+  - url: https://staging.api.f1racepanel.com/v1
+    description: Development Endpoint
+security:
+  - AdminAuth: []
+paths:
+  /driver:
+    post:
+      summary: Create Driver
+      operationId: createDriver
+      security:
+        - AdminAuth: []
+      tags:
+        - Drivers
+      responses:
+        '200':
+          $ref: '#/components/responses/Driver'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /driver/{DriverID}:
+    parameters:
+      - $ref: '#/components/parameters/DriverID'
+    get:
+      summary: Get Driver
+      operationId: getDriver
+      description: Get information for a specific driver.
+      tags:
+        - Drivers
+      responses:
+        '200':
+          $ref: '#/components/responses/Driver'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      summary: Edit Driver
+      operationId: editDriver
+      description: Edit the information for a specific driver
+      security:
+        - AdminAuth: []
+      tags:
+        - Drivers
+      responses:
+        '200':
+          $ref: '#/components/responses/Driver'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /drivers:
+    get:
+      summary: Get Multiple Drivers
+      operationId: getDrivers
+      tags:
+        - Drivers
+      parameters:
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/offset'
+      responses:
+        '200':
+          $ref: '#/components/responses/MultipleDrivers'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  securitySchemes:
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Auth
+      description: Authentication Token received after logging in.
+  schemas:
+    Driver:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: F1 Race Panel Driver ID Number.
+        name:
+          type: string
+          description: Name of the driver.
+        nationality:
+          type: string
+          description: Nationality of the driver in an ISO 3166-1 alpha-2 country code.
+        dob:
+          type: string
+          format: date
+          description: Date of Birth of the driver.
+      required:
+        - id
+        - name
+        - nationality
+        - dob
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: The HTTP status code.
+          minimum: 400
+          maximum: 599
+        description:
+          type: string
+          description: A short description of the cause of the error.
+      required:
+        - code
+        - description
+    PagedResponse:
+      x-internal: true
+      type: object
+      properties:
+        href:
+          type: string
+          format: uri
+          description: A link to the API endpoint returning the full request.
+        limit:
+          type: integer
+          minimum: 1
+          description: The maximum number of items in the response.
+        next:
+          oneOf:
+            - type: 'null'
+            - type: string
+              format: url
+              description: URL to the next page of items. (`null` if none)
+        offset:
+          type: integer
+          minimum: 0
+          description: The offset of the items returned.
+      required:
+        - href
+        - limit
+        - next
+        - offset
+    Drivers:
+      allOf:
+        - $ref: '#/components/schemas/PagedResponse'
+        - type: object
+          properties:
+            items:
+              oneOf:
+                - type: 'null'
+                - type: array
+                  items:
+                    $ref: '#/components/schemas/Driver'
+          required:
+            - items
+  responses:
+    Driver:
+      description: A driver.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Driver'
+    BadRequest:
+      description: The request to the API is invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: API Key is missing or invalid.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The specified resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    MultipleDrivers:
+      description: An array of drivers.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Drivers'
+  parameters:
+    DriverID:
+      in: path
+      name: DriverID
+      description: UUID of a specific driver.
+      schema:
+        type: string
+        format: uuid
+      required: true
+    limit:
+      in: query
+      name: limit
+      description: The number of drivers to return.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+    offset:
+      in: query
+      name: offset
+      description: The number of items to skip before starting to collect the result set.
+      schema:
+        type: integer
+        default: 0
+        minimum: 0

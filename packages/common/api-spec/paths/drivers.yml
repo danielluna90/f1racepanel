@@ -1,11 +1,13 @@
 get:
   summary: Get Multiple Drivers
   operationId: getDrivers
-  description: This is a test of a description I don't know if this will work
   tags:
     - Drivers
+  parameters:
+    - $ref: ../components/parameters/query/limit.yml
+    - $ref: ../components/parameters/query/offset.yml
   responses:
-    200:
-      $ref: ../components/responses/4xx/NotFound.yml
-    404:
+    '200':
+      $ref: ../components/responses/2xx/MultipleDrivers.yml
+    '404':
       $ref: ../components/responses/4xx/NotFound.yml
