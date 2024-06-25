@@ -14,9 +14,9 @@
     "@astrojs/sitemap": "^3.1.6",
     "@fontsource-variable/montserrat": "^5.0.19",
     "@fontsource-variable/open-sans": "^5.0.29",
-    "@playwright/test": "^1.44.1",
-    "astro": "^4.11.0",
-    "typescript": "^5.4.5"
+    "@playwright/test": "^1.45.0",
+    "astro": "^4.11.1",
+    "typescript": "^5.5.2"
   },
   "devDependencies": {
     "@types/bun": "^1.1.5",

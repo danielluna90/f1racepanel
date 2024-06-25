@@ -15,7 +15,7 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "^8.42.3",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.14.6",
+    "@types/node": "^20.14.8",
     "axios": "^1.7.2",
     "docker-compose": "^0.24.8",
     "eslint": "^9.5.0",
@@ -27,8 +27,8 @@
     "npm-run-all2": "^6.2.0",
     "prettier": "3.3.2",
     "ts-jest": "^29.1.5",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^7.13.1",
+    "typescript": "^5.5.2",
+    "typescript-eslint": "^7.14.1",
     "zod-validation-error": "^3.3.0"
   },
   "peerDependencies": {
