@@ -1,0 +1,25 @@
+openapi: 3.1.0
+info:
+  title: F1 Race Panel API
+  version: v1
+  contact: 
+    name: Daniel Luna
+    email: api-support@f1racepanel.com
+    url: https://danielluna.nyc
+servers: 
+  - url: https://api.f1racepanel.com/v1
+    description: Production Endpoint
+  - url: https://staging.api.f1racepanel.com/v1
+    description: Development Endpoint 
+security: 
+  -  AdminAuth: []
+paths:
+  /drivers:
+    $ref: './paths/drivers.yml'
+components: 
+  securitySchemes:
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Auth
+      description: "Authentication Token received after logging in."

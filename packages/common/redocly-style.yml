@@ -1,0 +1,20 @@
+extends:
+  - recommended
+
+rules:
+  info-license: off
+  rule/operation-description:
+    subject: 
+      type: Operation
+      property: description
+    assertions:
+      defined: true
+      minLength: 30
+
+theme:
+  features.openapi:
+    generateCodeSamples:
+      languages:
+        - lang: curl
+        - lang: Node.js
+        - lang: Python
