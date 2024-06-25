@@ -35,18 +35,22 @@ async function closeDockerContainers() {
   );
 }
 
-process.on('SIGINT', () => {
-  connection.close(() => {
-    console.log('Server Closed');
-  });
-  closeDockerContainers()
-    .finally(() => {
-      console.log('Closed Docker Containers');
-      process.exit(0);
-    })
-    .catch((err: unknown) => {
-      console.log(err);
+const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTRAP', 'SIGKILL'];
+
+exitSignals.forEach((signal: NodeJS.Signals) => {
+  process.on(signal, () => {
+    connection.close(() => {
+      console.log('Server Closed');
     });
+    closeDockerContainers()
+      .finally(() => {
+        console.log('Closed Docker Containers');
+        process.exit(0);
+      })
+      .catch((err: unknown) => {
+        console.log(err);
+      });
+  });
 });
 
 process.on('exit', () => {
