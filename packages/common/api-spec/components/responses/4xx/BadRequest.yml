@@ -1,0 +1,5 @@
+description: The request to the API is invalid.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/Error.yml

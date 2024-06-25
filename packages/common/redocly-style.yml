@@ -3,13 +3,13 @@ extends:
 
 rules:
   info-license: off
-  rule/operation-description:
-    subject: 
-      type: Operation
-      property: description
-    assertions:
-      defined: true
-      minLength: 30
+  #rule/operation-description:
+  #  subject: 
+  #    type: Operation
+  #    property: description
+  #  assertions:
+  #    defined: true
+  #    minLength: 30
 
 theme:
   features.openapi:

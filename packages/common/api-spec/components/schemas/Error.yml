@@ -1,0 +1,13 @@
+type: object
+properties:
+  code:
+    type: integer
+    description: The HTTP status code.
+    minimum: 400
+    maximum: 599
+  description:
+    type: string
+    description: A short description of the cause of the error.
+required:
+  - code
+  - description
