@@ -17,5 +17,8 @@ F1 Race Panel API Documentation: `http://localhost:3000/docs`
 
 - Raw OpenAPI spec yaml file can be found in
   [src/static/api/api-spec.yml](./src/static/api/api-spec.yml)
+- **Note:** This file is only generated after the server is ran for the first
+  time. It can be manually compiled by running `bun run api:gen` from the
+  `f1racepanel-common` package located at `/packages/common`.
 
 F1 Race Panel API entry point: `http://localhost:3000/v1/`
