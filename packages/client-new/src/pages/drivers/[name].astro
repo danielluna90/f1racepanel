@@ -1,0 +1,51 @@
+---
+import type { GetStaticPathsResult } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import { getSecret } from "astro:env/server";
+
+import { Driver, Drivers } from "f1racepanel-common";
+
+import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
+
+export async function getStaticPaths() {
+  let rv: GetStaticPathsResult = [];
+
+  const API_URL = getSecret("API_URL");
+  const API_DRIVERS_URL = `${API_URL}/drivers`;
+
+  let complete: boolean = false;
+  let url: string = API_DRIVERS_URL;
+
+  while (!complete) {
+    const rawRes = await fetch(url);
+    const resJSON = await rawRes.json();
+    const res = Drivers.parse(resJSON);
+
+    res.items.forEach((driver: Driver) => {
+      rv.push({
+        props: { driverData: driver },
+        params: { name: driver.name.toLowerCase().replace(" ", "-") },
+      });
+    });
+
+    if (res.next == null) {
+      complete = true;
+    } else {
+      url = res.next;
+    }
+  }
+
+  return rv;
+}
+
+interface Props {
+  driverData: Driver;
+}
+
+const { driverData } = Astro.props;
+---
+
+<BaseLayout title=`${driverData.name}`>
+  <DriverBioCard data={driverData} />
+</BaseLayout>

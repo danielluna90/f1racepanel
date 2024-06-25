@@ -1,0 +1,41 @@
+{
+    "name": "Miami",
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-05-05T18:00:00Z"
+            },
+            "fp2": {
+                "time": "2023-05-05T21:30:00Z"
+            },
+            "fp3": {
+                "time": "2023-05-06T16:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-05-06T20:00:00Z"
+            },
+            "race": {
+                "time": "2023-05-07T19:30:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 11
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 14
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

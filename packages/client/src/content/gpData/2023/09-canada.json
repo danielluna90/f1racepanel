@@ -1,0 +1,41 @@
+{
+    "name": "Canada",
+    "status": "Completed",
+    "weekendInfo": {
+        "weekendType": "Normal",
+        "sessionInfo": {
+            "fp1": {
+                "time": "2023-06-16T17:30:00Z"
+            },
+            "fp2": {
+                "time": "2023-06-16T20:30:00Z"
+            },
+            "fp3": {
+                "time": "2023-06-17T16:30:00Z"
+            },
+            "qualifying": {
+                "time": "2023-06-17T20:00:00Z"
+            },
+            "race": {
+                "time": "2023-06-18T18:00:00Z",
+                "session": {
+                    "type": "Race",
+                    "results": [
+                        {
+                            "pos": 1,
+                            "driverNum": 1
+                        },
+                        {
+                            "pos": 2,
+                            "driverNum": 14
+                        },
+                        {
+                            "pos": 3,
+                            "driverNum": 44
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

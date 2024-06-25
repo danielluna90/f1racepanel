@@ -1,0 +1,31 @@
+parameters: 
+  - $ref: ../components/parameters/DriverID.yml
+
+get:
+  summary: Get Driver
+  operationId: getDriver
+  description: Get information for a specific driver.
+  tags:
+    - Drivers
+  responses:
+    200:
+      $ref: ../components/responses/2xx/Driver.yml
+    404:
+      $ref: ../components/responses/4xx/NotFound.yml
+
+post:
+  summary: Edit Driver
+  operationId: editDriver
+  security:
+    - AdminAuth: []
+  tags:
+    - Drivers
+  responses:
+    200:
+      $ref: ../components/responses/2xx/Driver.yml
+    400:
+      $ref: ../components/responses/4xx/BadRequest.yml
+    401:
+      $ref: ../components/responses/4xx/Unauthorized.yml
+    404:
+      $ref: ../components/responses/4xx/NotFound.yml

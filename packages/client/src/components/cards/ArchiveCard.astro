@@ -1,0 +1,30 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Card from "../Card.astro";
+import Badge from "../Badge.astro";
+
+export interface Props {
+  race: CollectionEntry<"gpData">;
+}
+
+const { race } = Astro.props;
+
+const [year, gp] = race.id.split("/");
+const [_, gpName] = gp.split("-");
+
+const raceSlug =
+  race.data.status != "Completed" ? undefined : `${year}/${gpName}`;
+---
+
+<>
+  {
+    (
+      <Card href={raceSlug} nonselectable animate={raceSlug ? true : false}>
+        <h3>{race.data.name}</h3>
+        <Badge type={race.data.status} />
+      </Card>
+    )
+  }
+</>
+
+<style></style>

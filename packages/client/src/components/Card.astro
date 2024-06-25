@@ -1,0 +1,68 @@
+---
+export interface Props {
+  interactive?: boolean;
+  href?: string;
+  nonselectable?: boolean;
+  animate?: boolean;
+}
+
+const { interactive, href, nonselectable, animate } = Astro.props;
+---
+
+<div
+  class="card"
+  class:list={{
+    interactive: interactive || href,
+    padding: !href,
+    nonselectable,
+    animate,
+  }}
+>
+  {
+    href ? (
+      <a href={href}>
+        <slot />
+      </a>
+    ) : (
+      <slot />
+    )
+  }
+</div>
+
+<style>
+  .card {
+    background-color: var(--primary-color);
+    border-radius: 0.5rem;
+  }
+
+  .card.nonselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .card.interactive:hover {
+    cursor: pointer;
+  }
+
+  .card.padding {
+    padding: 1rem;
+  }
+
+  .card.animate {
+    transition: 0.25s ease;
+  }
+
+  .card.animate:hover {
+    transform: translate(-5px, -5px);
+  }
+
+  a {
+    display: block;
+    height: 100%;
+    padding: 1rem;
+  }
+</style>

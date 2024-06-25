@@ -1,0 +1,21 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: F1 Race Panel Driver ID Number.
+  name:
+    type: string
+    description: Name of the driver.
+  nationality:
+    type: string
+    description: Nationality of the driver in an ISO 3166-1 alpha-2 country code.
+  dob:
+    type: string
+    format: date
+    description: Date of Birth of the driver.
+required:
+  - id
+  - name
+  - nationality
+  - dob

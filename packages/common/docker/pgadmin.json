@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "F1 Race Panel - Docker DB",
+      "Group": "Servers",
+      "Host": "db",
+      "Port": 5432,
+      "Username": "root",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}
