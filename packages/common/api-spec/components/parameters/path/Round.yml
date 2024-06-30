@@ -1,0 +1,7 @@
+in: path
+name: Round
+description: Round of a Season
+schema:
+  type: integer
+  minimum: 1
+required: true

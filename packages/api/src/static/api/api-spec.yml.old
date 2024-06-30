@@ -162,7 +162,7 @@ components:
       type: apiKey
       in: header
       name: X-Auth
-      description: "Authentication Token recieved after logging in."
+      description: "Authentication Token received after logging in."
 
   responses:
     Driver:

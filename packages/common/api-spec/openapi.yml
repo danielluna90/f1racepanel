@@ -24,6 +24,20 @@ paths:
     $ref: paths/circuits/circuit.yml
   /circuits:
     $ref: paths/circuits/circuits.yml
+  /circuits/{CircuitID}:
+    $ref: paths/circuits/circuit-CircuitID.yml
+  /season/{Year}:
+    $ref: paths/gp-weekends/season-Year.yml
+  /gp/{Year}/{Round}:
+    $ref: paths/gp-weekends/gp-Year-Round.yml
+  /gp/{Year}/{Round}/{Session}:
+    $ref: paths/gp-weekends/gp-Year-Round-Session.yml
+  /session/{SessionID}:
+    $ref: paths/gp-weekends/session-SessionID.yml
+  /login:
+    $ref: paths/auth/login.yml
+  /search:
+    $ref: paths/other/search.yml
 components: 
   securitySchemes:
     AdminAuth:

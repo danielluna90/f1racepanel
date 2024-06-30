@@ -1,0 +1,47 @@
+type: object
+properties:
+  id:
+    type: string
+    format: uuid
+    description: F1 Race Panel GP Weekend ID Number.
+  start_date:
+    type: string
+    format: date
+    description: Date of the first session of the Grand Prix Weekend.
+  end_date:
+    type: string
+    format: date
+    description: Date of the last session of the Grand Prix Weekend.
+  circuit_id:
+    type: string
+    format: uuid
+    description: CircuitID number of the circuit where this weekend is taking place.
+  sessions:
+    type: array
+    description: Array of Session IDs. Order is the order in which the sessions took place.
+    minItems: 1
+    items:
+      type: string
+      format: uuid
+  driver_entries:
+    type: array
+    description: DriverIDs of the drivers who took part in at least one session of the weekend.
+    minItems: 1
+    items:
+      type: string
+      format: uuid
+  team_entries:
+    type: array
+    description: TeamIDs of the teams who took part in at least one session of the weekend.
+    minItems: 1
+    items:
+      type: string
+      format: uuid
+required:
+  - id
+  - start_date
+  - end_date
+  - circuit_id
+  - sessions
+  - driver_entries
+  - team_entries

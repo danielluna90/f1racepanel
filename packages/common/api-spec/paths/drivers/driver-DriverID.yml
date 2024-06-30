@@ -22,11 +22,11 @@ post:
   tags:
     - Drivers
   responses:
-    200:
+    '200':
       $ref: ../../components/responses/2xx/Driver.yml
-    400:
+    '400':
       $ref: ../../components/responses/4xx/BadRequest.yml
-    401:
+    '401':
       $ref: ../../components/responses/4xx/Unauthorized.yml
-    404:
+    '404':
       $ref: ../../components/responses/4xx/NotFound.yml
