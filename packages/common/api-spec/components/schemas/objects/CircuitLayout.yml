@@ -15,7 +15,6 @@ properties:
   race_lap_record:
     type: object
     oneOf: 
-      - type: 'null'
       - type: object
         properties:
           time:  
@@ -27,6 +26,7 @@ properties:
             type: string
             format: uuid
             description: DriverID of the driver who set the fastest time.
+      - type: 'null'
 required:
   - name
   - first_year

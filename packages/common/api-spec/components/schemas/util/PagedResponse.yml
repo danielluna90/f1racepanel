@@ -11,10 +11,10 @@ properties:
     description: The maximum number of items in the response.
   next:
     oneOf: 
-      - type: "null"
       - type: string
-        format: url
+        format: uri
         description: URL to the next page of items. (`null` if none)
+      - type: "null"
   offset:
     type: integer
     minimum: 0

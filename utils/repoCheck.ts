@@ -21,16 +21,15 @@ function main() {
     process.exit(-1);
   }
 
-  // TODO: Code ready for when Redocly is fully embraced by the OpenAPI Spec docs
-  // const UnifiedAPIYmlFile = Path.join(APIPackagePath, 'src', 'static', 'api', 'api-spec2.yml');
-  // if (!fs.existsSync(UnifiedAPIYmlFile)) {
-  //   console.log('Unified API Spec does not exist, generating...');
-  //   Bun.spawnSync({
-  //     cmd: ['bun', '--filter', 'f1racepanel-common', 'api:gen']
-  //   });
-  //   fs.renameSync(Path.join(CommonPackagePath, 'f1racepanel-v1.yml'), UnifiedAPIYmlFile);
-  //   console.log('Unified API Spec was successfully created');
-  // }
+  const UnifiedAPIYmlFile = Path.join(APIPackagePath, 'src', 'static', 'api', 'api-spec2.yml');
+  if (!fs.existsSync(UnifiedAPIYmlFile)) {
+    console.log('Unified API Spec does not exist, generating...');
+    Bun.spawnSync({
+      cmd: ['bun', '--filter', 'f1racepanel-common', 'api:gen']
+    });
+    fs.renameSync(Path.join(CommonPackagePath, 'f1racepanel-v1.yml'), UnifiedAPIYmlFile);
+    console.log('Unified API Spec was successfully created');
+  }
 
 
   console.log('Repository is set');

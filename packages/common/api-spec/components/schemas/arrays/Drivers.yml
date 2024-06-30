@@ -4,9 +4,9 @@ allOf:
     properties:
       items:
         oneOf: 
-          - type: "null"
           - type: array
             items:
               $ref: ../objects/Driver.yml
+          - type: "null"
     required:
       - items
