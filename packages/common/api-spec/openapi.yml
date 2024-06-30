@@ -15,15 +15,15 @@ security:
   -  AdminAuth: []
 paths:
   /driver:
-    $ref: paths/driver.yml
+    $ref: paths/drivers/driver.yml
   /driver/{DriverID}:
-    $ref: paths/driver-DriverID.yml
+    $ref: paths/drivers/driver-DriverID.yml
   /drivers:
-    $ref: paths/drivers.yml
+    $ref: paths/drivers/drivers.yml
   /circuit:
-    $ref: paths/circuit.yml
+    $ref: paths/circuits/circuit.yml
   /circuits:
-    $ref: paths/circuits.yml
+    $ref: paths/circuits/circuits.yml
 components: 
   securitySchemes:
     AdminAuth:

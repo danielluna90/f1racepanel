@@ -1,0 +1,14 @@
+post:
+  summary: Create Driver
+  operationId: createDriver
+  security:
+    - AdminAuth: []
+  tags:
+    - Drivers
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/Driver.yml
+    '400':
+      $ref: ../../components/responses/4xx/BadRequest.yml
+    '401':
+      $ref: ../../components/responses/4xx/Unauthorized.yml
