@@ -1,0 +1,5 @@
+description: A circuit.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/objects/Circuit.yml

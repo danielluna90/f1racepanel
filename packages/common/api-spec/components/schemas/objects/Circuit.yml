@@ -1,0 +1,25 @@
+type: object
+properties:
+  id:
+    type: string
+    description: F1 Race Panel CircuitID number.
+  name:
+    type: string
+    description: Name of the circuit.
+  country:
+    type: string
+    description: ISO 3166-1 alpha-2 country code.
+  date_opened:
+    type: string
+    format: date
+    description: Date the track first opened.
+  layouts:
+    type: array
+    minItems: 1
+    items:
+      $ref: ./CircuitLayout.yml
+required:
+  - name
+  - country
+  - date_opened
+  - layouts

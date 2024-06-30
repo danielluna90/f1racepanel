@@ -20,6 +20,10 @@ paths:
     $ref: paths/driver-DriverID.yml
   /drivers:
     $ref: paths/drivers.yml
+  /circuit:
+    $ref: paths/circuit.yml
+  /circuits:
+    $ref: paths/circuits.yml
 components: 
   securitySchemes:
     AdminAuth:
