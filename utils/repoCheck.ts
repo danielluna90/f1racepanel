@@ -21,7 +21,7 @@ function main() {
     process.exit(-1);
   }
 
-  const UnifiedAPIYmlFile = Path.join(APIPackagePath, 'src', 'static', 'api', 'api-spec2.yml');
+  const UnifiedAPIYmlFile = Path.join(APIPackagePath, 'src', 'static', 'api', 'f1racepanel-v1.yml');
   if (!fs.existsSync(UnifiedAPIYmlFile)) {
     console.log('Unified API Spec does not exist, generating...');
     Bun.spawnSync({
