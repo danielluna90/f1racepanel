@@ -388,7 +388,7 @@ components:
           type: string
           format: date
           description: "Date of the last session of the Grand Prix Weekend."
-        circuit:
+        circuit_id:
           type: string
           format: uuid
           description: "CircuitID number of the circuit where this weekend is taking place."
@@ -417,7 +417,7 @@ components:
         - id
         - start_date
         - end_date
-        - circuit
+        - circuit_id
         - sessions
         - driver_entries
         - team_entries
