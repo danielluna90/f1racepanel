@@ -1,0 +1,14 @@
+parameters: 
+  - $ref: ../../components/parameters/path/Year.yml
+  - $ref: ../../components/parameters/path/Round.yml
+
+get:
+  summary: Get Grand Prix Weekend
+  operationId: getGPWeekend
+  tags:
+    - Grand Prix Weekend
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/GPWeekend.yml
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml

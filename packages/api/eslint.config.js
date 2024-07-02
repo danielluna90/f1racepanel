@@ -21,6 +21,9 @@ export default tseslint.config(
         },
       ],
       "sort-imports": "error",
+      "camelcase": ["error", {
+        properties: "never"
+      }]
     },
   },
   {

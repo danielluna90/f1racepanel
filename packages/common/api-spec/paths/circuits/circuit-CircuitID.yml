@@ -1,0 +1,12 @@
+get:
+  summary: Get Circuit
+  operationId: getCircuit
+  tags:
+    - Circuits
+  parameters:
+    - $ref: ../../components/parameters/path/CircuitID.yml
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/Circuit.yml
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml

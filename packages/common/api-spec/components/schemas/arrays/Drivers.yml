@@ -1,0 +1,12 @@
+allOf:
+  - $ref: ../util/PagedResponse.yml
+  - type: object
+    properties:
+      items:
+        oneOf: 
+          - type: array
+            items:
+              $ref: ../objects/Driver.yml
+          - type: "null"
+    required:
+      - items

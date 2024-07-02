@@ -19,13 +19,15 @@ model Driver {
   nationality String @db.VarChar(2)
   dob         String
 
-  gp_weekends GPWeekend[]
-  seasons     Season[]
+  gp_weekends      GPWeekend[]
+  seasons          Season[]
+  race_lap_records RaceLapRecord[]
 }
 
 model RaceLapRecord {
   id        String @id @default(uuid())
   time      String
+  driver    Driver @relation(fields: [driver_id], references: [id])
   driver_id String
 
   circuit_layout CircuitLayout?
@@ -52,12 +54,15 @@ model Circuit {
 }
 
 model GPWeekend {
-  id             String    @id @default(uuid())
+  id             String   @id @default(uuid())
   start_date     String
   end_date       String
-  circuit        Circuit[]
+  circuit        Circuit  @relation(fields: [circuit_id], references: [id])
+  circuit_id     String   @unique
   // sessions Sessions[] <- One-to-Many
   driver_entries Driver[]
+  season         Season   @relation(fields: [season_id], references: [year])
+  season_id      Int
   // team_entries Team[] <- Many-to-Many
 }
 
@@ -67,5 +72,7 @@ model Season {
   drivers           Driver[]
   num_of_rounds     Int
   is_current_season Boolean
+
+  weekends GPWeekend[]
   // point_system
 }

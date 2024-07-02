@@ -1,0 +1,4 @@
+type: object
+properties:
+  awards_extra_point_for_fastest_lap_t10:
+    type: boolean

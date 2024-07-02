@@ -14,10 +14,10 @@ const { admin } = Astro.props;
     </div>
 
     <ul>
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/archive">Archive</a></li>
+      <li><a href="/query-builder">Query Builder</a></li>
+      <li><a href="/about">About</a></li>
     </ul>
     {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
   </div>

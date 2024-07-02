@@ -1,0 +1,16 @@
+type: object
+properties:
+  drivers:
+    type: array
+    description: UUID of all of the drivers who took part in the given season.
+    items:
+      type: string
+      format: uuid
+  num_of_rounds:
+    type: integer
+    description: Number of rounds in the given season.
+  is_current_season:
+    type: boolean
+    default: false
+  point_system:
+    $ref: PointSystem.yml

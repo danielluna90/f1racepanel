@@ -1,0 +1,13 @@
+get:
+  summary: "Get Circuits"
+  operationId: getCircuits
+  tags:
+    - Circuits
+  parameters:
+    - $ref: ../../components/parameters/query/limit.yml
+    - $ref: ../../components/parameters/query/offset.yml
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/MultipleCircuits.yml
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml

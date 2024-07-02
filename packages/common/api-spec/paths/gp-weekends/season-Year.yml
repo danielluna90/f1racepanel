@@ -1,0 +1,13 @@
+parameters: 
+  - $ref: ../../components/parameters/path/Year.yml
+
+get:
+  summary: Get Season Info
+  operationId: getSeason
+  tags:
+    - Grand Prix Weekend
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/Season.yml
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml
