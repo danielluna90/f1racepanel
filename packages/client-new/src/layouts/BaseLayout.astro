@@ -35,35 +35,12 @@ const { title, admin = false } = Astro.props;
 </html>
 
 <style is:global lang="scss">
+  @use "../styles/themes";
+  @use "../styles/variables" as *;
+
   :root {
-    --body-light: #fafaf8;
-    --body-dark: #151515;
-
-    --header-light: #292b23;
-    --header-dark: #fff;
-
-    --page-x-margin: 2rem;
-    --page-y-margin: 1rem;
-
-    --page-margin: var(--page-y-margin) var(--page-x-margin);
-
     --widget-bg-light: #fff;
     --widget-box-shadow: 0 1px 8px rgba(110, 110, 110, 0.1);
-  }
-
-  @mixin light-theme {
-    @include set-theme("light");
-  }
-
-  @mixin dark-theme {
-    @include set-theme("dark");
-  }
-
-  /* These are all of hte available colors for use in the website, they will
-     change dynamically, either by the system or by the user. */
-  @mixin set-theme($name) {
-    --theme-body: var(--body-#{$name});
-    --theme-header: var(--header-#{$name});
   }
 
   /* This solution will check if any element has the theme attribute, if it
@@ -72,22 +49,22 @@ const { title, admin = false } = Astro.props;
      theme using CSS variables. */
   @media (prefers-color-scheme: light) {
     :root:not([theme]) {
-      @include light-theme;
+      @include themes.light-theme;
     }
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([theme]) {
-      @include dark-theme;
+      @include themes.dark-theme;
     }
   }
 
   html[theme="light"] {
-    @include light-theme;
+    @include themes.light-theme;
   }
 
   html[theme="dark"] {
-    @include dark-theme;
+    @include themes.dark-theme;
   }
 
   html {
@@ -98,8 +75,8 @@ const { title, admin = false } = Astro.props;
   }
 
   body {
-    margin: var(--page-margin);
-    min-height: calc(100vh - 2 * var(--page-y-margin));
+    margin: $page-margin;
+    min-height: calc(100vh - 2 * $page-y-margin);
 
     display: grid;
     grid-template-areas:
