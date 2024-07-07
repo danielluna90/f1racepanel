@@ -1,4 +1,6 @@
 ---
+import Theme from "./utilities/Theme.astro";
+
 interface Props {
   admin: boolean;
 }
@@ -13,7 +15,7 @@ const { admin } = Astro.props;
   </div>
 
   <div>
-    <button>Theme</button>
+    <Theme />
   </div>
 </nav>
 
