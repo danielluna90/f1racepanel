@@ -17,7 +17,7 @@ function setupDevENVFiles() {
   }
 
   if (!fs.existsSync(path.join(CommonPackagePath, '.env'))) {
-    printDevMsg('Didn\'t find \'.env\' so copying .env from API Package', true);
+    printDevMsg('Didn\'t find \'.env\' so copying .env from API Package');
     fs.copyFileSync(path.join(APIPackagePath, '.env'), path.join(CommonPackagePath, '.env'));
   }
 }
@@ -25,6 +25,11 @@ function setupDevENVFiles() {
 function main() {
   printDevMsg('Configuring Development Environment');
   
+  printDevMsg('Running gen:* Scripts in f1racepanel-common');
+  Bun.spawnSync({
+    cmd: ['bun', '--filter', 'f1racepanel-common', 'postinstall']
+  });
+
   printDevMsg('Checking .env Status');
   setupDevENVFiles();
 
