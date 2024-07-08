@@ -21,11 +21,16 @@ function main() {
     process.exit(-1);
   }
 
+  if (!fs.existsSync(Path.join(CommonPackagePath, '.env'))) {
+    console.log('Didn\'t find \'.env\' so copying .env from API Package');
+    fs.copyFileSync(Path.join(APIPackagePath, '.env'), Path.join(CommonPackagePath, '.env'));
+  }
+
   const UnifiedAPIYmlFile = Path.join(APIPackagePath, 'src', 'static', 'api', 'f1racepanel-v1.yml');
   if (!fs.existsSync(UnifiedAPIYmlFile)) {
     console.log('Unified API Spec does not exist, generating...');
     Bun.spawnSync({
-      cmd: ['bun', '--filter', 'f1racepanel-common', 'api:gen']
+      cmd: ['bun', '--filter', 'f1racepanel-common', 'gen:api']
     });
     fs.renameSync(Path.join(CommonPackagePath, 'f1racepanel-v1.yml'), UnifiedAPIYmlFile);
     console.log('Unified API Spec was successfully created');

@@ -21,6 +21,7 @@ if (isDev) {
   Bun.spawnSync({
     cmd: ['bunx', 'prisma', 'db', 'push'],
     cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+    env: process.env,
   });
 }
 

@@ -1,10 +1,13 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
+import { seedDB, startDB } from '../utils/seed-db';
 import { initializeWebServer } from '../../src';
 
 export let axiosAPIClient: AxiosInstance;
 
-export default () => {
+export default async () => {
+  await startDB();
+  seedDB();
   const port = initializeWebServer();
 
   const AxiosConfig: CreateAxiosDefaults = {
