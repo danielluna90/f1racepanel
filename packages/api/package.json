@@ -6,6 +6,7 @@
     "start": "bun src/entrypoints/server.ts",
     "dev": "bun --watch src/entrypoints/server.ts",
     "test": "vitest run --coverage",
+    "test:ui": "vitest run --coverage && vite preview --outDir html",
     "lint": "lint-staged"
   },
   "devDependencies": {
@@ -15,6 +16,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^20.14.10",
     "@vitest/coverage-istanbul": "^2.0.2",
+    "@vitest/ui": "^2.0.2",
     "axios": "^1.7.2",
     "docker-compose": "^0.24.8",
     "eslint": "^9.6.0",
