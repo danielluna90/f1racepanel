@@ -1,18 +1,37 @@
 import z from "zod";
 
+namespace DatabaseTypes {
+  export const Driver = z.object({
+    id: z.string().uuid(),
+    name: z.string(),
+    nationality: z.string().length(2),
+    dob: z.string().date(),
+  });
+  export type Driver = z.infer<typeof Driver>;
+
+  export const Drivers = getPagedResponse<typeof Driver>(Driver);
+  export type Drivers = z.infer<typeof Drivers>;
+};
+
+namespace ObjectTypes {
+  export const Driver = z.object({
+    name: z.string(),
+    nationality: z.string().length(2),
+    dob: z.string().date(),
+  });
+  export type Driver = z.infer<typeof Driver>;
+
+  export const Drivers = getPagedResponse<typeof Driver>(Driver);
+  export type Drivers = z.infer<typeof Drivers>;
+};
+
+export { DatabaseTypes, ObjectTypes };
+
 const ErrorResponse = z.object({
   code: z.number().int().min(400).max(599),
   description: z.string(),
 });
 type ErrorResponse = z.infer<typeof ErrorResponse>;
-
-const Driver = z.object({
-  id: z.string().uuid(),
-  name: z.string(),
-  nationality: z.string().length(2),
-  dob: z.string().date(),
-});
-type Driver = z.infer<typeof Driver>;
 
 const CircuitLayout = z.object({
   id: z.string().uuid(),
@@ -70,7 +89,4 @@ function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
   });
 }
 
-const Drivers = getPagedResponse<typeof Driver>(Driver);
-type Drivers = z.infer<typeof Drivers>;
-
-export { ErrorResponse, Driver, CircuitLayout, Circuit, GPWeekend, Season, Drivers };
+export { ErrorResponse, CircuitLayout, Circuit, GPWeekend, Season };

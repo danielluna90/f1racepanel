@@ -1,10 +1,10 @@
-import { Driver, ErrorResponse } from 'f1racepanel-common';
+import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import { prisma } from 'lib/prisma';
 
 export const createDriver: RequestHandler = async (
-  req: Request<unknown, unknown, Driver>,
-  res: Response<ErrorResponse | Driver>,
+  req: Request<unknown, unknown, ObjectTypes.Driver>,
+  res: Response<ErrorResponse | DatabaseTypes.Driver>,
   next: NextFunction
 ) => {
   const driver = await prisma.driver
