@@ -20,4 +20,10 @@ router.post(
   DriverController.editDriver
 );
 
+router.get(
+  '/:DriverID',
+  ValidateParams(DriverSchemas.getDriverParamsSchema),
+  DriverController.getDriver
+);
+
 export default router;

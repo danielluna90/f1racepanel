@@ -1,6 +1,9 @@
 import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
+import {
+  EditDriverParamsSchema,
+  GetDriverParamsSchema,
+} from './driver.schemas';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { EditDriverParamsSchema } from './driver.schemas';
 import { prisma } from 'lib/prisma';
 
 export const createDriver: RequestHandler = async (
@@ -44,4 +47,28 @@ export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
     });
 
   if (driver) res.send(driver);
+};
+
+export const getDriver: RequestHandler<GetDriverParamsSchema> = async (
+  req: Request<GetDriverParamsSchema, unknown, unknown>,
+  res: Response<ErrorResponse | DatabaseTypes.Driver>
+) => {
+  const driver = await prisma.driver.findUnique({
+    where: {
+      id: req.params.DriverID,
+    },
+  });
+
+  if (driver == null) {
+    res.status(404).send({
+      code: 404,
+      description: `Could not find driver with DriverID: ${req.params.DriverID}`,
+    });
+
+    return;
+  }
+
+  res.status(200).send({
+    ...driver,
+  });
 };
