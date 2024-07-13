@@ -1,3 +1,4 @@
+import { APIErrorCodes, APIException } from 'lib/errorHandling';
 import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
 import {
   EditDriverParamsSchema,
@@ -28,8 +29,7 @@ export const createDriver: RequestHandler = async (
 
 export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
   req: Request<EditDriverParamsSchema, unknown, ObjectTypes.Driver>,
-  res: Response<ErrorResponse | DatabaseTypes.Driver>,
-  next: NextFunction
+  res: Response<ErrorResponse | DatabaseTypes.Driver>
 ) => {
   const driver = await prisma.driver
     .update({
@@ -40,13 +40,11 @@ export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
         ...req.body,
       },
     })
-    .catch((error: unknown) => {
-      next(error);
-
-      return null;
+    .catch(() => {
+      throw new APIException('', APIErrorCodes.USER_NOT_FOUND);
     });
 
-  if (driver) res.send(driver);
+  res.send(driver);
 };
 
 export const getDriver: RequestHandler<GetDriverParamsSchema> = async (

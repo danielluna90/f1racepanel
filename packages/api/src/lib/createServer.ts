@@ -1,7 +1,9 @@
 import { AddressInfo, Server } from 'net';
-import { ErrorHandler, JSONErrorHandler } from 'lib/middleware';
 import express, { Router } from 'express';
+import { APIErrorHandler } from 'lib/errorHandling';
 import DriverRouter from 'driver/driver.router';
+// import { JSONErrorHandler } from 'lib/middleware';
+// import { ErrorHandler } from 'lib/middleware'
 import { prisma } from 'lib/prisma';
 
 export let connection: Server;
@@ -18,15 +20,14 @@ export const initializeWebServer = (port?: number): number => {
   app.disable('x-powered-by');
 
   app.use(express.json());
-  app.use(JSONErrorHandler);
 
   const APIRouter: Router = express.Router();
 
   APIRouter.use('/driver', DriverRouter);
-  APIRouter.use(ErrorHandler);
 
   app.use('/v1', APIRouter);
   app.use('/docs', express.static('src/static'));
+  app.use(APIErrorHandler);
 
   connection = app
     .listen(port, () => {

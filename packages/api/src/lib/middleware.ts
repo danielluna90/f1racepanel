@@ -1,59 +1,58 @@
-import { ErrorResponse, Prisma } from 'f1racepanel-common';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { ErrorResponse } from 'f1racepanel-common';
 import Zod from 'zod';
 
-export function JSONErrorHandler(
-  err: unknown,
-  _: Request,
-  res: Response<ErrorResponse>,
-  next: NextFunction
-) {
-  res.status(400).send({
-    code: 400,
-    description: 'JSON is not correctly formatted in body',
-  });
+// TODO: Remove these functions eventually
+// export function JSONErrorHandler(
+//   _err: unknown,
+//   _req: Request,
+//   res: Response<ErrorResponse>,
+//   _next: NextFunction
+// ) {
+//   res.status(400).send({
+//     code: 400,
+//     description: 'JSON is not correctly formatted in body',
+//   });
+// }
 
-  next();
-}
+// export function ErrorHandler(
+//   err: unknown,
+//   _: Request,
+//   res: Response<ErrorResponse>,
+//   next: NextFunction
+// ) {
+//   if (err instanceof Prisma.PrismaClientKnownRequestError) {
+//     switch (err.code) {
+//       case 'P2002':
+//         res.status(400).send({
+//           code: 400,
+//           description: 'Unique field is not unique.',
+//         });
+//         break;
 
-export function ErrorHandler(
-  err: unknown,
-  _: Request,
-  res: Response<ErrorResponse>,
-  next: NextFunction
-) {
-  if (err instanceof Prisma.PrismaClientKnownRequestError) {
-    switch (err.code) {
-      case 'P2002':
-        res.status(400).send({
-          code: 400,
-          description: 'Unique field is not unique.',
-        });
-        break;
+//       case 'P2025':
+//         res.status(400).send({
+//           code: 400,
+//           description: 'Entity not found.',
+//         });
+//         break;
 
-      case 'P2025':
-        res.status(400).send({
-          code: 400,
-          description: 'Entity not found.',
-        });
-        break;
+//       default:
+//         res.status(500).send({
+//           code: 500,
+//           description: `Unknown DB error: ${err.code}.`,
+//         });
+//         break;
+//     }
+//   } else {
+//     res.status(500).send({
+//       code: 500,
+//       description: 'Unknown server error.',
+//     });
+//   }
 
-      default:
-        res.status(500).send({
-          code: 500,
-          description: `Unknown DB error: ${err.code}.`,
-        });
-        break;
-    }
-  } else {
-    res.status(500).send({
-      code: 500,
-      description: 'Unknown server error.',
-    });
-  }
-
-  next();
-}
+//   next();
+// }
 
 const ValidateRequestField = (
   schema: Zod.AnyZodObject,
