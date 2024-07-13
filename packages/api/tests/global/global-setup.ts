@@ -1,11 +1,11 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
-import { seedDB, startDB } from '../utils/seed-db';
-import { initializeWebServer } from '../../src';
+import { connection, initializeWebServer } from '../../src';
+import { seedDB, startDB, stopDB } from '../utils/seed-db';
 
 export let axiosAPIClient: AxiosInstance;
 
-export default async () => {
+export async function setup() {
   await startDB();
   await seedDB();
   const port = initializeWebServer();
@@ -16,4 +16,12 @@ export default async () => {
   };
 
   axiosAPIClient = axios.create(AxiosConfig);
-};
+}
+
+export async function teardown() {
+  connection.close(() => {
+    console.log('Closing down server.');
+  });
+
+  await stopDB();
+}

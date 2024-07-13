@@ -2,6 +2,7 @@ import { Driver, PrismaClient } from 'f1racepanel-common';
 import { v2 as compose } from 'docker-compose';
 import { generateMock } from '@anatine/zod-mock';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const dockerServices = ['db-test'];
 const dockerOptions = {
@@ -20,8 +21,13 @@ async function startDB() {
   process.env.DATABASE_URL =
     'postgresql://test:test@localhost:5432/f1racepanel?schema=public';
 
-  const proc = Bun.spawnSync({
-    cmd: ['bunx', 'prisma', 'db', 'push'],
+  // const proc = Bun.spawnSync({
+  //   cmd: ['bunx', 'prisma', 'db', 'push'],
+  //   cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+  //   env: process.env,
+  // });
+
+  const proc = spawnSync('bunx', ['prisma', 'db', 'push'], {
     cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
     env: process.env,
   });
