@@ -5,10 +5,16 @@ export default defineConfig({
     coverage: {
       enabled: true,
       provider: 'istanbul',
-      exclude: ['src/entrypoints/**', 'html/**', 'tests/**'],
+      exclude: ['src/entrypoints/**', 'src/static/**', 'html/**', 'tests/**'],
       reportsDirectory: './html/coverage',
     },
     globalSetup: './tests/utils/global-setup.ts',
     reporters: ['default', 'html'],
+  },
+  resolve: {
+    alias: {
+      driver: '/src/driver',
+      lib: '/src/lib',
+    },
   },
 });
