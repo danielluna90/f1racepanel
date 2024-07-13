@@ -1,7 +1,7 @@
 import { AddressInfo, Server } from 'net';
 import express, { Router } from 'express';
 import DriverRouter from 'driver/driver.router';
-import ErrorHandler from 'lib/middleware';
+import { ErrorHandler } from 'lib/middleware';
 import { prisma } from 'lib/prisma';
 
 export let connection: Server;

@@ -1,7 +1,8 @@
 import { ErrorResponse, Prisma } from 'f1racepanel-common';
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, RequestHandler, Response } from 'express';
+import Zod from 'zod';
 
-export default function ErrorHandler(
+export function ErrorHandler(
   err: unknown,
   _: Request,
   res: Response<ErrorResponse>,
@@ -39,3 +40,26 @@ export default function ErrorHandler(
 
   next();
 }
+
+export const Validate =
+  (schema: Zod.AnyZodObject): RequestHandler =>
+  (
+    req: Request<unknown, unknown, unknown>,
+    res: Response<ErrorResponse>,
+    next: NextFunction
+  ) => {
+    try {
+      schema.parse({
+        body: req.body,
+        query: req.query,
+        params: req.params,
+      });
+      next();
+    } catch (error) {
+      console.log(error);
+      res.status(400).send({
+        code: 400,
+        description: 'Bad Request: Schema is not Valid',
+      });
+    }
+  };
