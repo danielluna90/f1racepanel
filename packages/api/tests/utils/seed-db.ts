@@ -1,4 +1,6 @@
+import { Driver, PrismaClient } from 'f1racepanel-common';
 import { v2 as compose } from 'docker-compose';
+import { generateMock } from '@anatine/zod-mock';
 import path from 'node:path';
 
 const dockerServices = ['db-test'];
@@ -32,8 +34,19 @@ async function stopDB() {
   await compose.stopMany(dockerOptions, ...dockerServices);
 }
 
-function seedDB() {
-  console.log(process.env.DATABASE_URL);
+async function seedDB() {
+  const prisma = new PrismaClient();
+
+  // Add two drivers
+  const driverWithoutID = Driver.omit({ id: true });
+
+  await prisma.driver.createMany({
+    data: [generateMock(driverWithoutID), generateMock(driverWithoutID)],
+  });
+
+  // Add two circuits
+  // Add three GP Weekends
+  // Add two Seasons
 }
 
 export { startDB, stopDB, seedDB };

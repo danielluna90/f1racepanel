@@ -7,7 +7,7 @@ export let axiosAPIClient: AxiosInstance;
 
 export default async () => {
   await startDB();
-  seedDB();
+  await seedDB();
   const port = initializeWebServer();
 
   const AxiosConfig: CreateAxiosDefaults = {
