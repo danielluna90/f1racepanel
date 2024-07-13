@@ -1,5 +1,6 @@
 import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { EditDriverParamsSchema } from './driver.schemas';
 import { prisma } from 'lib/prisma';
 
 export const createDriver: RequestHandler = async (
@@ -20,4 +21,27 @@ export const createDriver: RequestHandler = async (
     });
 
   if (driver) res.status(200).send(driver);
+};
+
+export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
+  req: Request<EditDriverParamsSchema, unknown, ObjectTypes.Driver>,
+  res: Response<ErrorResponse | DatabaseTypes.Driver>,
+  next: NextFunction
+) => {
+  const driver = await prisma.driver
+    .update({
+      where: {
+        id: req.params.DriverID,
+      },
+      data: {
+        ...req.body,
+      },
+    })
+    .catch((error: unknown) => {
+      next(error);
+
+      return null;
+    });
+
+  if (driver) res.send(driver);
 };

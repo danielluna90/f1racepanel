@@ -2,6 +2,20 @@ import { ErrorResponse, Prisma } from 'f1racepanel-common';
 import { NextFunction, Request, RequestHandler, Response } from 'express';
 import Zod from 'zod';
 
+export function JSONErrorHandler(
+  err: unknown,
+  _: Request,
+  res: Response<ErrorResponse>,
+  next: NextFunction
+) {
+  res.status(400).send({
+    code: 400,
+    description: 'JSON is not correctly formatted in body',
+  });
+
+  next();
+}
+
 export function ErrorHandler(
   err: unknown,
   _: Request,
@@ -41,25 +55,50 @@ export function ErrorHandler(
   next();
 }
 
-export const Validate =
-  (schema: Zod.AnyZodObject): RequestHandler =>
+const ValidateRequestField = (
+  schema: Zod.AnyZodObject,
+  obj: unknown,
+  res: Response<ErrorResponse>,
+  next: NextFunction,
+  strict = true
+) => {
+  try {
+    strict ? schema.parse(obj) : schema.partial().parse(obj);
+    next();
+  } catch (error) {
+    res.status(400).send({
+      code: 400,
+      description: 'Schema validation failed.',
+    });
+  }
+};
+
+export const ValidateBody =
+  (schema: Zod.AnyZodObject, strict = true): RequestHandler =>
   (
     req: Request<unknown, unknown, unknown>,
     res: Response<ErrorResponse>,
     next: NextFunction
   ) => {
-    try {
-      schema.parse({
-        body: req.body,
-        query: req.query,
-        params: req.params,
-      });
-      next();
-    } catch (error) {
-      console.log(error);
-      res.status(400).send({
-        code: 400,
-        description: 'Bad Request: Schema is not Valid',
-      });
-    }
+    ValidateRequestField(schema, req.body, res, next, strict);
+  };
+
+export const ValidateParams =
+  (schema: Zod.AnyZodObject, strict = true): RequestHandler =>
+  (
+    req: Request<unknown, unknown, unknown>,
+    res: Response<ErrorResponse>,
+    next: NextFunction
+  ) => {
+    ValidateRequestField(schema, req.params, res, next, strict);
+  };
+
+export const ValidateQueries =
+  (schema: Zod.AnyZodObject, strict = true): RequestHandler =>
+  (
+    req: Request<unknown, unknown, unknown>,
+    res: Response<ErrorResponse>,
+    next: NextFunction
+  ) => {
+    ValidateRequestField(schema, req.query, res, next, strict);
   };
