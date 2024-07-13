@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
 
 import { connection, initializeWebServer } from '../../src';
-import { seedDB, startDB, stopDB } from '../utils/seed-db';
+import { seedDB, startDB, stopDB } from './seed-db';
 
 export let axiosAPIClient: AxiosInstance;
 

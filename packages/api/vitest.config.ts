@@ -6,6 +6,6 @@ export default defineConfig({
       provider: 'istanbul',
       exclude: ['src/entrypoints/**'],
     },
-    globalSetup: './tests/global/global-setup.ts',
+    globalSetup: './tests/utils/global-setup.ts',
   },
 });
