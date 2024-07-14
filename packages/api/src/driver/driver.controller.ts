@@ -50,7 +50,7 @@ export const getDriver: RequestHandler<GetDriverParamsSchema> = async (
     },
   });
 
-  if (driver == null) {
+  if (!driver) {
     res.status(404).send({
       status_code: 404,
       internal_code: APIErrorCodes.USER_NOT_FOUND,
