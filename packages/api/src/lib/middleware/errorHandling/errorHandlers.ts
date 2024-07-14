@@ -11,18 +11,16 @@ export function CaughtErrorHandler(
 ) {
   if (err instanceof APIException) {
     next(err);
-  }
-
-  if (err instanceof SyntaxError) {
+  } else if (err instanceof SyntaxError) {
     throw new APIException(
       'JSON Syntax Error.',
       APIErrorCodes.JSON_FORMAT_ERROR
     );
   } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
     ProcessPrismaErrorHandler(err);
+  } else {
+    throw new APIException('Unknown Error.', APIErrorCodes.UNKNOWN_ERROR);
   }
-
-  throw new APIException('Unknown Error.', APIErrorCodes.UNKNOWN_ERROR);
 }
 
 export function APIErrorHandler(
@@ -35,7 +33,8 @@ export function APIErrorHandler(
     // 1xxx
     case APIErrorCodes.USER_NOT_FOUND:
       res.status(400).send({
-        code: 400,
+        status_code: 400,
+        internal_code: APIErrorCodes.USER_NOT_FOUND,
         description: 'User not found.',
       });
 
@@ -44,7 +43,8 @@ export function APIErrorHandler(
     // 2xxx
     case APIErrorCodes.UNIQUE_FIELD_NOT_UNIQUE:
       res.status(400).send({
-        code: 400,
+        status_code: 400,
+        internal_code: APIErrorCodes.UNIQUE_FIELD_NOT_UNIQUE,
         description: 'Unique field is not unique.',
       });
 
@@ -53,7 +53,8 @@ export function APIErrorHandler(
     // 3xxx
     case APIErrorCodes.JSON_FORMAT_ERROR:
       res.status(400).send({
-        code: 400,
+        status_code: 400,
+        internal_code: APIErrorCodes.JSON_FORMAT_ERROR,
         description: 'JSON is not correctly formatted.',
       });
 
@@ -62,7 +63,8 @@ export function APIErrorHandler(
     // 9xxx
     default:
       res.status(500).send({
-        code: 500,
+        status_code: 500,
+        internal_code: APIErrorCodes.UNKNOWN_ERROR,
         description: 'Unprocessed API Error',
       });
   }

@@ -34,7 +34,7 @@ export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
       },
     })
     .catch(() => {
-      throw new APIException('', APIErrorCodes.USER_NOT_FOUND);
+      throw new APIException('User not found', APIErrorCodes.USER_NOT_FOUND);
     });
 
   res.send(driver);
@@ -52,7 +52,8 @@ export const getDriver: RequestHandler<GetDriverParamsSchema> = async (
 
   if (driver == null) {
     res.status(404).send({
-      code: 404,
+      status_code: 404,
+      internal_code: APIErrorCodes.USER_NOT_FOUND,
       description: `Could not find driver with DriverID: ${req.params.DriverID}`,
     });
 

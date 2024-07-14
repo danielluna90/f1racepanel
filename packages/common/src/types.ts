@@ -24,7 +24,8 @@ namespace ObjectTypes {
 export { DatabaseTypes, ObjectTypes };
 
 const ErrorResponse = z.object({
-  code: z.number().int().min(400).max(599),
+  status_code: z.number().int().min(400).max(599),
+  internal_code: z.number().int().min(1000).max(9999),
   description: z.string(),
 });
 type ErrorResponse = z.infer<typeof ErrorResponse>;
