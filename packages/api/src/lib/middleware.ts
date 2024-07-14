@@ -5,6 +5,8 @@ export {
 } from 'lib/middleware/schemaValidator';
 
 export {
-  CaughtErrorHandler,
+  APIErrorCodes,
   APIErrorHandler,
+  APIException,
+  CaughtErrorHandler,
 } from 'lib/middleware/errorHandling';

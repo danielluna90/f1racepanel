@@ -1,4 +1,4 @@
-import { APIErrorCodes, APIException } from 'lib/errorHandling';
+import { APIErrorCodes, APIException } from 'lib/middleware';
 import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
 import {
   EditDriverParamsSchema,
