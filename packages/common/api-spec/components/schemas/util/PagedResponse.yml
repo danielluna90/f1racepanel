@@ -1,0 +1,26 @@
+x-internal: true
+type: object
+properties:
+  href:
+    type: string
+    format: uri
+    description: A link to the API endpoint returning the full request.
+  limit:
+    type: integer
+    minimum: 1
+    description: The maximum number of items in the response.
+  next:
+    oneOf: 
+      - type: string
+        format: uri
+        description: URL to the next page of items. (`null` if none)
+      - type: "null"
+  offset:
+    type: integer
+    minimum: 0
+    description: The offset of the items returned.
+required:
+  - href
+  - limit
+  - next
+  - offset

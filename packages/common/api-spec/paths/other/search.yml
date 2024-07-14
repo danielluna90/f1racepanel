@@ -1,0 +1,8 @@
+post:
+  summary: Search
+  operationId: search
+  tags:
+    - Search
+  responses:
+    400:
+      $ref: ../../components/responses/4xx/BadRequest.yml

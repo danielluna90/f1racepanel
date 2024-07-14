@@ -177,3 +177,7 @@ dist
 # Test Results
 playwright-report
 test-results
+
+# Unified API Spec
+src/static/api/f1racepanel-v1.yml
+html

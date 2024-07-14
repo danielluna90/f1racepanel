@@ -1,0 +1,34 @@
+type: object
+properties:
+  name:
+    type: string
+    description: Name of layout.
+  first_year:
+    type: integer
+    description: First year of the layout.
+  last_year:
+    type: integer
+    description: Last year of usage of the layout (if applicable).
+  track_length:
+    type: number
+    description: Length of circuit in KM.
+  race_lap_record:
+    type: object
+    oneOf: 
+      - type: object
+        properties:
+          time:  
+            type: string
+            pattern: ^\d{1}:\d{2}.\d{3}$
+            example: '1:21.500'
+            description: Race lap record of the layout. Format is `{minutes}:{seconds}.{milliseconds}`.
+          driver_id:
+            type: string
+            format: uuid
+            description: DriverID of the driver who set the fastest time.
+      - type: 'null'
+required:
+  - name
+  - first_year
+  - track_length
+  - race_lap_record

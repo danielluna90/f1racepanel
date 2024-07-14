@@ -1,0 +1,7 @@
+in: path
+name: Session
+description: Session Number in GP Weekend
+schema:
+  type: integer
+  minimum: 1
+required: true

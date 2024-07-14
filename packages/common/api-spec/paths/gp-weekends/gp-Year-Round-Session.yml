@@ -1,0 +1,13 @@
+parameters: 
+  - $ref: ../../components/parameters/path/Year.yml
+  - $ref: ../../components/parameters/path/Round.yml
+  - $ref: ../../components/parameters/path/Session.yml
+
+get:
+  summary: Get Session with Year and Round
+  operationId: getGPSession
+  tags:
+    - GP Session
+  responses:
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml

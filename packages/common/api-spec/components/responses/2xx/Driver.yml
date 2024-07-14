@@ -2,4 +2,4 @@ description: A driver.
 content:
   application/json:
     schema:
-      $ref: ../../schemas/Driver.yml
+      $ref: ../../schemas/objects/Driver.yml

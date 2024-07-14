@@ -1,0 +1,10 @@
+get:
+  summary: Log In
+  operationId: login
+  tags:
+    - Admin
+  responses:
+    '200':
+      $ref: ../../components/responses/2xx/Login.yml
+    '401':
+      $ref: ../../components/responses/4xx/Unauthorized.yml

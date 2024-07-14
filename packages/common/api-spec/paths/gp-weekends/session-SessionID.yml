@@ -1,0 +1,11 @@
+parameters: 
+  - $ref: ../../components/parameters/path/SessionID.yml
+
+get:
+  summary: Get Session with SessionID
+  operationId: getSessionWithID
+  tags:
+    - GP Session
+  responses:
+    '404':
+      $ref: ../../components/responses/4xx/NotFound.yml

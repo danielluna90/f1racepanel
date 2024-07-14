@@ -1,0 +1,5 @@
+description: An array of drivers.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/arrays/Drivers.yml

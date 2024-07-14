@@ -7,15 +7,13 @@
   "scripts": {
     "build:client": "rm -rf dist && cd packages/client && bun run build && mv dist ../../dist",
     "build": "npm-run-all2 build:*",
-    "dev": "bun --filter '{f1racepanel-server,f1racepanel-client-new}' dev",
     "prepare": "husky",
-    "checkRepo": "bun utils/repoCheck.ts",
-    "postinstall": "bun run checkRepo",
-    "predev": "bun run checkRepo"
+    "predev": "bun run utils/setup-dev.ts",
+    "dev": "bun --filter '{f1racepanel-server,f1racepanel-client-new}' dev"
   },
   "devDependencies": {
     "husky": "^9.0.11",
-    "npm-run-all2": "^6.2.0",
+    "npm-run-all2": "^6.2.2",
     "zod": "^3.23.8"
   }
 }

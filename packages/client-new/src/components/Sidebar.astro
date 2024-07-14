@@ -14,16 +14,18 @@ const { admin } = Astro.props;
     </div>
 
     <ul>
-      <li>Home</li>
-      <li>Archive</li>
-      <li>Query Builder</li>
-      <li>About</li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/archive">Archive</a></li>
+      <li><a href="/query-builder">Query Builder</a></li>
+      <li><a href="/about">About</a></li>
     </ul>
     {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @use "../styles/variables" as *;
+
   #sidebar-wrapper {
     position: fixed;
     z-index: 999;
@@ -48,11 +50,11 @@ const { admin } = Astro.props;
   }
 
   #sidebar {
-    background-color: var(--body-light);
+    background-color: var(--theme-body);
     width: 25%;
-    padding: var(--page-margin);
+    padding: $page-margin;
 
-    min-height: calc(100vh - 2 * var(--page-y-margin));
+    min-height: calc(100vh - 2 * $page-y-margin);
     min-height: -webkit-fill-available;
     min-height: fill-available;
 

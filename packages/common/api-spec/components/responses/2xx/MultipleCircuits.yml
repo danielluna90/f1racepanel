@@ -1,0 +1,5 @@
+description: An array of circuits.
+content:
+  application/json:
+    schema:
+      $ref: ../../schemas/arrays/Circuits.yml
