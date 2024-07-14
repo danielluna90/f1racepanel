@@ -1,4 +1,4 @@
-import { APIErrorHandler, CaughtErrorHandler } from 'lib/errorHandling';
+import { APIErrorHandler, CaughtErrorHandler } from 'lib/middleware';
 import { AddressInfo, Server } from 'net';
 import express, { Router } from 'express';
 import DriverRouter from 'driver/driver.router';
