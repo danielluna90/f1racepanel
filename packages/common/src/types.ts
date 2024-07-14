@@ -14,11 +14,7 @@ namespace DatabaseTypes {
 };
 
 namespace ObjectTypes {
-  export const Driver = z.object({
-    name: z.string(),
-    nationality: z.string().length(2),
-    dob: z.string().date(),
-  });
+  export const Driver = DatabaseTypes.Driver.omit({ id: true });
   export type Driver = z.infer<typeof Driver>;
 
   export const Drivers = getPagedResponse<typeof Driver>(Driver);
