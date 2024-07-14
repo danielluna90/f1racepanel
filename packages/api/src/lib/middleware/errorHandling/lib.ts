@@ -9,6 +9,10 @@ export enum APIErrorCodes {
   // Javascript Runtime errors (3xxx)
   JSON_FORMAT_ERROR = 3001,
 
+  // API Errors (4xxx)
+  SCHEMA_VALIDATION_FAILED = 4001,
+  QUERY_SCHEMA_MISFORMED = 4002,
+
   // Unknown / Critical errors (9xxx)
   UNKNOWN_ERROR = 9001,
   PRISMA_UNKNOWN_ERROR = 9002,

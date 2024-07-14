@@ -60,6 +60,25 @@ export function APIErrorHandler(
 
       break;
 
+    // 4xxx
+    case APIErrorCodes.SCHEMA_VALIDATION_FAILED:
+      res.status(400).send({
+        status_code: 400,
+        internal_code: APIErrorCodes.SCHEMA_VALIDATION_FAILED,
+        description: 'Schema validation failed.',
+      });
+
+      break;
+
+    case APIErrorCodes.QUERY_SCHEMA_MISFORMED:
+      res.status(500).send({
+        status_code: 500,
+        internal_code: APIErrorCodes.QUERY_SCHEMA_MISFORMED,
+        description: 'Query schema was misformed.',
+      });
+
+      break;
+
     // 9xxx
     default:
       res.status(500).send({
