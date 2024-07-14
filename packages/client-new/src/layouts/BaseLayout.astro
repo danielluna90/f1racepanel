@@ -34,33 +34,49 @@ const { title, admin = false } = Astro.props;
   </body>
 </html>
 
-<style is:global>
+<style is:global lang="scss">
+  @use "../styles/themes";
+  @use "../styles/variables" as *;
+
   :root {
-    --body-light: #fafaf8;
-    --body-dark: #151515;
-
-    --header-light: #292b23;
-    --header-dark: #fff;
-
-    --page-x-margin: 2rem;
-    --page-y-margin: 1rem;
-
-    --page-margin: var(--page-y-margin) var(--page-x-margin);
-
     --widget-bg-light: #fff;
     --widget-box-shadow: 0 1px 8px rgba(110, 110, 110, 0.1);
   }
 
+  /* This solution will check if any element has the theme attribute, if it
+     does then it will ignore the prefers-color-scheme media query. This
+     enables us to set the theme attribute to any element and control the
+     theme using CSS variables. */
+  @media (prefers-color-scheme: light) {
+    :root:not([theme]) {
+      @include themes.light-theme;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([theme]) {
+      @include themes.dark-theme;
+    }
+  }
+
+  html[theme="light"] {
+    @include themes.light-theme;
+  }
+
+  html[theme="dark"] {
+    @include themes.dark-theme;
+  }
+
   html {
-    background-color: var(--body-light);
-    color: var(--header-light);
+    background-color: var(--theme-body);
+    color: var(--theme-header);
 
     font-family: "Open Sans Variable", "Montserrat Variable", sans-serif;
   }
 
   body {
-    margin: var(--page-margin);
-    min-height: calc(100vh - 2 * var(--page-y-margin));
+    margin: $page-margin;
+    min-height: calc(100vh - 2 * $page-y-margin);
 
     display: grid;
     grid-template-areas:

@@ -1,4 +1,4 @@
-import { connection, initializeWebServer } from 'lib/createServer';
+import { connection, initializeWebServer } from '..';
 import { v2 as compose } from 'docker-compose';
 import dotenv from 'dotenv';
 import path from 'node:path';

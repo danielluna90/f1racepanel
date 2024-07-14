@@ -1,0 +1,11 @@
+description: Log in credentials
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        jwt:
+          type: string
+          description: JWT used for authentication
+      required: 
+        -  jwt
