@@ -1,6 +1,6 @@
+import { APIErrorHandler, CaughtErrorHandler } from 'lib/errorHandling';
 import { AddressInfo, Server } from 'net';
 import express, { Router } from 'express';
-import { APIErrorHandler } from 'lib/errorHandling';
 import DriverRouter from 'driver/driver.router';
 // import { JSONErrorHandler } from 'lib/middleware';
 // import { ErrorHandler } from 'lib/middleware'
@@ -27,6 +27,7 @@ export const initializeWebServer = (port?: number): number => {
 
   app.use('/v1', APIRouter);
   app.use('/docs', express.static('src/static'));
+  app.use(CaughtErrorHandler);
   app.use(APIErrorHandler);
 
   connection = app

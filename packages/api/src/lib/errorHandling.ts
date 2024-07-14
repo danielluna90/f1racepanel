@@ -2,10 +2,14 @@ import { NextFunction, Request, Response } from 'express';
 import { ErrorResponse } from 'f1racepanel-common';
 
 export enum APIErrorCodes {
+  // Prisma / DB errors (1xxx)
   USER_NOT_FOUND = 1001,
-  JSON_FORMAT_ERROR = 2000,
 
-  UNKNOWN_ERROR = 9000,
+  // Javascript Runtime errors (2xxx)
+  JSON_FORMAT_ERROR = 2001,
+
+  // Unknown / Critical errors (9xxx)
+  UNKNOWN_ERROR = 9001,
 }
 
 export class APIException extends Error {
@@ -20,23 +24,30 @@ export class APIException extends Error {
   }
 }
 
+export function CaughtErrorHandler(
+  err: unknown,
+  _req: Request,
+  _res: Response,
+  next: NextFunction
+) {
+  if (err instanceof APIException) {
+    next(err);
+  }
+
+  if (err instanceof SyntaxError) {
+    throw new APIException('', APIErrorCodes.JSON_FORMAT_ERROR);
+  }
+
+  throw new APIException('', APIErrorCodes.UNKNOWN_ERROR);
+}
+
 export function APIErrorHandler(
-  err: APIException | SyntaxError,
+  err: APIException,
   _: Request,
   res: Response<ErrorResponse>,
   next: NextFunction
 ) {
-  let errObj: APIException | undefined;
-
-  if (err instanceof APIException) {
-    errObj = err;
-  } else if (err instanceof SyntaxError) {
-    errObj = new APIException('', APIErrorCodes.JSON_FORMAT_ERROR);
-  } else {
-    errObj = new APIException('', APIErrorCodes.UNKNOWN_ERROR);
-  }
-
-  switch (errObj.errorCode) {
+  switch (err.errorCode) {
     case APIErrorCodes.USER_NOT_FOUND:
       res.status(401).send({
         code: 401,
