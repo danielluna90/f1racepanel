@@ -34,14 +34,21 @@ export function APIErrorHandler(
   switch (err.errorCode) {
     // 1xxx
     case APIErrorCodes.USER_NOT_FOUND:
-      res.status(401).send({
-        code: 401,
+      res.status(400).send({
+        code: 400,
         description: 'User not found.',
       });
 
       break;
 
     // 2xxx
+    case APIErrorCodes.UNIQUE_FIELD_NOT_UNIQUE:
+      res.status(400).send({
+        code: 400,
+        description: 'Unique field is not unique.',
+      });
+
+      break;
 
     // 3xxx
     case APIErrorCodes.JSON_FORMAT_ERROR:

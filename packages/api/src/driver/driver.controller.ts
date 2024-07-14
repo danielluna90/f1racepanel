@@ -4,27 +4,20 @@ import {
   EditDriverParamsSchema,
   GetDriverParamsSchema,
 } from './driver.schemas';
-import { NextFunction, Request, RequestHandler, Response } from 'express';
+import { Request, RequestHandler, Response } from 'express';
 import { prisma } from 'lib/prisma';
 
 export const createDriver: RequestHandler = async (
   req: Request<unknown, unknown, ObjectTypes.Driver>,
-  res: Response<ErrorResponse | DatabaseTypes.Driver>,
-  next: NextFunction
+  res: Response<ErrorResponse | DatabaseTypes.Driver>
 ) => {
-  const driver = await prisma.driver
-    .create({
-      data: {
-        ...req.body,
-      },
-    })
-    .catch((error: unknown) => {
-      next(error);
+  const driver = await prisma.driver.create({
+    data: {
+      ...req.body,
+    },
+  });
 
-      return null;
-    });
-
-  if (driver) res.status(200).send(driver);
+  res.status(200).send(driver);
 };
 
 export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
