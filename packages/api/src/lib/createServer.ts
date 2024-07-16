@@ -44,5 +44,7 @@ export const initializeWebServer = (port?: number): number => {
       await prisma.$disconnect();
     });
 
-  return port ? port : 80;
+  return (connection.address() as AddressInfo).port
+    ? (connection.address() as AddressInfo).port
+    : 0;
 };
