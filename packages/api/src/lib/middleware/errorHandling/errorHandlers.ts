@@ -30,62 +30,26 @@ export function APIErrorHandler(
   next: NextFunction
 ) {
   switch (err.errorCode) {
-    // 1xxx
-    case APIErrorCodes.USER_NOT_FOUND:
-      res.status(400).send({
-        status_code: 400,
-        internal_code: APIErrorCodes.USER_NOT_FOUND,
-        description: 'User not found.',
-      });
-
-      break;
-
-    // 2xxx
+    // Status Code: 400 (Bad Request)
     case APIErrorCodes.UNIQUE_FIELD_NOT_UNIQUE:
-      res.status(400).send({
-        status_code: 400,
-        internal_code: APIErrorCodes.UNIQUE_FIELD_NOT_UNIQUE,
-        description: 'Unique field is not unique.',
-      });
-
-      break;
-
-    // 3xxx
     case APIErrorCodes.JSON_FORMAT_ERROR:
-      res.status(400).send({
-        status_code: 400,
-        internal_code: APIErrorCodes.JSON_FORMAT_ERROR,
-        description: 'JSON is not correctly formatted.',
-      });
-
-      break;
-
-    // 4xxx
     case APIErrorCodes.SCHEMA_VALIDATION_FAILED:
-      res.status(400).send({
-        status_code: 400,
-        internal_code: APIErrorCodes.SCHEMA_VALIDATION_FAILED,
-        description: 'Schema validation failed.',
-      });
+      err.sendResponseWithStatus(res, 400);
 
       break;
 
+    // Status Code: 401 (Unauthorized)
+
+    // Status Code: 404 (Not Found)
+    case APIErrorCodes.USER_NOT_FOUND:
+      err.sendResponseWithStatus(res, 404);
+      break;
+
+    // Status Code: 500 (Internal Server Error)
     case APIErrorCodes.QUERY_SCHEMA_MISFORMED:
-      res.status(500).send({
-        status_code: 500,
-        internal_code: APIErrorCodes.QUERY_SCHEMA_MISFORMED,
-        description: 'Query schema was misformed.',
-      });
-
-      break;
-
-    // 9xxx
     default:
-      res.status(500).send({
-        status_code: 500,
-        internal_code: APIErrorCodes.UNKNOWN_ERROR,
-        description: 'Unprocessed API Error',
-      });
+      err.sendResponseWithStatus(res, 500);
+      break;
   }
 
   next();

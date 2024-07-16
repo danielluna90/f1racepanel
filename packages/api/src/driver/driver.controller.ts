@@ -51,13 +51,10 @@ export const getDriver: RequestHandler<GetDriverParamsSchema> = async (
   });
 
   if (!driver) {
-    res.status(404).send({
-      status_code: 404,
-      internal_code: APIErrorCodes.USER_NOT_FOUND,
-      description: `Could not find driver with DriverID: ${req.params.DriverID}`,
-    });
-
-    return;
+    throw new APIException(
+      `Could not find driver with DriverID: ${req.params.DriverID}`,
+      APIErrorCodes.USER_NOT_FOUND
+    );
   }
 
   res.status(200).send({

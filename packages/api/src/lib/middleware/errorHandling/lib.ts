@@ -1,3 +1,6 @@
+import { ErrorResponse } from 'f1racepanel-common';
+import { Response } from 'express';
+
 export enum APIErrorCodes {
   // Prisma / DB Custom errors (1xxx)
   USER_NOT_FOUND = 1001,
@@ -27,5 +30,16 @@ export class APIException extends Error {
 
     this.msg = msg;
     this.errorCode = errorCode;
+  }
+
+  sendResponseWithStatus(
+    res: Response<ErrorResponse>,
+    statusCode: number
+  ): void {
+    res.status(statusCode).send({
+      status_code: statusCode,
+      internal_code: this.errorCode,
+      description: this.msg,
+    });
   }
 }
