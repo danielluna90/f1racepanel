@@ -1,21 +1,19 @@
-import axios, { AxiosInstance, CreateAxiosDefaults } from 'axios';
-
 import { connection, initializeWebServer } from 'lib/createServer';
 import { seedDB, startDB, stopDB } from './seed-db';
+import type { GlobalSetupContext } from 'vitest/node';
 
-export let axiosAPIClient: AxiosInstance;
-
-export async function setup() {
+export async function setup({ provide }: GlobalSetupContext) {
   await startDB();
   await seedDB();
   const port = initializeWebServer();
 
-  const AxiosConfig: CreateAxiosDefaults = {
-    baseURL: `http://127.0.0.1:${port.toString()}`,
-    validateStatus: () => true,
-  };
+  provide('port', port);
+}
 
-  axiosAPIClient = axios.create(AxiosConfig);
+declare module 'vitest' {
+  export interface ProvidedContext {
+    port: number;
+  }
 }
 
 export async function teardown() {

@@ -14,6 +14,7 @@ export default defineConfig({
   resolve: {
     alias: {
       driver: '/src/driver',
+      search: '/src/search',
       lib: '/src/lib',
     },
   },

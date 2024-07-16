@@ -28,13 +28,21 @@ async function startDB() {
   //   env: process.env,
   // });
 
-  const proc = spawnSync('bunx', ['prisma', 'db', 'push'], {
+  const genPrismaTypesProc = spawnSync('bun', ['run', 'gen:prisma'], {
     cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
     env: process.env,
   });
 
-  const text = await new Response(proc.stdout).text();
-  console.log(text);
+  const genPrismaOutput = await new Response(genPrismaTypesProc.stdout).text();
+  console.log(genPrismaOutput);
+
+  const pushPrismaToDBProc = spawnSync('bunx', ['prisma', 'db', 'push'], {
+    cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+    env: process.env,
+  });
+
+  const pushPrismaOutput = await new Response(pushPrismaToDBProc.stdout).text();
+  console.log(pushPrismaOutput);
 }
 
 async function stopDB() {

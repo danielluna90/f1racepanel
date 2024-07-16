@@ -5,6 +5,12 @@ post:
     - AdminAuth: []
   tags:
     - Drivers
+  requestBody:
+    description: Driver Object Type
+    content:
+      application/json:
+        schema: 
+          $ref: ../../components/schemas/objects/Driver.yml
   responses:
     '200':
       $ref: ../../components/responses/2xx/Driver.yml

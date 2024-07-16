@@ -19,6 +19,8 @@ export function CaughtErrorHandler(
   } else if (err instanceof Prisma.PrismaClientKnownRequestError) {
     ProcessPrismaErrorHandler(err);
   } else {
+    console.log(err);
+
     throw new APIException('Unknown Error.', APIErrorCodes.UNKNOWN_ERROR);
   }
 }
@@ -39,6 +41,8 @@ export function APIErrorHandler(
       break;
 
     // Status Code: 401 (Unauthorized)
+
+    // Status Code: 403 (Forbidden)
 
     // Status Code: 404 (Not Found)
     case APIErrorCodes.USER_NOT_FOUND:
