@@ -3,7 +3,7 @@ import { DatabaseTypes, ErrorResponse } from 'f1racepanel-common';
 import {
   GetDriversQueriesSchema,
   getDriversQueriesSchema,
-} from './drivers.schemas';
+} from './search.schemas';
 import { Request, RequestHandler, Response } from 'express';
 import { prisma } from 'lib/prisma';
 

@@ -2,9 +2,7 @@ import { APIErrorHandler, CaughtErrorHandler } from 'lib/middleware';
 import { AddressInfo, Server } from 'net';
 import express, { Router } from 'express';
 import DriverRouter from 'driver/driver.router';
-import DriversRouter from 'drivers/drivers.router';
-// import { JSONErrorHandler } from 'lib/middleware';
-// import { ErrorHandler } from 'lib/middleware'
+import SearchRouter from 'search/search.router';
 import { prisma } from 'lib/prisma';
 
 export let connection: Server;
@@ -25,7 +23,7 @@ export const initializeWebServer = (port?: number): number => {
   const APIRouter: Router = express.Router();
 
   APIRouter.use('/driver', DriverRouter);
-  APIRouter.use('/drivers', DriversRouter);
+  APIRouter.use('/search', SearchRouter);
 
   app.use('/v1', APIRouter);
   app.use('/docs', express.static('src/static'));
