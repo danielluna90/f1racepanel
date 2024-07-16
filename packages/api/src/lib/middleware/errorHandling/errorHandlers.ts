@@ -42,11 +42,14 @@ export function APIErrorHandler(
 
     // Status Code: 404 (Not Found)
     case APIErrorCodes.USER_NOT_FOUND:
+    case APIErrorCodes.ENTITY_NOT_FOUND:
       err.sendResponseWithStatus(res, 404);
       break;
 
     // Status Code: 500 (Internal Server Error)
     case APIErrorCodes.QUERY_SCHEMA_MISFORMED:
+    case APIErrorCodes.UNKNOWN_ERROR:
+    case APIErrorCodes.PRISMA_UNKNOWN_ERROR:
     default:
       err.sendResponseWithStatus(res, 500);
       break;
