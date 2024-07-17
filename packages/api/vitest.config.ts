@@ -10,7 +10,7 @@ export default defineConfig({
         'src/static/**',
         'html/**',
         'tests/**',
-        'out-src/**',
+        'old-src/**',
       ],
       reportsDirectory: './html/coverage',
     },
