@@ -1,3 +1,4 @@
+name: f1racepanel_development
 services:
   db:
     container_name: pg_db
@@ -11,16 +12,6 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     restart: unless-stopped
-
-  db-test:
-    container_name: pg_db_test
-    image: postgres
-    environment:
-      - POSTGRES_USER=test
-      - POSTGRES_PASSWORD=test
-      - POSTGRES_DB=f1racepanel
-    ports:
-      - 5432:5432
 
   pgadmin:
     container_name: pgadmin

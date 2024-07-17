@@ -9,7 +9,7 @@ const dockerServices = ['db-test'];
 const dockerOptions = {
   cwd: path.join(
     path.dirname(require.resolve('f1racepanel-common/package.json')),
-    'docker'
+    'docker-test-suite'
   ),
   log: true,
 };
