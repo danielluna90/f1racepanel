@@ -7,7 +7,9 @@
     "dev": "bun --watch src/entrypoints/server.ts",
     "test": "vitest run --coverage",
     "test:ui": "vitest run --coverage && vite preview --outDir html",
-    "lint": "lint-staged"
+    "lint": "run-p lint:*",
+    "lint:prettier": "prettier -c {src,tests}/**/*.ts",
+    "lint:eslint": "eslint '{src,tests}/**/*.ts'"
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",

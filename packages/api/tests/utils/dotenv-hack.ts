@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 
@@ -21,6 +22,10 @@ if (fs.existsSync(dotenvFile)) {
 }
 
 fs.copyFileSync(dotenvTestFile, dotenvFile);
+
+console.log('Dotenv hack completed');
+
+dotenv.config({ path: dotenvFile });
 
 export const moveDotEnvBack = () => {
   fs.rmSync(dotenvFile);
