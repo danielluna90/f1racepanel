@@ -6,7 +6,7 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 
 const dockerServices = ['db-test'];
-const dockerOptions = {
+const dockerOptions: compose.IDockerComposeOptions = {
   cwd: path.join(
     path.dirname(require.resolve('f1racepanel-common/package.json')),
     'docker-test-suite'
@@ -15,7 +15,10 @@ const dockerOptions = {
 };
 
 async function startDB() {
-  await compose.downMany(dockerServices, dockerOptions);
+  await compose.downMany(dockerServices, {
+    commandOptions: ['-v'],
+    ...dockerOptions,
+  });
 
   await compose.upMany(dockerServices, dockerOptions);
 
