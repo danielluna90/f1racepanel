@@ -5,7 +5,13 @@ export default defineConfig({
     coverage: {
       enabled: true,
       provider: 'istanbul',
-      exclude: ['src/entrypoints/**', 'src/static/**', 'html/**', 'tests/**'],
+      exclude: [
+        'src/entrypoints/**',
+        'src/static/**',
+        'html/**',
+        'tests/**',
+        'out-src/**',
+      ],
       reportsDirectory: './html/coverage',
     },
     globalSetup: './tests/utils/global-setup.ts',

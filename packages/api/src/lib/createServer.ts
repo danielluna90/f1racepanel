@@ -7,13 +7,7 @@ import { prisma } from 'lib/prisma';
 
 export let connection: Server;
 
-/**
- * This initializes the web server and does initial setup of ExpressJS. It setups our middleware and also our routes.
- *
- * @param port - Port to attempt to use. If, not available, a random port will be assigned.
- * @returns Port of the server.
- */
-export const initializeWebServer = (port?: number): number => {
+export const createAPIServer = (): express.Express => {
   const app = express();
 
   app.disable('x-powered-by');
@@ -30,7 +24,17 @@ export const initializeWebServer = (port?: number): number => {
   app.use(CaughtErrorHandler);
   app.use(APIErrorHandler);
 
-  connection = app
+  return app;
+};
+
+/**
+ * This initializes the web server and does initial setup of ExpressJS. It setups our middleware and also our routes.
+ *
+ * @param port - Port to attempt to use. If, not available, a random port will be assigned.
+ * @returns Port of the server.
+ */
+export const initializeWebServer = (port?: number): number => {
+  connection = createAPIServer()
     .listen(port, () => {
       port = (connection.address() as AddressInfo).port;
       console.log('Server running at PORT:', port);
