@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import { getSecret } from "astro:env/server";
 
-import { Driver, Drivers } from "f1racepanel-common";
+import { DatabaseTypes } from "f1racepanel-common";
 
 import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
 
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
   let rv: GetStaticPathsResult = [];
 
   const API_URL = getSecret("API_URL");
-  const API_DRIVERS_URL = `${API_URL}/drivers`;
+  const API_DRIVERS_URL = `${API_URL}/search/drivers`;
 
   let complete: boolean = false;
   let url: string = API_DRIVERS_URL;
@@ -20,9 +20,9 @@ export async function getStaticPaths() {
   while (!complete) {
     const rawRes = await fetch(url);
     const resJSON = await rawRes.json();
-    const res = Drivers.parse(resJSON);
+    const res = DatabaseTypes.Drivers.parse(resJSON);
 
-    res.items.forEach((driver: Driver) => {
+    res.items.forEach((driver: DatabaseTypes.Driver) => {
       rv.push({
         props: { driverData: driver },
         params: { name: driver.name.toLowerCase().replace(" ", "-") },
@@ -40,7 +40,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  driverData: Driver;
+  driverData: DatabaseTypes.Driver;
 }
 
 const { driverData } = Astro.props;
