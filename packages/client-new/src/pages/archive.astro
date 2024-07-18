@@ -1,7 +1,36 @@
 ---
+import { DatabaseTypes } from "f1racepanel-common";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getSecret } from "astro:env/server";
+
+const currentYear = new Date().getFullYear();
+let gpSeasons: (DatabaseTypes.Season | null)[] = [];
+
+const API_URL = getSecret("API_URL");
+
+for (let i = currentYear; i >= 1950; i--) {
+  const API_SEASONS_URL = `${API_URL}/season/${i}`;
+
+  const rawRes = await fetch(API_SEASONS_URL);
+
+  if (rawRes.status === 404) {
+    gpSeasons.push(null);
+    continue;
+  }
+
+  const rawJSON = await rawRes.json();
+  const season = DatabaseTypes.Season.parse(rawJSON);
+
+  gpSeasons.push(season);
+}
 ---
 
 <BaseLayout title="Archive">
-  <div></div>
+  {
+    gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
+      if (!season) {
+        return <h3>{currentYear - index} - Not Available</h3>;
+      }
+    })
+  }
 </BaseLayout>
