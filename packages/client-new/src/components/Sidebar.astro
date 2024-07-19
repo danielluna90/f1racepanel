@@ -18,6 +18,9 @@ const { admin } = Astro.props;
       <li><a href="/archive">Archive</a></li>
       <li><a href="/query-builder">Query Builder</a></li>
       <li><a href="/about">About</a></li>
+      {
+        process.env.NODE_ENV == "development" ? <li><a href="/design">Design</a></li> : <></>
+      }
     </ul>
     {admin ? <p>I'm an admin</p> : <p>I'm not an admin</p>}
   </div>

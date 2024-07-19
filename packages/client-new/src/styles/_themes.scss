@@ -3,11 +3,13 @@
 $theme-colors-light: (
   "body": #fafaf8,
   "header": #292b23,
+  "card": #fff,
 );
 
 $theme-colors-dark: (
-  "body": #151515,
+  "body": #000,
   "header": #fff,
+  "card": #151515
 );
 
 @mixin light-theme {
@@ -29,4 +31,5 @@ $theme-colors-dark: (
 
   --theme-body: #{map.get($theme, "body")};
   --theme-header: #{map.get($theme, "header")};
+  --theme-card: #{map.get($theme, "card")};
 }
