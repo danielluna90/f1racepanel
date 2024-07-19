@@ -1,6 +1,7 @@
 import { APIErrorHandler, CaughtErrorHandler } from 'lib/middleware';
 import { AddressInfo, Server } from 'net';
 import express, { Router } from 'express';
+import CircuitRouter from 'circuit/circuit.router';
 import DriverRouter from 'driver/driver.router';
 import SearchRouter from 'search/search.router';
 import { prisma } from 'lib/prisma';
@@ -16,6 +17,7 @@ export const createAPIServer = (): express.Express => {
 
   const APIRouter: Router = express.Router();
 
+  APIRouter.use('/circuit', CircuitRouter);
   APIRouter.use('/driver', DriverRouter);
   APIRouter.use('/search', SearchRouter);
 

@@ -30,7 +30,7 @@ namespace DatabaseTypes {
     name: z.string(),
     country: z.string().length(2),
     date_opened: z.string().date(),
-    layout: CircuitLayout.array().min(1),
+    layouts: CircuitLayout.array().min(1),
   });
   export type Circuit = z.infer<typeof Circuit>;
   

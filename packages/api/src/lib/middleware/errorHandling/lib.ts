@@ -19,6 +19,7 @@ export enum APIErrorCodes {
   // Unknown / Critical errors (9xxx)
   UNKNOWN_ERROR = 9001,
   PRISMA_UNKNOWN_ERROR = 9002,
+  UNIMPLEMENTED = 9003,
 }
 
 export class APIException extends Error {
