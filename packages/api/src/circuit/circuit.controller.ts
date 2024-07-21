@@ -1,13 +1,13 @@
 import { APIErrorCodes, APIException } from 'lib/middleware';
-//import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
+//import { DatabaseTypes, ErrorResponse, ResponseTypes } from 'f1racepanel-common';
 //import { Request, RequestHandler, Response } from 'express';
 //import { prisma } from 'lib/prisma';
 
 import { Request, RequestHandler } from 'express';
-import { ObjectTypes } from 'f1racepanel-common';
+import { ResponseTypes } from 'f1racepanel-common';
 
 export const createPost: RequestHandler = (
-  req: Request<unknown, unknown, ObjectTypes.Circuit>
+  req: Request<unknown, unknown, ResponseTypes.Circuit>
   //res: Response<ErrorResponse | DatabaseTypes.Circuit>
 ) => {
   // const circuit = await prisma.circuit.create({

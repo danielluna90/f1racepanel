@@ -1,5 +1,5 @@
 import { GenerateMockOptions, generateMock } from '@anatine/zod-mock';
-import { ObjectTypes, PrismaClient } from 'f1racepanel-common';
+import { ResponseTypes, PrismaClient } from 'f1racepanel-common';
 import { v2 as compose } from 'docker-compose';
 import { faker } from '@faker-js/faker';
 import path from 'node:path';
@@ -56,7 +56,7 @@ async function seedDB() {
   const prisma = new PrismaClient();
 
   // Add two drivers
-  const driver = ObjectTypes.Driver;
+  const driver = ResponseTypes.Driver;
   const driverStringMap: GenerateMockOptions = {
     stringMap: {
       dob: () => faker.date.past({ years: 100 }).toISOString().split('T')[0],

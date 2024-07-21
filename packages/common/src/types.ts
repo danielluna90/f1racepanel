@@ -1,5 +1,6 @@
 import z from "zod";
 
+// These are supposed to match the Database Models from Prisma
 namespace DatabaseTypes {
   export const Driver = z.object({
     id: z.string().uuid(),
@@ -59,7 +60,8 @@ namespace DatabaseTypes {
   export type Season = z.infer<typeof Season>;
 };
 
-namespace ObjectTypes {
+// These are supposed to match the responses in the API Specification
+namespace ResponseTypes {
   export const Driver = DatabaseTypes.Driver.omit({ id: true });
   export type Driver = z.infer<typeof Driver>;
 
@@ -82,7 +84,7 @@ namespace ObjectTypes {
   export type Seaons = DatabaseTypes.Season;
 };
 
-export { DatabaseTypes, ObjectTypes };
+export { DatabaseTypes, ResponseTypes };
 
 const ErrorResponse = z.object({
   status_code: z.number().int().min(400).max(599),

@@ -19,7 +19,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      client: '/src/circuit',
+      circuit: '/src/circuit',
       driver: '/src/driver',
       search: '/src/search',
       lib: '/src/lib',

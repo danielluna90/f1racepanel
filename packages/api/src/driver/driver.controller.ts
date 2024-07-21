@@ -1,5 +1,9 @@
 import { APIErrorCodes, APIException } from 'lib/middleware';
-import { DatabaseTypes, ErrorResponse, ObjectTypes } from 'f1racepanel-common';
+import {
+  DatabaseTypes,
+  ErrorResponse,
+  ResponseTypes,
+} from 'f1racepanel-common';
 import {
   EditDriverParamsSchema,
   GetDriverParamsSchema,
@@ -8,7 +12,7 @@ import { Request, RequestHandler, Response } from 'express';
 import { prisma } from 'lib/prisma';
 
 export const createDriver: RequestHandler = async (
-  req: Request<unknown, unknown, ObjectTypes.Driver>,
+  req: Request<unknown, unknown, ResponseTypes.Driver>,
   res: Response<ErrorResponse | DatabaseTypes.Driver>
 ) => {
   const driver = await prisma.driver.create({
@@ -21,7 +25,7 @@ export const createDriver: RequestHandler = async (
 };
 
 export const editDriver: RequestHandler<EditDriverParamsSchema> = async (
-  req: Request<EditDriverParamsSchema, unknown, ObjectTypes.Driver>,
+  req: Request<EditDriverParamsSchema, unknown, ResponseTypes.Driver>,
   res: Response<ErrorResponse | DatabaseTypes.Driver>
 ) => {
   const driver = await prisma.driver
