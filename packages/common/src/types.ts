@@ -10,19 +10,24 @@ namespace DatabaseTypes {
   });
   export type Driver = z.infer<typeof Driver>;
 
-  export const Drivers = getPagedResponse<typeof Driver>(Driver);
-  export type Drivers = z.infer<typeof Drivers>;
-
+  export const RaceLapRecord = z.object({
+    id: z.string().uuid(),
+    time: z.string().regex(new RegExp("^d{1}:d{2}.d{3}$")),
+    driver: Driver,
+    driver_id: z.string().uuid(),
+  });
+  export type RaceLapRecord = z.infer<typeof RaceLapRecord>;
+ 
   export const CircuitLayout = z.object({
     id: z.string().uuid(),
-    name: z.string(),
     first_year: z.number().int(),
     last_year: z.number().int(),
     track_length: z.number(),
-    race_lap_record: z.object({
-      time: z.string().regex(new RegExp("^d{1}:d{2}.d{3}$")),
-      driver_id: z.string().uuid(),
-    }),
+    race_lap_record: RaceLapRecord,
+    race_lap_record_id: z.string().uuid(),
+    circuit: z.object({}),
+    circuit_id: z.string().uuid(),
+    
   });
   export type CircuitLayout = z.infer<typeof CircuitLayout>;
   
@@ -32,6 +37,7 @@ namespace DatabaseTypes {
     country: z.string().length(2),
     date_opened: z.string().date(),
     layouts: CircuitLayout.array().min(1),
+    //gp_weekends: GPWeekend.array().min(1),
   });
   export type Circuit = z.infer<typeof Circuit>;
   
@@ -62,6 +68,16 @@ namespace DatabaseTypes {
 
 // These are supposed to match the responses in the API Specification
 namespace ResponseTypes {
+  function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
+    return z.object({
+      href: z.string().url(),
+      limit: z.number().int().positive(),
+      next: z.string().url().nullable(),
+      offset: z.number().int().nonnegative(),
+      items: schema.array()
+    });
+  }  
+
   export const Driver = DatabaseTypes.Driver.omit({ id: true });
   export type Driver = z.infer<typeof Driver>;
 
@@ -94,13 +110,3 @@ const ErrorResponse = z.object({
 type ErrorResponse = z.infer<typeof ErrorResponse>;
 
 export { ErrorResponse };
-
-function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
-  return z.object({
-    href: z.string().url(),
-    limit: z.number().int().positive(),
-    next: z.string().url().nullable(),
-    offset: z.number().int().nonnegative(),
-    items: schema.array()
-  });
-}

@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["omitApi"]
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -20,6 +19,7 @@ model Driver {
   nationality String @db.VarChar(2)
   dob         String
 
+  session_entries  DriverEntry[]
   gp_weekends      GPWeekend[]
   seasons          Season[]
   race_lap_records RaceLapRecord[]
@@ -41,8 +41,8 @@ model CircuitLayout {
   track_length       Float
   race_lap_record    RaceLapRecord @relation(fields: [race_lap_record_id], references: [id])
   race_lap_record_id String        @unique
-  Circuit            Circuit?      @relation(fields: [circuitId], references: [id])
-  circuitId          String?
+  circuit            Circuit       @relation(fields: [circuit_id], references: [id])
+  circuit_id         String
 }
 
 model Circuit {
@@ -54,17 +54,65 @@ model Circuit {
   gp_weekends GPWeekend[]
 }
 
+enum SessionStatus {
+  UNKNOWN
+  ACTIVE
+  FUTURE
+  COMPLETED
+  CANCELED
+}
+
+model Result {
+  id String @id @default(uuid())
+
+  driver_id String
+}
+
+model WeekendSession {
+  id String @id @default(uuid())
+
+  session_number Int
+  session_status SessionStatus
+
+  driver_entries DriverEntry[]
+
+  gp_weekend    GPWeekend @relation(fields: [gp_weekend_id], references: [id])
+  gp_weekend_id String
+}
+
 model GPWeekend {
-  id             String   @id @default(uuid())
-  start_date     String
-  end_date       String
-  circuit        Circuit  @relation(fields: [circuit_id], references: [id])
-  circuit_id     String   @unique
+  id String @id @default(uuid())
+
+  start_date DateTime @unique
+  end_date   DateTime @unique
+
+  round_number Int
+
+  circuit    Circuit @relation(fields: [circuit_id], references: [id])
+  circuit_id String  @unique
   // sessions Sessions[] <- One-to-Many
-  driver_entries Driver[]
-  season         Season   @relation(fields: [season_id], references: [year])
-  season_id      Int
+
+  sessions WeekendSession[]
+
+  season    Season  @relation(fields: [season_id], references: [year])
+  season_id Int
   // team_entries Team[] <- Many-to-Many
+  Driver    Driver? @relation(fields: [driver_id], references: [id])
+  driver_id String?
+}
+
+// Drivers (pre-2013) car numbers were based on performance in the previous
+// year's championship so drivers would change car number's throughout their carrers.
+// Since this wouldn't often change throughout the same season, as a space saving measure,
+// we will allow one driver entry to be associated with more than one GP Weekend.
+model DriverEntry {
+  id String @id @default(uuid())
+
+  driver     Driver @relation(fields: [driver_id], references: [id])
+  driver_id  String
+  car_number Int
+
+  weekend_session WeekendSession[]
 }
 
 model Season {
