@@ -97,7 +97,7 @@ namespace ResponseTypes {
   export type PointSystem = DatabaseTypes.PointSystem;
 
   export const Season = DatabaseTypes.Season;
-  export type Seaons = DatabaseTypes.Season;
+  export type Season = DatabaseTypes.Season;
 };
 
 export { DatabaseTypes, ResponseTypes };
