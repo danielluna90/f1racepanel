@@ -23,6 +23,13 @@ const { title, admin = false } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <title>{title ? `F1 Race Panel - ${title}` : "F1 Race Panel"}</title>
+
+    <script>
+      let theme = localStorage.getItem("theme");
+      document
+        .getElementsByTagName("html")[0]
+        ?.setAttribute("theme", theme ? theme : "light");
+    </script>
   </head>
   <body>
     <Sidebar admin={admin} />

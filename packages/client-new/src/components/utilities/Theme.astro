@@ -7,9 +7,14 @@
 <script>
   const themeBtns = document.getElementById("theme-btn");
 
-  let currentTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
+  let storedTheme = localStorage.getItem("theme");
+
+  if (!storedTheme) {
+    let theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+    localStorage.setItem("theme", theme);
+  }
 
   // window
   //   .matchMedia("(prefers-color-scheme: dark)")
@@ -18,10 +23,10 @@
   //   });
 
   themeBtns?.addEventListener("click", () => {
-    currentTheme = currentTheme == "light" ? "dark" : "light";
+    let theme = localStorage.getItem("theme") == "light" ? "dark" : "light";
+    localStorage.setItem("theme", theme);
+    console.log(theme);
 
-    document
-      .getElementsByTagName("html")[0]
-      ?.setAttribute("theme", currentTheme);
+    document.getElementsByTagName("html")[0]?.setAttribute("theme", theme);
   });
 </script>
