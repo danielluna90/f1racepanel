@@ -66,6 +66,27 @@ namespace DatabaseTypes {
   export type Season = z.infer<typeof Season>;
 };
 
+// These are supposed to match the requests in the API Specification
+namespace RequestTypes {
+  export const Driver = DatabaseTypes.Driver.omit({ id: true });
+  export type Driver = z.infer<typeof Driver>;
+
+  export const CircuitLayout = DatabaseTypes.CircuitLayout.omit({ id: true });
+  export type CircuitLayout = z.infer<typeof CircuitLayout>;
+
+  export const Circuit = DatabaseTypes.Circuit.omit({ id: true });
+  export type Circuit = z.infer<typeof Circuit>;
+
+  export const GPWeekend = DatabaseTypes.GPWeekend.omit({ id: true });
+  export type GPWeekend = z.infer<typeof GPWeekend>;
+
+  export const PointSystem = DatabaseTypes.PointSystem;
+  export type PointSystem = DatabaseTypes.PointSystem;
+
+  export const Season = DatabaseTypes.Season;
+  export type Season = DatabaseTypes.Season;
+};
+
 // These are supposed to match the responses in the API Specification
 namespace ResponseTypes {
   function getPagedResponse<T extends z.ZodTypeAny>(schema: T) {
@@ -76,7 +97,7 @@ namespace ResponseTypes {
       offset: z.number().int().nonnegative(),
       items: schema.array()
     });
-  }  
+  }
 
   export const Driver = DatabaseTypes.Driver.omit({ id: true });
   export type Driver = z.infer<typeof Driver>;
@@ -98,9 +119,9 @@ namespace ResponseTypes {
 
   export const Season = DatabaseTypes.Season;
   export type Season = DatabaseTypes.Season;
-};
+}
 
-export { DatabaseTypes, ResponseTypes };
+export { DatabaseTypes, RequestTypes, ResponseTypes };
 
 const ErrorResponse = z.object({
   status_code: z.number().int().min(400).max(599),

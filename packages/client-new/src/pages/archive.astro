@@ -1,6 +1,9 @@
 ---
-import { DatabaseTypes } from "f1racepanel-common";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Card from "../components/Card.astro";
+import Grid from "../components/utilities/Grid.astro";
+
+import { DatabaseTypes } from "f1racepanel-common";
 import { getSecret } from "astro:env/server";
 
 const currentYear = new Date().getFullYear();
@@ -26,11 +29,17 @@ for (let i = currentYear; i >= 1950; i--) {
 ---
 
 <BaseLayout title="Archive">
-  {
-    gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
-      if (!season) {
-        return <h3>{currentYear - index} - Not Available</h3>;
-      }
-    })
-  }
+  <Grid>
+    {
+      gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
+        if (!season) {
+          return (
+            <Card>
+              <h3>{currentYear - index} - Not Available</h3>
+            </Card>
+          );
+        }
+      })
+    }
+  </Grid>
 </BaseLayout>
