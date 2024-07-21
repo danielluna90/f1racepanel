@@ -1,5 +1,5 @@
 import { GenerateMockOptions, generateMock } from '@anatine/zod-mock';
-import { ResponseTypes, PrismaClient } from 'f1racepanel-common';
+import { PrismaClient, ResponseTypes } from 'f1racepanel-common';
 import { v2 as compose } from 'docker-compose';
 import { faker } from '@faker-js/faker';
 import path from 'node:path';

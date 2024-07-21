@@ -1,5 +1,5 @@
 import { APIErrorCodes, APIException } from 'lib/middleware';
-import { DatabaseTypes, ErrorResponse } from 'f1racepanel-common';
+import { ErrorResponse, ResponseTypes } from 'f1racepanel-common';
 import {
   GetDriversQueriesSchema,
   getDriversQueriesSchema,
@@ -14,7 +14,7 @@ export const getDrivers: RequestHandler<
   never
 > = async (
   req: Request<unknown, unknown, unknown, GetDriversQueriesSchema>,
-  res: Response<ErrorResponse | DatabaseTypes.Drivers>
+  res: Response<ErrorResponse | ResponseTypes.Drivers>
 ) => {
   // This should be safe since the query middleware already parsed and inserted default values.
   const query = getDriversQueriesSchema.safeParse(req.query).data;
