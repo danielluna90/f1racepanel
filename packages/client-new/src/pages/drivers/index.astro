@@ -1,5 +1,5 @@
 ---
-import type { DatabaseTypes } from "f1racepanel-common";
+import type { ResponseTypes } from "f1racepanel-common";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getAllDrivers } from "../../services/drivers";
 
@@ -9,7 +9,7 @@ const drivers = await getAllDrivers();
 <BaseLayout title="Drivers">
   <p>All Drivers Page</p>
   {
-    drivers.map((driver: DatabaseTypes.Driver) => {
+    drivers.map((driver: ResponseTypes.Driver) => {
       return <h2>{driver.name}</h2>;
     })
   }
