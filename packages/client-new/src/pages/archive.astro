@@ -28,16 +28,18 @@ for (let i = currentYear; i >= 1950; i--) {
 ---
 
 <BaseLayout title="Archive">
+  <h1 class="text-4xl font-bold text-center pb-4">The Archive</h1>
+
   <div class="grid grid-cols-4 gap-4">
     {
       gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
-        if (!season) {
-          return (
-            <Card title={`${currentYear - index}`}>
-              <h3>{currentYear - index} - Not Available</h3>
-            </Card>
-          );
-        }
+        const year = currentYear - index;
+
+        return (
+          <Card title={`${year}`}>
+            { season ? <p>Not Available</p> :  <a href=`/season/${year}` class="btn btn-primary">Visit</a> }
+          </Card>
+        );
       })
     }
   </div>
