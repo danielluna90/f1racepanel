@@ -9,6 +9,7 @@ export default {
   ],
   daisyui: {
     themes: ['emerald', 'dark'],
-  }
+  },
+  darkMode: ['selector', '[data-theme="dark"]']
 }
 
