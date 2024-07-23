@@ -21,9 +21,6 @@ interface Props {
       <li><a href="/archive">Archive</a></li>
       <li><a href="/query-builder">Query Builder</a></li>
       <li><a href="/about">About</a></li>
-      {
-        process.env.NODE_ENV == "development" ? <li><a href="/design">Design</a></li> : <></>
-      }
       <div class="sm:hidden">
         <SidebarContent />
       </div>
