@@ -39,12 +39,13 @@ const { title, admin = false } = Astro.props;
     </script>
   </head>
   <body>
-    <Sidebar admin={admin} />
-    <Navbar admin={admin} />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <Sidebar admin={admin}>
+      <Navbar admin={admin} />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </Sidebar>
   </body>
 </html>
 
