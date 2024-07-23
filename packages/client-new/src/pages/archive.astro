@@ -28,7 +28,7 @@ for (let i = currentYear; i >= 1950; i--) {
 ---
 
 <BaseLayout title="Archive">
-  <div>
+  <div class="grid grid-cols-4 gap-4">
     {
       gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
         if (!season) {
