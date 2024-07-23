@@ -24,11 +24,18 @@ const { title, admin = false } = Astro.props;
 
     <title>{title ? `F1 Race Panel - ${title}` : "F1 Race Panel"}</title>
 
+    <script is:inline>
+      if (localStorage.getItem("theme") === null) {
+        document.documentElement.setAttribute("data-theme", "cupcake");
+      } else
+        document.documentElement.setAttribute(
+          "data-theme",
+          localStorage.getItem("theme")
+        );
+    </script>
     <script>
-      let theme = localStorage.getItem("theme");
-      document
-        .getElementsByTagName("html")[0]
-        ?.setAttribute("theme", theme ? theme : "light");
+      import { themeChange } from "theme-change";
+      themeChange();
     </script>
   </head>
   <body>
