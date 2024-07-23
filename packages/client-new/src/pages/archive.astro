@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Card from "../components/Card.astro";
-import Grid from "../components/utilities/Grid.astro";
 
 import { DatabaseTypes } from "f1racepanel-common";
 import { getSecret } from "astro:env/server";
@@ -29,7 +28,7 @@ for (let i = currentYear; i >= 1950; i--) {
 ---
 
 <BaseLayout title="Archive">
-  <Grid>
+  <div>
     {
       gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
         if (!season) {
@@ -41,5 +40,5 @@ for (let i = currentYear; i >= 1950; i--) {
         }
       })
     }
-  </Grid>
+  </div>
 </BaseLayout>
