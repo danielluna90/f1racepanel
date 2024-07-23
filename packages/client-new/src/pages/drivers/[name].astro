@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import { ResponseTypes } from "f1racepanel-common";
 
-import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
+//import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
 import { getAllDrivers } from "../../services/drivers";
 
 export async function getStaticPaths() {
@@ -29,5 +29,26 @@ const { driverData } = Astro.props;
 ---
 
 <BaseLayout title=`${driverData.name}`>
-  <DriverBioCard data={driverData} />
+  <h1 class="text-3xl text-center font-bold">{driverData.name}</h1>
+
+  <!-- <DriverBioCard data={driverData} /> -->
+  <h2>Race Statistics</h2>
+  <div class="stats stats-vertical md:stats-horizontal shadow">
+    <div class="stat">
+      <div class="stat-title">Entries</div>
+      <div class="stat-value">100</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Podiums</div>
+      <div class="stat-value">50</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Wins</div>
+      <div class="stat-value">50</div>
+    </div>
+  </div>
+
+  <h2>Race Entries</h2>
 </BaseLayout>

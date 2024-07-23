@@ -1,55 +1,57 @@
 ---
-import Theme from "./utilities/Theme.astro";
+import SidebarContent from "./sidebar/SidebarContent.astro";
 
 interface Props {
   admin: boolean;
 }
 
-const { admin } = Astro.props;
+//const { admin } = Astro.props;
 ---
 
-<nav>
-  <div class="left">
-    <button id="nav-open-btn">Open Navbar</button>
-    <h1><a href="/">F1 Race Panel{admin ? " - Admin" : ""}</a></h1>
+<nav class="navbar bg-base-100">
+  <div class="flex-none">
+    <label
+      for="my-drawer-3"
+      aria-label="open sidebar"
+      class="btn btn-square btn-ghost"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="inline-block h-6 w-6 stroke-current"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </label>
   </div>
-
-  <div>
-    <Theme />
+  <div class="flex-1">
+    <a class="btn btn-ghost text-2xl" href="/">F1 Race Panel</a>
+  </div>
+  <div class="hidden flex-none sm:block">
+    <ul class="menu menu-horizontal">
+      <SidebarContent />
+    </ul>
   </div>
 </nav>
 
-<style>
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .left {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-  }
-</style>
-
 <script>
-  const bodyEl: HTMLBodyElement = document.getElementsByTagName(
-    "body"
-  )[0] as HTMLBodyElement;
+  const themeToggles: HTMLInputElement[] = [
+    ...document.getElementsByClassName("theme-selector-toggle"),
+  ] as HTMLInputElement[];
 
-  document.getElementsByTagName("nav");
+  themeToggles.forEach((el) => {
+    el.checked =
+      (localStorage.getItem("theme") ?? "light") == "light" ? false : true;
 
-  document.getElementById("nav-open-btn")?.addEventListener("click", () => {
-    bodyEl.classList.toggle("nav-open");
-
-    [...document.getElementsByTagName("button")].forEach((element) => {
-      //element.tabIndex = -1;
-      element.disabled = true;
+    el.addEventListener("change", function () {
+      themeToggles.forEach((toggles) => {
+        toggles.checked = this.checked;
+      });
     });
-
-    //(document.getElementById("nav-close-btn") as HTMLButtonElement).tabIndex = 0;
-    (document.getElementById("nav-close-btn") as HTMLButtonElement).disabled =
-      false;
   });
 </script>
