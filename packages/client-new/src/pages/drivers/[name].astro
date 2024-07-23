@@ -30,4 +30,21 @@ const { driverData } = Astro.props;
 
 <BaseLayout title=`${driverData.name}`>
   <DriverBioCard data={driverData} />
+  <h1>Race Statistics</h1>
+  <div class="stats stats-vertical md:stats-horizontal shadow">
+    <div class="stat">
+      <div class="stat-title">Entries</div>
+      <div class="stat-value">100</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Podiums</div>
+      <div class="stat-value">50</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Wins</div>
+      <div class="stat-value">50</div>
+    </div>
+  </div>
 </BaseLayout>
