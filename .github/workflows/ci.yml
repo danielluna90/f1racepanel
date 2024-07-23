@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-
 
       - name: Install Packages
-        run: bun install --frozen-lockfile
+        run: bun install
 
       - name: Check Formatting [API Server]
         working-directory: ./packages/api
