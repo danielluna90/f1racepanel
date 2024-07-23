@@ -3,7 +3,7 @@ interface Props {
   admin: boolean;
 }
 
-const { admin } = Astro.props;
+//const { admin } = Astro.props;
 ---
 
 <nav class="navbar bg-base-100">
@@ -47,11 +47,12 @@ const { admin } = Astro.props;
           ></path>
         </svg>
         <input
+          id="theme-selector"
           type="checkbox"
           value="light"
           class="toggle theme-controller"
           data-toggle-theme="light,dark"
-          data-act-class="ACTIVECLASS"
+          data-act-class="theme-controller-dark"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -90,4 +91,7 @@ const { admin } = Astro.props;
     (document.getElementById("nav-close-btn") as HTMLButtonElement).disabled =
       false;
   });
+
+  (document.getElementById("theme-selector") as HTMLInputElement).checked =
+    (localStorage.getItem("theme") ?? "light") == "light" ? false : true;
 </script>
