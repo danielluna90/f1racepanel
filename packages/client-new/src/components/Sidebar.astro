@@ -17,8 +17,13 @@ interface Props {
     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"
     ></label>
     <ul class="menu bg-base-200 min-h-full w-80 p-4">
-      <li><a href="query-builder">Query Builder</a></li>
-      <li><a href="query-builder">Query Builder</a></li>
+      <li><a href="/">Home</a></li>
+      <li><a href="/archive">Archive</a></li>
+      <li><a href="/query-builder">Query Builder</a></li>
+      <li><a href="/about">About</a></li>
+      {
+        process.env.NODE_ENV == "development" ? <li><a href="/design">Design</a></li> : <></>
+      }
       <div class="sm:hidden">
         <SidebarContent />
       </div>
