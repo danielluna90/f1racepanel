@@ -26,7 +26,7 @@ const { title, admin = false } = Astro.props;
 
     <script is:inline>
       if (localStorage.getItem("theme") === null) {
-        document.documentElement.setAttribute("data-theme", "cupcake");
+        document.documentElement.setAttribute("data-theme", "light");
       } else
         document.documentElement.setAttribute(
           "data-theme",
@@ -49,44 +49,7 @@ const { title, admin = false } = Astro.props;
 </html>
 
 <style is:global lang="scss">
-  @use "../styles/themes";
   @use "../styles/variables" as *;
-
-  :root {
-    --widget-bg-light: #fff;
-    --widget-box-shadow: 0 1px 8px rgba(110, 110, 110, 0.1);
-  }
-
-  /* This solution will check if any element has the theme attribute, if it
-     does then it will ignore the prefers-color-scheme media query. This
-     enables us to set the theme attribute to any element and control the
-     theme using CSS variables. */
-  @media (prefers-color-scheme: light) {
-    :root:not([theme]) {
-      @include themes.light-theme;
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([theme]) {
-      @include themes.dark-theme;
-    }
-  }
-
-  html[theme="light"] {
-    @include themes.light-theme;
-  }
-
-  html[theme="dark"] {
-    @include themes.dark-theme;
-  }
-
-  html {
-    background-color: var(--theme-body);
-    color: var(--theme-header);
-
-    font-family: "Open Sans Variable", "Montserrat Variable", sans-serif;
-  }
 
   body {
     margin: $page-margin;
@@ -112,24 +75,7 @@ const { title, admin = false } = Astro.props;
     grid-area: footer;
   }
 
-  button {
-    all: unset;
-    cursor: pointer;
-  }
-
-  button:focus {
-    outline: #000 5px solid;
-  }
-
   .nav-open {
     overflow: hidden;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  a:visited {
-    color: unset;
   }
 </style>

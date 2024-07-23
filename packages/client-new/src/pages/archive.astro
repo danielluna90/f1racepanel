@@ -34,7 +34,7 @@ for (let i = currentYear; i >= 1950; i--) {
       gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
         if (!season) {
           return (
-            <Card>
+            <Card title={`${currentYear - index}`}>
               <h3>{currentYear - index} - Not Available</h3>
             </Card>
           );

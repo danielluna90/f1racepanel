@@ -9,8 +9,7 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<Card>
-  <h3>{data.name}</h3>
+<Card title={data.name}>
   <h4>{data.dob} &#183 {data.nationality.toLocaleUpperCase()}</h4>
 
   <p>First Grand Prix:</p>
