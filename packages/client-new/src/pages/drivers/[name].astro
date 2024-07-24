@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPathsResult } from "astro";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
 
 import { ResponseTypes } from "f1racepanel-common";
 
@@ -28,9 +28,7 @@ interface Props {
 const { driverData } = Astro.props;
 ---
 
-<BaseLayout title=`${driverData.name}`>
-  <h1 class="text-3xl text-center font-bold">{driverData.name}</h1>
-
+<PageLayout title={driverData.name} titleText={driverData.name}>
   <!-- <DriverBioCard data={driverData} /> -->
   <h2>Race Statistics</h2>
   <div class="stats stats-vertical md:stats-horizontal shadow">
@@ -51,4 +49,4 @@ const { driverData } = Astro.props;
   </div>
 
   <h2>Race Entries</h2>
-</BaseLayout>
+</PageLayout>

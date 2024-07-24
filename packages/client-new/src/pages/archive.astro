@@ -1,5 +1,5 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import Card from "../components/Card.astro";
 
 import { DatabaseTypes } from "f1racepanel-common";
@@ -27,9 +27,7 @@ for (let i = currentYear; i >= 1950; i--) {
 }
 ---
 
-<BaseLayout title="Archive">
-  <h1 class="text-4xl font-bold text-center pb-4">The Archive</h1>
-
+<PageLayout title="Archive" titleText="The Archive">
   <div class="grid grid-cols-4 gap-4">
     {
       gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
@@ -43,4 +41,4 @@ for (let i = currentYear; i >= 1950; i--) {
       })
     }
   </div>
-</BaseLayout>
+</PageLayout>
