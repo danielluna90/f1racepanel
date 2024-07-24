@@ -23,13 +23,11 @@ interface Props {
       <li><a href="/archive">Archive</a></li>
       <li><a href="/query-builder">Query Builder</a></li>
       <li><a href="/about">About</a></li>
-      <li class="sm:hidden">
-        <details open>
-          <summary>Settings</summary>
-          <ul>
-            <SidebarContent />
-          </ul>
-        </details>
+      <li class="sm:hidden grow flex-col-reverse">
+        <ul>
+          <SidebarContent />
+        </ul>
+        <h2 class="menu-title">Settings</h2>
       </li>
     </ul>
   </div>
