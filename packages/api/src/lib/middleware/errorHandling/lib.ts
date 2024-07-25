@@ -4,6 +4,7 @@ import { Response } from 'express';
 export enum APIErrorCodes {
   // Prisma / DB Custom errors (1xxx)
   USER_NOT_FOUND = 1001,
+  SEASON_NOT_FOUND = 1002,
 
   // Prisma / DB Generic errors (2xxx)
   UNIQUE_FIELD_NOT_UNIQUE = 2001,

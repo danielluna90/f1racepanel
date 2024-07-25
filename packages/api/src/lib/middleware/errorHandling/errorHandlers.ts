@@ -46,6 +46,7 @@ export function APIErrorHandler(
 
     // Status Code: 404 (Not Found)
     case APIErrorCodes.USER_NOT_FOUND:
+    case APIErrorCodes.SEASON_NOT_FOUND:
     case APIErrorCodes.ENTITY_NOT_FOUND:
     case APIErrorCodes.UNIMPLEMENTED:
       err.sendResponseWithStatus(res, 404);
