@@ -10,7 +10,6 @@ export default defineConfig({
         'src/static/**',
         'html/**',
         'tests/**',
-        'old-src/**',
       ],
       reportsDirectory: './html/coverage',
     },
@@ -19,10 +18,10 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      circuit: '/src/circuit',
-      driver: '/src/driver',
-      search: '/src/search',
-      lib: '/src/lib',
+      // circuit: '/src/circuit',
+      // driver: '/src/driver',
+      // search: '/src/search',
+      // lib: '/src/lib',
     },
   },
 });

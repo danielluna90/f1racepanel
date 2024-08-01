@@ -1,10 +1,11 @@
-import { createConfig, type ServerConfig } from 'express-zod-api';
+import { type ServerConfig, createConfig } from 'express-zod-api';
+
 import express from 'express';
 
-export const config: ServerConfig<string> = createConfig({
+export const config: ServerConfig = createConfig({
   server: {
     listen: 3000,
-    beforeRouting: async ({ app }) => {
+    beforeRouting: ({ app }) => {
       app.use('/docs', express.static('src/static'));
     },
   },
@@ -13,5 +14,5 @@ export const config: ServerConfig<string> = createConfig({
     level: 'debug',
     color: true,
   },
-  startupLogo: false
+  startupLogo: false,
 });
