@@ -1,8 +1,10 @@
-import type { Routing } from 'express-zod-api';
-import { helloWorldEndpoint } from './createServerFactory';
+import { type Routing, ServeStatic } from 'express-zod-api';
 
 export const routing: Routing = {
   v1: {
-    hello: helloWorldEndpoint,
+    circuit: {},
+    driver: {},
+    search: {},
   },
+  docs: new ServeStatic('src/static'),
 };
