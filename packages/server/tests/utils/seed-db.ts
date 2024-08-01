@@ -1,4 +1,5 @@
-import { GenerateMockOptions, generateMock } from '@anatine/zod-mock';
+import { type GenerateMockOptions, generateMock } from '@anatine/zod-mock';
+import { PrismaClient } from '@prisma/client';
 import { v2 as compose } from 'docker-compose';
 import { faker } from '@faker-js/faker';
 

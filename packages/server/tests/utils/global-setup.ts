@@ -5,7 +5,7 @@ import type { GlobalSetupContext } from 'vitest/node';
 export async function setup({ provide }: GlobalSetupContext) {
   await startDB();
   await seedDB();
-  const port = initializeWebServer();
+  const port = await initializeWebServer();
 
   provide('port', port);
 }

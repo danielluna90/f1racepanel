@@ -1,4 +1,4 @@
-import { CreateAxiosDefaults } from 'axios';
+import type { CreateAxiosDefaults } from 'axios';
 
 export const getAxiosConfig = (port: number): CreateAxiosDefaults => {
   return {

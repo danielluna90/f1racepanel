@@ -5,12 +5,7 @@ export default defineConfig({
     coverage: {
       enabled: true,
       provider: 'istanbul',
-      exclude: [
-        'src/entrypoints/**',
-        'src/static/**',
-        'html/**',
-        'tests/**',
-      ],
+      exclude: ['src/entrypoints/**', 'src/static/**', 'html/**', 'tests/**'],
       reportsDirectory: './html/coverage',
     },
     globalSetup: './tests/utils/global-setup.ts',
@@ -21,7 +16,7 @@ export default defineConfig({
       // circuit: '/src/circuit',
       // driver: '/src/driver',
       // search: '/src/search',
-      // lib: '/src/lib',
+      lib: '/src/lib',
     },
   },
 });

@@ -1,9 +1,10 @@
-import { DatabaseTypes, ErrorResponse } from 'f1racepanel-common';
-import axios, { AxiosInstance } from 'axios';
+import * as DefaultConfig from 'lib/config';
+
+import axios, { type AxiosInstance } from 'axios';
 import { describe, expect, inject, it } from 'vitest';
-import { APIErrorCodes } from 'lib/middleware';
-import { createAPIServer } from 'lib/createServer';
+// import { APIErrorCodes } from 'lib/middleware';
 import { getAxiosConfig } from './utils/axios';
+import { prepareAPIServer } from 'lib/createServer';
 
 import request from 'supertest';
 
@@ -11,7 +12,7 @@ const axiosAPIClient: AxiosInstance = axios.create(
   getAxiosConfig(inject('port'))
 );
 
-const connection = createAPIServer();
+const connection = (await prepareAPIServer(DefaultConfig.config)).app;
 
 describe('/driver', () => {
   describe('[POST] /', () => {
