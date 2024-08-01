@@ -1,7 +1,3 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "allowImportingTsExtensions": true
-  }
+  "extends": "astro/tsconfigs/strictest"
 }
