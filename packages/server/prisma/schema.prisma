@@ -72,7 +72,7 @@ enum SessionStatus {
 model Result {
   id String @id @default(uuid())
 
-  driver_id String
+  driver_id String /// @zod.string.uuid()
 }
 
 model WeekendSession {
@@ -90,22 +90,21 @@ model WeekendSession {
 model GPWeekend {
   id String @id @default(uuid())
 
-  start_date DateTime @unique
-  end_date   DateTime @unique
+  start_date DateTime @unique /// @zod.custom.use(z.string().date())
+  end_date   DateTime @unique /// @zod.custom.use(z.string().date())
 
   round_number Int
 
   circuit    Circuit @relation(fields: [circuit_id], references: [id])
-  circuit_id String  @unique
+  circuit_id String  @unique /// @zod.string.uuid()
   // sessions Sessions[] <- One-to-Many
 
-  sessions WeekendSession[]
+  sessions WeekendSession[] /// @zod.object.array(.min(1))
 
-  season    Season  @relation(fields: [season_id], references: [year])
+  season    Season   @relation(fields: [season_id], references: [year])
   season_id Int
   // team_entries Team[] <- Many-to-Many
-  Driver    Driver? @relation(fields: [driver_id], references: [id])
-  driver_id String?
+  Driver    Driver[]
 }
 
 // Drivers (pre-2013) car numbers were based on performance in the previous
@@ -127,7 +126,7 @@ model Season {
 
   drivers           Driver[]
   num_of_rounds     Int
-  is_current_season Boolean
+  is_current_season Boolean /// @zod.custom.use(z.boolean().default(false))
 
   weekends GPWeekend[]
   // point_system
