@@ -9,8 +9,9 @@ import { spawnSync } from 'node:child_process';
 const dockerServices = ['db-test'];
 const dockerOptions: compose.IDockerComposeOptions = {
   cwd: path.join(
-    path.dirname(require.resolve('f1racepanel-common/package.json')),
-    'docker-test-suite'
+    path.dirname(require.resolve('f1racepanel-server/package.json')),
+    'docker',
+    'test'
   ),
   log: true,
 };
@@ -32,16 +33,16 @@ async function startDB() {
   //   env: process.env,
   // });
 
-  const genPrismaTypesProc = spawnSync('bun', ['run', 'gen:prisma'], {
-    cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+  const genPrismaTypesProc = spawnSync('bun', ['run', 'db:gen'], {
+    cwd: path.dirname(require.resolve('f1racepanel-server/package.json')),
     env: process.env,
   });
 
   const genPrismaOutput = await new Response(genPrismaTypesProc.stdout).text();
   console.log(genPrismaOutput);
 
-  const pushPrismaToDBProc = spawnSync('bunx', ['prisma', 'db', 'push'], {
-    cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+  const pushPrismaToDBProc = spawnSync('bun', ['run', 'db:push'], {
+    cwd: path.dirname(require.resolve('f1racepanel-server/package.json')),
     env: process.env,
   });
 
