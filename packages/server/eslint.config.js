@@ -41,6 +41,7 @@ export default tseslint.config(
     },
     rules: {
       "tsdoc/syntax": "warn"
-    }
+    },
+    ignores: ['src/types/*.ts'] // Ignore Auto Generated Zod Types
   }
 );

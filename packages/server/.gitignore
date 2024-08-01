@@ -173,3 +173,7 @@ dist
 
 # Finder (MacOS) folder config
 .DS_Store
+
+src/static/api/f1racepanel-v1.yml
+src/types/*
+html
