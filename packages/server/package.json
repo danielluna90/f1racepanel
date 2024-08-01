@@ -7,8 +7,8 @@
     "test": "vitest run --coverage",
     "test:ui": "vitest run --coverage && vite preview --outDir html",
     "lint": "run-p lint:*",
-    "lint:prettier": "prettier -c {src,tests}/**/*.ts",
-    "lint:eslint": "eslint '{src,tests}/**/*.ts'",
+    "lint:prettier": "prettier -c '{src,tests}/!(types)/**/*.ts'",
+    "lint:eslint": "eslint '{src,tests}/!(types)/**/*.ts'",
     "db:gen": "prisma generate",
     "db:push": "prisma push"
   },
@@ -28,6 +28,7 @@
     "eslint": "^9.8.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-tsdoc": "^0.3.0",
+    "npm-run-all2": "^6.2.2",
     "prettier": "^3.3.3",
     "prisma": "^5.17.0",
     "supertest": "^7.0.0",

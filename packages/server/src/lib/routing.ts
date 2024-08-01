@@ -3,6 +3,6 @@ import { helloWorldEndpoint } from './createServerFactory';
 
 export const routing: Routing = {
   v1: {
-    hello: helloWorldEndpoint
-  }
-}
+    hello: helloWorldEndpoint,
+  },
+};

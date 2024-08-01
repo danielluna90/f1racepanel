@@ -23,8 +23,8 @@ datasource db {
 model Driver {
   id          String @id @default(uuid())
   name        String @unique
-  nationality String @db.VarChar(2)
-  dob         String
+  nationality String @db.VarChar(2) /// @zod.string.length(2)
+  dob         String /// @zod.custom.use(z.string().date())
 
   session_entries  DriverEntry[]
   gp_weekends      GPWeekend[]
@@ -34,9 +34,9 @@ model Driver {
 
 model RaceLapRecord {
   id        String @id @default(uuid())
-  time      String
+  time      String /// @zod.string.regex(new RegExp("^d{1}:d{2}.d{3}$"))
   driver    Driver @relation(fields: [driver_id], references: [id])
-  driver_id String
+  driver_id String /// @zod.string.uuid()
 
   circuit_layout CircuitLayout?
 }
@@ -47,18 +47,18 @@ model CircuitLayout {
   last_year          Int
   track_length       Float
   race_lap_record    RaceLapRecord @relation(fields: [race_lap_record_id], references: [id])
-  race_lap_record_id String        @unique
+  race_lap_record_id String        @unique /// @zod.string.uuid()
   circuit            Circuit       @relation(fields: [circuit_id], references: [id])
-  circuit_id         String
+  circuit_id         String /// @zod.string.uuid()
 }
 
 model Circuit {
   id          String          @id @default(uuid())
   name        String
-  country     String          @db.VarChar(2)
-  date_opened String
-  layouts     CircuitLayout[]
-  gp_weekends GPWeekend[]
+  country     String          @db.VarChar(2) /// @zod.string.length(2)
+  date_opened String /// @zod.custom.use(z.string().date())
+  layouts     CircuitLayout[] // @zod.object.array(.min(1))
+  gp_weekends GPWeekend[] // @zod.object.array(.min(1))
 }
 
 enum SessionStatus {
