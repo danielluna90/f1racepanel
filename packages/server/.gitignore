@@ -175,5 +175,5 @@ dist
 .DS_Store
 
 src/static/api/f1racepanel-v1.yml
-src/types/*
+src/types/prisma/**/*.ts
 html

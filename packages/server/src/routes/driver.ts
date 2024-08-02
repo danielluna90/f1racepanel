@@ -1,4 +1,5 @@
-import { DriverSchema } from 'types';
+import { DatabaseTypes } from 'types';
+import { DriverSchema } from 'types/prisma';
 
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
@@ -7,7 +8,7 @@ import z from 'zod';
 
 export const createDriver = endpointFactory.build({
   method: 'post',
-  input: DriverSchema.omit({ id: true }),
+  input: DatabaseTypes.Driver,
   output: DriverSchema,
   handler: async ({ input }) => {
     const driver = await prisma.driver.create({

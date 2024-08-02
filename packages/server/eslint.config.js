@@ -9,7 +9,6 @@ export default tseslint.config(
   eslint.configs.recommended,
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
-  ...tseslint.configs.recommendedTypeChecked,
   {
     rules: {
       '@typescript-eslint/no-misused-promises': [
