@@ -1,10 +1,8 @@
-import { DatabaseTypes } from 'types';
+import { DatabaseTypes, ParamTypes } from 'types';
 import { DriverSchema } from 'types/prisma';
 
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
-
-import z from 'zod';
 
 export const createDriver = endpointFactory.build({
   method: 'post',
@@ -23,10 +21,7 @@ export const createDriver = endpointFactory.build({
 
 export const getDriver = endpointFactory.build({
   method: 'get',
-  input: z.object({
-    // Params
-    DriverID: z.string().uuid(),
-  }),
+  input: ParamTypes.DriverID,
   output: DriverSchema,
   handler: async ({ input }) => {
     const driver = await prisma.driver.findUnique({
@@ -50,12 +45,7 @@ export const getDriver = endpointFactory.build({
 
 export const editDriver = endpointFactory.build({
   method: 'post',
-  input: z
-    .object({
-      // Params
-      DriverID: z.string().uuid(),
-    })
-    .and(DriverSchema.omit({ id: true }).partial()),
+  input: ParamTypes.DriverID.and(DriverSchema.omit({ id: true }).partial()),
   output: DriverSchema,
   handler: async ({ input }) => {
     const { DriverID, ...body } = input;
