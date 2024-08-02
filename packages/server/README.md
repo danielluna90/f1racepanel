@@ -1,15 +1,19 @@
-# server
+# F1 Race Panel (API Server)
 
-To install dependencies:
+## Getting Started
 
-```bash
-bun install
-```
+To get started run `bun run dev`.
 
-To run:
+## Important URLs
 
-```bash
-bun run index.ts
-```
+Port found in `.env.dev`: `3000` (This should be the default port whilst in
+development unless altered in .env)
 
-This project was created using `bun init` in bun v1.1.20. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+F1 Race Panel API Documentation: `http://localhost:3000/docs`
+
+- Raw OpenAPI spec yaml file can be found in
+  [src/static/api/f1racepanel-v1.yml](./src/static/api/f1racepanel-v1.yml).
+- **Note:** This file is only generated after the server is ran for the first
+  time.
+
+F1 Race Panel API entry point: `http://localhost:3000/v1/`

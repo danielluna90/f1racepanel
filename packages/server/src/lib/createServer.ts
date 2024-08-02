@@ -22,6 +22,7 @@ export const prepareAPIServer = async (config: ServerConfig) => {
       version: 'v1',
       title: 'F1 Race Panel API',
       serverUrl: 'https://api.f1racepanel.com/v1',
+      composition: 'components',
     }).getSpecAsYaml(),
     'utf-8'
   );
