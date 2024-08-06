@@ -29,7 +29,7 @@ async function startDB() {
 
   // const proc = Bun.spawnSync({
   //   cmd: ['bunx', 'prisma', 'db', 'push'],
-  //   cwd: path.dirname(require.resolve('f1racepanel-common/package.json')),
+  //   cwd: path.dirname(require.resolve('f1racepanel-server/package.json')),
   //   env: process.env,
   // });
 

@@ -1,5 +1,5 @@
 import { getSecret } from "astro:env/server";
-import { ResponseTypes } from "f1racepanel-common";
+import { ResponseTypes } from "f1racepanel-server";
 
 export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
   let rv: ResponseTypes.Driver[] = [];
