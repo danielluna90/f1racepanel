@@ -25,11 +25,14 @@ const server = spawn('bun', ['src/entrypoints/server.ts'], {
   killSignal: 'SIGINT',
 });
 
+setTimeout(()=>{}, 5000)
+
 let serverIsActive: boolean = false;
 const serverHealthCheck = setInterval(async ()=>{
   fetch('http://localhost:3000/').catch((_)=>{
     console.log("Failed to Connect to Server... Trying again in 1 second...");
   }).then((_)=>{
+    console.log("Connected to Server");
     serverIsActive = true;
     clearInterval(serverHealthCheck);
   })

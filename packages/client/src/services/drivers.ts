@@ -12,6 +12,11 @@ export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
   
   while (!complete) {
     const rawRes = await fetch(url);
+
+    if (rawRes.status != 200) {
+      break;
+    }
+
     const resJSON = await rawRes.json();
     const res = ResponseTypes.Drivers.parse(resJSON);
   
