@@ -1,10 +1,10 @@
 {
   "name": "f1racepanel",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "scripts": {
     "build": "bun scripts/build.ts"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
