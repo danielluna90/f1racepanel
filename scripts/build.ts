@@ -1,11 +1,14 @@
-import { spawn, spawnSync } from 'node:child_process';
+import { spawn, spawnSync, SpawnSyncReturns } from 'node:child_process';
 import path from 'node:path';
+import { ServerMessages } from 'f1racepanel-server';
 
 // Check ENV Variables
 if (!process.env.DATABASE_URL) {
-  console.log("Environment Variable DATABASE_URL is not defined");
+  console.log('Environment Variable DATABASE_URL is not defined');
   process.exit(-1);
 }
+
+process.env.BUILD_PROD = 'TRUE';
 
 // Global Const
 const CLIENT_DIRECTORY = path.dirname(require.resolve('f1racepanel-client/package.json'));
@@ -19,36 +22,35 @@ spawnSync('bun', ['run', 'db:gen'], {
 
 // Run Server
 console.log('Starting Server Up on Port 3000')
+
+let client: SpawnSyncReturns<Buffer> | undefined;
+
 const server = spawn('bun', ['src/entrypoints/server.ts'], {
   cwd: SERVER_DIRECTORY,
   env: process.env,
+  stdio: [ 'pipe', 'pipe', 'pipe', 'ipc' ],
   killSignal: 'SIGINT',
+}).on('message', (message)=> {
+  if (message == ServerMessages.SERVER_READY) {
+    console.log(`Server is ready!`);
+    startClient();
+  } else if (message == ServerMessages.SERVER_CLOSED) {
+    console.log("Server Closed!");
+    server.kill();
+  
+    console.log("Exiting Build Script");
+    process.exit(client?.status);
+  }
 });
 
-setTimeout(()=>{}, 5000)
-
-let serverIsActive: boolean = false;
-const serverHealthCheck = setInterval(async ()=>{
-  fetch('http://localhost:3000/').catch((_)=>{
-    console.log("Failed to Connect to Server... Trying again in 1 second...");
-  }).then((_)=>{
-    console.log("Connected to Server");
-    serverIsActive = true;
-    clearInterval(serverHealthCheck);
-  })
-}, 1000);
-
-if (serverIsActive) {
-  console.log("Server is Up, Starting Build Process");
+function startClient(): SpawnSyncReturns<Buffer> {
+  client = spawnSync('bun', ['run', 'build'], {
+    cwd: CLIENT_DIRECTORY,
+    env: process.env,
+    stdio: 'inherit'
+  });
+  
+  server.send(ServerMessages.SERVER_CLOSE);
+  
+  return client;
 }
-
-const client = spawnSync('bun', ['run', 'build'], {
-  cwd: CLIENT_DIRECTORY,
-  env: process.env,
-  stdio: 'inherit'
-});
-
-server.kill();
-
-console.log("Exiting Build Script");
-process.exit(client.status);

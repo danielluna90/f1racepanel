@@ -41,3 +41,11 @@ export { ErrorResponse };
 export const ParamTypes = {
   DriverID: z.object({ DriverID: z.string().uuid() }),
 };
+
+export enum ServerMessages {
+  SERVER_READY = 'SERVER_READY',
+  SERVER_INIT = 'SERVER_INIT',
+  SERVER_ERROR = 'SERVER_ERROR',
+  SERVER_CLOSE = 'SERVER_CLOSE',
+  SERVER_CLOSED = 'SERVER_CLOSED',
+}
