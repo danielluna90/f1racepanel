@@ -8,7 +8,10 @@ if (!process.env.DATABASE_URL) {
   process.exit(-1);
 }
 
-process.env.BUILD_PROD = 'TRUE';
+if (!process.env.CI) {
+  console.log('Environment Variable CI is not set, building using local docker postgresdb')
+  process.env.BUILD_LOCAL_PROD = 'TRUE';
+}
 
 // Global Const
 const CLIENT_DIRECTORY = path.dirname(require.resolve('f1racepanel-client/package.json'));
