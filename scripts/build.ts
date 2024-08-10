@@ -2,20 +2,45 @@ import { spawn, spawnSync, SpawnSyncReturns } from 'node:child_process';
 import path from 'node:path';
 import { ServerMessages } from 'f1racepanel-server';
 
+import dotenv from 'dotenv';
+
+// Global Const
+const CLIENT_DIRECTORY = path.dirname(require.resolve('f1racepanel-client/package.json'));
+const SERVER_DIRECTORY = path.dirname(require.resolve('f1racepanel-server/package.json'));
+
+if (!process.env.CI && process.env.USE_DOTENV) {
+  console.log('Using .env file!');
+  dotenv.config();
+}
+
 // Check ENV Variables
 if (!process.env.DATABASE_URL) {
   console.log('Environment Variable DATABASE_URL is not defined');
   process.exit(-1);
 }
 
-if (!process.env.CI) {
-  console.log('Environment Variable CI is not set, building using local docker postgresdb')
-  process.env.BUILD_LOCAL_PROD = 'TRUE';
-}
+if (process.env.CI) {
+  if (!process.env.DATA_API_KEY) {
+    console.log('Set DATA_API_KEY');
+    process.exit(-1);
+  }
 
-// Global Const
-const CLIENT_DIRECTORY = path.dirname(require.resolve('f1racepanel-client/package.json'));
-const SERVER_DIRECTORY = path.dirname(require.resolve('f1racepanel-server/package.json'));
+  console.log('Environment Variable CI is set, building using local docker PostgreSQL and fetching latest DB');
+} else {
+  console.log('Local dev configuration detected.');
+  process.env.BUILD_LOCAL_PROD = 'TRUE';
+
+  if (!process.env.DB_DOWNLOAD || !process.env.DATA_API_KEY) {
+    console.log('Not Downloading Latest DB. To enable set the environment variable DB_DOWNLOAD and DATA_API_KEY.');
+  } else {
+    console.log('Going to Download Latest DB');
+
+    spawnSync('bun', ['src/entrypoints/db_download.ts'], {
+      cwd: SERVER_DIRECTORY,
+      stdio: 'inherit'
+    });
+  }
+}
 
 // Generate Prisma & Zod Types
 spawnSync('bun', ['run', 'db:gen'], {

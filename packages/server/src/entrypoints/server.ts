@@ -10,19 +10,11 @@ const isLocalProdBuild = process.env.BUILD_LOCAL_PROD == 'TRUE';
 const isCI = process.env.CI;
 const isDev = !isLocalProdBuild && !isCI;
 
-if (isLocalProdBuild) {
+if (isLocalProdBuild || isCI) {
   process.on('message', async message => {
     if (message == ServerMessages.SERVER_INIT) {
       await DockerUtils.InitializeDocker();
     } else if (message == ServerMessages.SERVER_CLOSE) {
-      await DockerUtils.CloseDocker();
-
-      if (process.send) process.send(ServerMessages.SERVER_CLOSED);
-    }
-  });
-} else if (isCI) {
-  process.on('message', async message => {
-    if (message == ServerMessages.SERVER_CLOSE) {
       await DockerUtils.CloseDocker();
 
       if (process.send) process.send(ServerMessages.SERVER_CLOSED);
