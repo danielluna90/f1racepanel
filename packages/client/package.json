@@ -10,12 +10,12 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.1",
+    "@astrojs/check": "^0.9.2",
     "@astrojs/sitemap": "^3.1.6",
     "@fontsource-variable/montserrat": "^5.0.19",
     "@fontsource-variable/open-sans": "^5.0.29",
     "@playwright/test": "^1.46.0",
-    "astro": "^4.13.1",
+    "astro": "^4.13.3",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
     "daisyui": "^4.12.10",
     "f1racepanel-server": "workspace:*",
     "sass": "^1.77.8",
-    "tailwindcss": "^3.4.7",
+    "tailwindcss": "^3.4.9",
     "theme-change": "^2.5.0"
   }
 }

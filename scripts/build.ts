@@ -56,7 +56,7 @@ let client: SpawnSyncReturns<Buffer> | undefined;
 const server = spawn('bun', ['src/entrypoints/server.ts'], {
   cwd: SERVER_DIRECTORY,
   env: process.env,
-  stdio: [ 'pipe', 'pipe', 'pipe', 'ipc' ],
+  stdio: [ 'inherit', 'inherit', 'inherit', 'ipc' ],
   killSignal: 'SIGINT',
 }).on('message', (message)=> {
   if (message == ServerMessages.SERVER_READY) {
@@ -70,6 +70,7 @@ const server = spawn('bun', ['src/entrypoints/server.ts'], {
     process.exit(client?.status);
   }
 });
+server.send(ServerMessages.SERVER_INIT);
 
 function startClient(): SpawnSyncReturns<Buffer> {
   client = spawnSync('bun', ['run', 'build'], {

@@ -8,12 +8,13 @@ dotenv.config();
 const port = process.env.PORT ? parseInt(process.env.PORT) : undefined;
 const isLocalProdBuild = process.env.BUILD_LOCAL_PROD == 'TRUE';
 const isCI = process.env.CI;
-const isDev = !isLocalProdBuild && !isCI;
 
 if (isLocalProdBuild || isCI) {
   process.on('message', async message => {
     if (message == ServerMessages.SERVER_INIT) {
       await DockerUtils.InitializeDocker();
+      await initializeWebServer(port);
+      if (process.send) process.send(ServerMessages.SERVER_READY);
     } else if (message == ServerMessages.SERVER_CLOSE) {
       await DockerUtils.CloseDocker();
 
@@ -22,13 +23,8 @@ if (isLocalProdBuild || isCI) {
   });
 } else {
   await DockerUtils.InitializeDocker();
-}
+  await initializeWebServer(port);
 
-await initializeWebServer(port);
-
-if (process.send) process.send(ServerMessages.SERVER_READY);
-
-if (isDev) {
   const exitSignals: NodeJS.Signals[] = ['SIGINT', 'SIGTRAP', 'SIGKILL'];
 
   exitSignals.forEach((signal: NodeJS.Signals) => {
