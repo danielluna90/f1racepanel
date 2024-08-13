@@ -1,6 +1,6 @@
 import { spawn, spawnSync, SpawnSyncReturns } from 'node:child_process';
 import path from 'node:path';
-import { ServerMessages } from 'f1racepanel-server';
+import { ServerMessages } from 'f1racepanel-server/src/types/server';
 
 import dotenv from 'dotenv';
 
