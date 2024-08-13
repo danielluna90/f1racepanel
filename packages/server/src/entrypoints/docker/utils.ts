@@ -1,4 +1,4 @@
-import { createWriteStream, openSync } from 'node:fs';
+import { createWriteStream, mkdirSync, openSync } from 'node:fs';
 import { Readable } from 'node:stream';
 import { v2 as compose } from 'docker-compose';
 import path from 'node:path';
@@ -68,13 +68,11 @@ export async function GetLatestDatabaseFile() {
   const database = await fetch(dbURL);
 
   if (database.ok && database.body) {
-    const filePath = path.join(
-      serverPath,
-      'docker',
-      'dev',
-      'database',
-      'latest.db'
-    );
+    const folderPath = path.join(serverPath, 'docker', 'dev', 'database');
+
+    const filePath = path.join(folderPath, 'latest.db');
+
+    mkdirSync(filePath);
     openSync(filePath, 'w');
 
     const writer = createWriteStream(filePath);
