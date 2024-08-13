@@ -1,0 +1,133 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["omitApi"]
+}
+
+generator zod {
+  provider         = "zod-prisma-types"
+  output           = "../src/types/prisma"
+  useMultipleFiles = true
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Driver {
+  id          String @id @default(uuid())
+  name        String @unique
+  nationality String @db.VarChar(2) /// @zod.string.length(2)
+  dob         String /// @zod.custom.use(z.string().date())
+
+  session_entries  DriverEntry[]
+  gp_weekends      GPWeekend[]
+  seasons          Season[]
+  race_lap_records RaceLapRecord[]
+}
+
+model RaceLapRecord {
+  id        String @id @default(uuid())
+  time      String /// @zod.string.regex(new RegExp("^d{1}:d{2}.d{3}$"))
+  driver    Driver @relation(fields: [driver_id], references: [id])
+  driver_id String /// @zod.string.uuid()
+
+  circuit_layout CircuitLayout?
+}
+
+model CircuitLayout {
+  id                 String        @id @default(uuid())
+  first_year         Int
+  last_year          Int
+  track_length       Float
+  race_lap_record    RaceLapRecord @relation(fields: [race_lap_record_id], references: [id])
+  race_lap_record_id String        @unique /// @zod.string.uuid()
+  circuit            Circuit       @relation(fields: [circuit_id], references: [id])
+  circuit_id         String /// @zod.string.uuid()
+}
+
+model Circuit {
+  id          String          @id @default(uuid())
+  name        String
+  country     String          @db.VarChar(2) /// @zod.string.length(2)
+  date_opened String /// @zod.custom.use(z.string().date())
+  layouts     CircuitLayout[] // @zod.object.array(.min(1))
+  gp_weekends GPWeekend[] // @zod.object.array(.min(1))
+}
+
+enum SessionStatus {
+  UNKNOWN
+  ACTIVE
+  FUTURE
+  COMPLETED
+  CANCELED
+}
+
+model Result {
+  id String @id @default(uuid())
+
+  driver_id String /// @zod.string.uuid()
+}
+
+model WeekendSession {
+  id String @id @default(uuid())
+
+  session_number Int
+  session_status SessionStatus
+
+  driver_entries DriverEntry[]
+
+  gp_weekend    GPWeekend @relation(fields: [gp_weekend_id], references: [id])
+  gp_weekend_id String
+}
+
+model GPWeekend {
+  id String @id @default(uuid())
+
+  start_date DateTime @unique /// @zod.custom.use(z.string().date())
+  end_date   DateTime @unique /// @zod.custom.use(z.string().date())
+
+  round_number Int
+
+  circuit    Circuit @relation(fields: [circuit_id], references: [id])
+  circuit_id String  @unique /// @zod.string.uuid()
+  // sessions Sessions[] <- One-to-Many
+
+  sessions WeekendSession[] /// @zod.object.array(.min(1))
+
+  season    Season   @relation(fields: [season_id], references: [year])
+  season_id Int
+  // team_entries Team[] <- Many-to-Many
+  Driver    Driver[]
+}
+
+// Drivers (pre-2013) car numbers were based on performance in the previous
+// year's championship so drivers would change car number's throughout their carrers.
+// Since this wouldn't often change throughout the same season, as a space saving measure,
+// we will allow one driver entry to be associated with more than one GP Weekend.
+model DriverEntry {
+  id String @id @default(uuid())
+
+  driver     Driver @relation(fields: [driver_id], references: [id])
+  driver_id  String
+  car_number Int
+
+  weekend_session WeekendSession[]
+}
+
+model Season {
+  year Int @id @unique
+
+  drivers           Driver[]
+  num_of_rounds     Int
+  is_current_season Boolean /// @zod.custom.use(z.boolean().default(false))
+
+  weekends GPWeekend[]
+  // point_system
+}

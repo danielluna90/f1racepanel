@@ -1,4 +1,7 @@
 name: CI
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 
 on:
   pull_request:
@@ -7,7 +10,7 @@ on:
       - Staging
   push:
     branches:
-      - Development
+      - '*'
 
 jobs:
   checks:
@@ -35,8 +38,12 @@ jobs:
       - name: Install Packages
         run: bun install --frozen-lockfile
 
+      - name: Generate Types
+        working-directory: ./packages/server
+        run: bun run db:gen
+
       - name: Check Formatting [API Server]
-        working-directory: ./packages/api
+        working-directory: ./packages/server
         run: bun run lint
 
       # - name: Check Formatting [Client]
@@ -44,11 +51,66 @@ jobs:
       #   run: TODO: add linting
 
       - name: Run API Tests
-        working-directory: ./packages/api
+        working-directory: ./packages/server
         run: bun run test
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./packages/api/html/coverage
+          directory: ./packages/server/html/coverage
+
+  build:
+    name: Build Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+  
+      - name: Cache Node Modules
+        id: bun-cache
+        uses: actions/cache@v4
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./bun.lockb') }}
+
+      - name: Install Packages
+        run: bun install --frozen-lockfile
+      
+      - name: Install Vercel CLI
+        run: bun install --global vercel@latest
+
+      - name: Pull Vercel Environment Information (Dev)
+        if: ${{ github.ref_name != 'master' }}
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Pull Vercel Environment Information (Prod)
+        if: ${{ github.ref_name == 'master' }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      
+      - name: Add Database File
+        run: mkdir ./packages/server/docker/dev/database && touch ./packages/server/docker/dev/database/latest.db
+
+      - name: Build Project (Dev)
+        if: ${{ github.ref_name != 'master' }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project (Prod)
+        if: ${{ github.ref_name == 'master' }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel (Dev)
+        if: ${{ github.ref_name != 'master' }}
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts to Vercel (Prod)
+        if: ${{ !github.head_ref && github.ref_name == 'master' }}
+        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}

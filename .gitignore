@@ -9,3 +9,7 @@ node_modules/
 dist/
 out/
 build/
+
+**/.env
+**/*.db
+.vercel

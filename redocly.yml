@@ -1,8 +1,0 @@
-# See https://redocly.com/docs/cli/configuration/
-
-extends:
-  - ./packages/common/redocly-style.yml
-
-apis:
-  f1racepanel@v1:
-    root: 'packages/common/api-spec/openapi.yml'

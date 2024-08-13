@@ -7,7 +7,7 @@
 - Language: [Typescript](https://www.typescriptlang.org)
 - Server: [ExpressJS](https://expressjs.com)
 - ORM: [Prisma](https://www.prisma.io)
-- Tests: [Jest](https://jestjs.io)
+- Tests: [Vitest](https://vitest.dev)
 
 ## Common
 - Schema Validation: [Zod](https://zod.dev)

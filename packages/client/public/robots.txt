@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://f1racepanel.com/sitemap-index.xml
