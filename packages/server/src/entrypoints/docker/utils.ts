@@ -1,6 +1,6 @@
+import { createWriteStream, openSync } from 'node:fs';
 import { Readable } from 'node:stream';
 import { v2 as compose } from 'docker-compose';
-import { createWriteStream } from 'node:fs';
 import path from 'node:path';
 
 const dockerServices = ['db', 'pgadmin'];
@@ -68,9 +68,16 @@ export async function GetLatestDatabaseFile() {
   const database = await fetch(dbURL);
 
   if (database.ok && database.body) {
-    const writer = createWriteStream(
-      path.join(serverPath, 'docker', 'dev', 'latest.db')
+    const filePath = path.join(
+      serverPath,
+      'docker',
+      'dev',
+      'database',
+      'latest.db'
     );
+    openSync(filePath, 'w');
+
+    const writer = createWriteStream(filePath);
 
     Readable.fromWeb(database.body).pipe(writer);
   }
@@ -79,7 +86,7 @@ export async function GetLatestDatabaseFile() {
 
   await compose.exec(
     'db',
-    'pg_restore /home/latest.db -d f1racepanel -c --if-exists',
+    'pg_restore /home/database/latest.db -d f1racepanel -c --if-exists',
     {
       cwd: path.join(serverPath, 'docker', 'dev'),
       log: true,
