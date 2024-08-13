@@ -93,7 +93,7 @@ jobs:
         run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       
       - name: Add Database File
-        run: mdkir ./packages/server/docker/dev/database && touch ./packages/server/docker/dev/database/latest.db
+        run: mkdir ./packages/server/docker/dev/database && touch ./packages/server/docker/dev/database/latest.db
 
       - name: Build Project (Dev)
         if: ${{ github.ref_name != 'master' }}
