@@ -1,6 +1,6 @@
 import { type GenerateMockOptions, generateMock } from '@anatine/zod-mock';
+import { InputTypes } from 'types';
 import { PrismaClient } from '@prisma/client';
-import { ResponseTypes } from 'types';
 import { v2 as compose } from 'docker-compose';
 import { faker } from '@faker-js/faker';
 
@@ -55,7 +55,7 @@ async function seedDB() {
   const prisma = new PrismaClient();
 
   // Add two drivers
-  const driver = ResponseTypes.Driver;
+  const driver = InputTypes.Driver;
   const driverStringMap: GenerateMockOptions = {
     stringMap: {
       dob: () => faker.date.past({ years: 100 }).toISOString().split('T')[0],

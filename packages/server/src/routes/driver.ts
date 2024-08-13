@@ -1,13 +1,14 @@
-import { DatabaseTypes, ParamTypes, ResponseTypes } from 'types';
+import { InputTypes, ParamTypes, ResponseTypes } from 'types';
 
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
 
 export const createDriver = endpointFactory.build({
   method: 'post',
-  input: DatabaseTypes.Driver,
+  input: InputTypes.Driver,
   output: ResponseTypes.Driver,
   handler: async ({ input }) => {
+    console.log(input);
     const driver = await prisma.driver.create({
       data: {
         ...input,
@@ -44,9 +45,7 @@ export const getDriver = endpointFactory.build({
 
 export const editDriver = endpointFactory.build({
   method: 'post',
-  input: ParamTypes.DriverID.and(
-    DatabaseTypes.Driver.omit({ id: true }).partial()
-  ),
+  input: ParamTypes.DriverID.and(InputTypes.Driver.partial()),
   output: ResponseTypes.Driver,
   handler: async ({ input }) => {
     const { DriverID, ...body } = input;

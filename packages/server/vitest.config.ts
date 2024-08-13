@@ -18,6 +18,10 @@ export default defineConfig({
     },
     globalSetup: './tests/utils/global-setup.ts',
     reporters: ['default', 'html'],
+    env: {
+      DATABASE_URL:
+        'postgresql://test:test@localhost:5432/f1racepanel?schema=public',
+    },
   },
   resolve: {
     alias: {

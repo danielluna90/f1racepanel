@@ -4,11 +4,18 @@ import { DriverSchema, SeasonSchema } from './prisma';
 import z from 'zod';
 
 export namespace DatabaseTypes {
-  export const Driver = DriverSchema.describe('Driver');
+  export const Driver = DriverSchema;
   export type Driver = z.infer<typeof Driver>;
 
   export const Season = SeasonSchema.describe('Season');
   export type Season = z.infer<typeof Season>;
+}
+
+export namespace InputTypes {
+  export const Driver = DatabaseTypes.Driver.omit({ id: true }).describe(
+    'Driver'
+  );
+  export type Driver = z.infer<typeof Driver>;
 }
 
 export namespace ResponseTypes {
