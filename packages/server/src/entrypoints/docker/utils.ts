@@ -72,7 +72,7 @@ export async function GetLatestDatabaseFile() {
 
     const filePath = path.join(folderPath, 'latest.db');
 
-    mkdirSync(filePath);
+    mkdirSync(folderPath);
     openSync(filePath, 'w');
 
     const writer = createWriteStream(filePath);
