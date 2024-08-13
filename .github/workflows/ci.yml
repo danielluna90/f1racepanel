@@ -58,7 +58,7 @@ jobs:
         uses: codecov/codecov-action@v4.0.1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./packages/api/html/coverage
+          directory: ./packages/server/html/coverage
 
   build:
     name: Build Repository
