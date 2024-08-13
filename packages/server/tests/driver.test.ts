@@ -1,5 +1,6 @@
 import * as DefaultConfig from 'lib/config';
 
+import { APIErrorCodes, DatabaseTypes, ErrorResponse } from 'types';
 import axios, { type AxiosInstance } from 'axios';
 import { describe, expect, inject, it } from 'vitest';
 // import { APIErrorCodes } from 'lib/middleware';
@@ -12,7 +13,14 @@ const axiosAPIClient: AxiosInstance = axios.create(
   getAxiosConfig(inject('port'))
 );
 
-const connection = (await prepareAPIServer(DefaultConfig.config)).app;
+const connection = (
+  await prepareAPIServer({
+    ...DefaultConfig.config,
+    server: {
+      listen: inject('port') + 1,
+    },
+  })
+).app;
 
 describe('/driver', () => {
   describe('[POST] /', () => {

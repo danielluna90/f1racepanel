@@ -1,5 +1,6 @@
 import { type GenerateMockOptions, generateMock } from '@anatine/zod-mock';
 import { PrismaClient } from '@prisma/client';
+import { ResponseTypes } from 'types';
 import { v2 as compose } from 'docker-compose';
 import { faker } from '@faker-js/faker';
 
@@ -33,21 +34,17 @@ async function startDB() {
   //   env: process.env,
   // });
 
-  const genPrismaTypesProc = spawnSync('bun', ['run', 'db:gen'], {
+  spawnSync('bun', ['run', 'db:gen'], {
     cwd: path.dirname(require.resolve('f1racepanel-server/package.json')),
     env: process.env,
+    stdio: 'inherit',
   });
 
-  const genPrismaOutput = await new Response(genPrismaTypesProc.stdout).text();
-  console.log(genPrismaOutput);
-
-  const pushPrismaToDBProc = spawnSync('bun', ['run', 'db:push'], {
+  spawnSync('bun', ['run', 'db:push'], {
     cwd: path.dirname(require.resolve('f1racepanel-server/package.json')),
     env: process.env,
+    stdio: 'inherit',
   });
-
-  const pushPrismaOutput = await new Response(pushPrismaToDBProc.stdout).text();
-  console.log(pushPrismaOutput);
 }
 
 async function stopDB() {

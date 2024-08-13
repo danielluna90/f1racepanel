@@ -1,3 +1,4 @@
+import './load-prisma';
 import { connection, initializeWebServer } from 'lib/createServer';
 import { seedDB, startDB, stopDB } from './seed-db';
 import type { GlobalSetupContext } from 'vitest/node';
