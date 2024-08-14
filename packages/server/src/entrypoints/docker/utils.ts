@@ -2,6 +2,7 @@ import { createWriteStream, existsSync, mkdirSync, openSync } from 'node:fs';
 import { Readable } from 'node:stream';
 import { v2 as compose } from 'docker-compose';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 const dockerServices = ['db', 'pgadmin'];
 
@@ -21,10 +22,10 @@ export async function InitializeDocker() {
     await GetLatestDatabaseFile();
   }
 
-  Bun.spawnSync({
-    cmd: ['bunx', 'prisma', 'db', 'push'],
+  spawnSync('bun', ['run', 'db:push'], {
     cwd: serverPath,
     env: process.env,
+    stdio: 'inherit',
   });
 }
 

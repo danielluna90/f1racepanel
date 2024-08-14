@@ -7,15 +7,28 @@ import {
   createServer,
 } from 'express-zod-api';
 
+import path from 'path';
 import { routing } from './routing';
 
 import { writeFileSync } from 'fs';
 
 export let connection: Server;
 
+const serverPath = path.dirname(
+  require.resolve('f1racepanel-server/package.json')
+);
+
 export const prepareAPIServer = async (config: ServerConfig) => {
+  const docFilePath = path.join(
+    serverPath,
+    'src',
+    'static',
+    'api',
+    'f1racepanel-v1.yml'
+  );
+
   writeFileSync(
-    'src/static/api/f1racepanel-v1.yml',
+    docFilePath,
     new Documentation({
       routing,
       config,
