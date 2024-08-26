@@ -42,13 +42,13 @@ model RaceLapRecord {
 }
 
 model CircuitLayout {
-  id                 String        @id @default(uuid())
+  id                 String         @id @default(uuid())
   first_year         Int
-  last_year          Int
+  last_year          Int?
   track_length       Float
-  race_lap_record    RaceLapRecord @relation(fields: [race_lap_record_id], references: [id])
-  race_lap_record_id String        @unique /// @zod.string.uuid()
-  circuit            Circuit       @relation(fields: [circuit_id], references: [id])
+  race_lap_record    RaceLapRecord? @relation(fields: [race_lap_record_id], references: [id])
+  race_lap_record_id String?        @unique /// @zod.string.uuid()
+  circuit            Circuit        @relation(fields: [circuit_id], references: [id])
   circuit_id         String /// @zod.string.uuid()
 }
 

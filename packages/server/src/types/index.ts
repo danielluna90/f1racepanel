@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { CircuitSchema, DriverSchema, SeasonSchema } from './prisma';
+import {
+  CircuitLayoutSchema,
+  CircuitSchema,
+  DriverSchema,
+  SeasonSchema,
+} from './prisma';
 
 import z from 'zod';
 
@@ -9,6 +14,9 @@ export namespace DatabaseTypes {
 
   export const Circuit = CircuitSchema;
   export type Circuit = z.infer<typeof Circuit>;
+
+  export const CircuitLayout = CircuitLayoutSchema;
+  export type CircuitLayout = z.infer<typeof CircuitLayout>;
 
   export const Season = SeasonSchema.describe('Season');
   export type Season = z.infer<typeof Season>;
@@ -22,6 +30,14 @@ export namespace InputTypes {
 
   export const Circuit = DatabaseTypes.Circuit.omit({ id: true }).describe('');
   export type Circuit = z.infer<typeof Circuit>;
+
+  export const CircuitLayout = DatabaseTypes.CircuitLayout.omit({
+    id: true,
+  }).describe('Circuit Layout');
+  export type CircuitLayout = z.infer<typeof CircuitLayout>;
+
+  export const Season = DatabaseTypes.Season.describe('Season');
+  export type Season = z.infer<typeof Season>;
 }
 
 export namespace ResponseTypes {
@@ -43,6 +59,12 @@ export namespace ResponseTypes {
 
   export const Circuit = DatabaseTypes.Circuit;
   export type Circuit = DatabaseTypes.Circuit;
+
+  export const CircuitLayout = DatabaseTypes.CircuitLayout;
+  export type CircuitLayout = DatabaseTypes.CircuitLayout;
+
+  export const Season = DatabaseTypes.Season;
+  export type Season = DatabaseTypes.Season;
 }
 
 const ErrorResponse = z.object({

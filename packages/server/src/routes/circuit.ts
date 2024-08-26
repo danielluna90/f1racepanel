@@ -1,6 +1,9 @@
-import { InputTypes, ResponseTypes } from 'types';
+import { APIErrorCodes, InputTypes, ResponseTypes } from 'types';
+import { APIException } from 'middleware/errorHandling';
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
+
+import z from 'zod';
 
 export const createCircuit = endpointFactory.build({
   method: 'post',
@@ -14,5 +17,51 @@ export const createCircuit = endpointFactory.build({
     });
 
     return circuit;
+  },
+});
+
+export const getCircuit = endpointFactory.build({
+  method: 'get',
+  input: z.object({
+    CircuitID: z.string().uuid(),
+  }),
+  output: ResponseTypes.Circuit.and(
+    z.object({
+      layouts: ResponseTypes.CircuitLayout.array(),
+    })
+  ),
+  handler: async ({ input }) => {
+    const circuit = await prisma.circuit.findUnique({
+      where: {
+        id: input.CircuitID,
+      },
+      include: {
+        layouts: true,
+      },
+    });
+
+    if (!circuit) {
+      throw new APIException(
+        'Circuit Not Found.',
+        APIErrorCodes.ENTITY_NOT_FOUND
+      );
+    }
+
+    return circuit;
+  },
+});
+
+export const createCircuitLayout = endpointFactory.build({
+  method: 'post',
+  input: InputTypes.CircuitLayout.omit({ race_lap_record_id: true }),
+  output: ResponseTypes.CircuitLayout,
+  handler: async ({ input }) => {
+    const layout = await prisma.circuitLayout.create({
+      data: {
+        ...input,
+      },
+    });
+
+    return layout;
   },
 });
