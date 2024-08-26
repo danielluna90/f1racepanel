@@ -1,68 +1,18 @@
 ---
-export interface Props {
-  interactive?: boolean;
-  href?: string;
-  nonselectable?: boolean;
-  animate?: boolean;
+interface Props {
+  class?: string;
+  title: string;
 }
 
-const { interactive, href, nonselectable, animate } = Astro.props;
+const { class: className, title } = Astro.props;
 ---
 
 <div
-  class="card"
-  class:list={{
-    interactive: interactive || href,
-    padding: !href,
-    nonselectable,
-    animate,
-  }}
+  class="card bg-opacity-55 bg-base-200 dark:bg-base-300 shadow-xl"
+  class:list={[className]}
 >
-  {
-    href ? (
-      <a href={href}>
-        <slot />
-      </a>
-    ) : (
-      <slot />
-    )
-  }
+  <div class="card-body">
+    <h2 class="card-title">{title}</h2>
+    <slot />
+  </div>
 </div>
-
-<style>
-  .card {
-    background-color: var(--primary-color);
-    border-radius: 0.5rem;
-  }
-
-  .card.nonselectable {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-
-  .card.interactive:hover {
-    cursor: pointer;
-  }
-
-  .card.padding {
-    padding: 1rem;
-  }
-
-  .card.animate {
-    transition: 0.25s ease;
-  }
-
-  .card.animate:hover {
-    transform: translate(-5px, -5px);
-  }
-
-  a {
-    display: block;
-    height: 100%;
-    padding: 1rem;
-  }
-</style>

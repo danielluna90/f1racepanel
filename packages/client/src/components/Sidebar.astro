@@ -1,0 +1,46 @@
+---
+import SidebarContent from "./sidebar/SidebarContent.astro";
+
+interface Props {
+  admin: boolean;
+}
+
+// const { admin } = Astro.props;
+---
+
+<div class="drawer">
+  <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+  <div class="drawer-content flex flex-col">
+    <slot />
+  </div>
+  <div class="drawer-side">
+    <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"
+    ></label>
+    <ul class="menu bg-base-200 min-h-full w-80 p-4">
+      <li><h2 class="menu-title">F1 Race Panel</h2></li>
+
+      <li><a href="/">Home</a></li>
+      <li>
+        <details open>
+          <summary>Statistics</summary>
+          <ul>
+            <li><a href="/drivers">Drivers</a></li>
+            <li><a>Constructors</a></li>
+            <li><a>Circuits</a></li>
+            <li><a>Grand Prix</a></li>
+            <li><a>Seasons</a></li>
+          </ul>
+        </details>
+      </li>
+      <li><a href="/archive">Archive</a></li>
+      <li><a href="/query-builder">Query Builder</a></li>
+      <li><a href="/about">About</a></li>
+      <li class="sm:hidden grow flex-col-reverse">
+        <ul>
+          <SidebarContent />
+        </ul>
+        <h2 class="menu-title">Settings</h2>
+      </li>
+    </ul>
+  </div>
+</div>

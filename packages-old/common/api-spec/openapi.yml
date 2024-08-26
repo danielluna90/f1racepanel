@@ -1,0 +1,47 @@
+openapi: 3.1.0
+info:
+  title: F1 Race Panel API
+  version: v1
+  contact: 
+    name: Daniel Luna
+    email: api-support@f1racepanel.com
+    url: https://danielluna.nyc
+servers: 
+  - url: https://api.f1racepanel.com/v1
+    description: Production Endpoint
+  - url: https://staging.api.f1racepanel.com/v1
+    description: Development Endpoint 
+security: 
+  -  AdminAuth: []
+paths:
+  /driver:
+    $ref: paths/drivers/driver.yml
+  /driver/{DriverID}:
+    $ref: paths/drivers/driver-DriverID.yml
+  /circuit:
+    $ref: paths/circuits/circuit.yml
+  /circuits:
+    $ref: paths/circuits/circuits.yml
+  /circuits/{CircuitID}:
+    $ref: paths/circuits/circuit-CircuitID.yml
+  /season/{Year}:
+    $ref: paths/gp-weekends/season-Year.yml
+  /gp/{Year}/{Round}:
+    $ref: paths/gp-weekends/gp-Year-Round.yml
+  /gp/{Year}/{Round}/{Session}:
+    $ref: paths/gp-weekends/gp-Year-Round-Session.yml
+  /session/{SessionID}:
+    $ref: paths/gp-weekends/session-SessionID.yml
+  /search/drivers:
+    $ref: paths/search/drivers.yml
+  /login:
+    $ref: paths/auth/login.yml
+  /query-builder:
+    $ref: paths/other/query-builder.yml
+components: 
+  securitySchemes:
+    AdminAuth:
+      type: apiKey
+      in: header
+      name: X-Auth
+      description: "Authentication Token received after logging in."

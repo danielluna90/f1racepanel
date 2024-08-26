@@ -1,0 +1,11 @@
+name: f1racepanel_test
+services:
+  db-test:
+    container_name: pg_db_test
+    image: postgres
+    environment:
+      - POSTGRES_USER=test
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=f1racepanel
+    ports:
+      - 5432:5432

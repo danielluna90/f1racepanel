@@ -1,0 +1,28 @@
+---
+import type { GetStaticPathsResult } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  let rv: GetStaticPathsResult = [];
+
+  const currentYear = new Date().getFullYear();
+  for (let i = currentYear; i >= 1950; i--) {
+    rv.push({
+      props: { year: i },
+      params: { year: i },
+    });
+  }
+
+  return rv;
+}
+
+interface Props {
+  year: number;
+}
+
+const { year } = Astro.props;
+---
+
+<BaseLayout title=`${year}`>
+  <h1 class="text-3xl text-center font-bold">{year}</h1>
+</BaseLayout>

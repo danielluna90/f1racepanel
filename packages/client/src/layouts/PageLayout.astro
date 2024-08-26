@@ -1,0 +1,15 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+  title?: string | undefined,
+  titleText?: string | undefined,
+}
+
+const { title, titleText } = Astro.props;
+---
+
+<BaseLayout title={title}>
+  {titleText ? <h1 class="text-3xl font-bold text-center pb-4">{titleText}</h1> : <></>}
+  <slot/>
+</BaseLayout>
