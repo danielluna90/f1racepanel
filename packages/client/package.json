@@ -11,12 +11,17 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
+    "@astrojs/react": "^3.6.2",
     "@astrojs/sitemap": "^3.1.6",
     "@fontsource-variable/montserrat": "^5.0.20",
     "@fontsource-variable/open-sans": "^5.0.30",
     "@playwright/test": "^1.46.1",
-    "astro": "^4.14.5",
-    "swapy": "^0.1.1",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^4.15.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "swapy": "^0.1.2",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
