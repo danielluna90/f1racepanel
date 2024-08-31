@@ -30,7 +30,11 @@ export const getCircuits = endpointFactory.build({
   input: getDriversQueriesSchema,
   output: ResponseTypes.Circuits,
   handler: async ({ input }) => {
-    const circuits = await prisma.circuit.findMany();
+    const circuits = await prisma.circuit.findMany({
+      include: {
+        layouts: true,
+      },
+    });
 
     return {
       href: 'http://localhost:3000/v1/circuits',

@@ -13,6 +13,7 @@ const circuits = await getAllCircuits();
         <Card title={circuit.name}>
           <h3>{circuit.date_opened}</h3>
           <h3>{circuit.country}</h3>
+          <h3>Number of Layouts: {circuit.layouts?.length ?? 0}</h3>
         </Card>
       );
     })
