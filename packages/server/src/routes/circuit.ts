@@ -25,11 +25,7 @@ export const getCircuit = endpointFactory.build({
   input: z.object({
     CircuitID: z.string().uuid(),
   }),
-  output: ResponseTypes.Circuit.and(
-    z.object({
-      layouts: ResponseTypes.CircuitLayout.array(),
-    })
-  ),
+  output: ResponseTypes.Circuit,
   handler: async ({ input }) => {
     const circuit = await prisma.circuit.findUnique({
       where: {

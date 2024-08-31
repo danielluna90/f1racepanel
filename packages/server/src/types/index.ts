@@ -57,14 +57,21 @@ export namespace ResponseTypes {
   export const Drivers = getPagedResponse<typeof Driver>(Driver);
   export type Drivers = z.infer<typeof Drivers>;
 
-  export const Circuit = DatabaseTypes.Circuit;
-  export type Circuit = DatabaseTypes.Circuit;
-
   export const CircuitLayout = DatabaseTypes.CircuitLayout;
   export type CircuitLayout = DatabaseTypes.CircuitLayout;
 
+  export const Circuit = DatabaseTypes.Circuit.and(
+    z.object({
+      layouts: ResponseTypes.CircuitLayout.array().optional(),
+    })
+  );
+  export type Circuit = z.infer<typeof ResponseTypes.Circuit>;
+
+  export const Circuits = getPagedResponse<typeof Circuit>(Circuit);
+  export type Circuits = z.infer<typeof Circuit>;
+
   export const Season = DatabaseTypes.Season;
-  export type Season = DatabaseTypes.Season;
+  export type Season = z.infer<typeof ResponseTypes.Season>;
 }
 
 const ErrorResponse = z.object({

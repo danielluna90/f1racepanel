@@ -2,8 +2,8 @@ import { DependsOnMethod, type Routing, ServeStatic } from 'express-zod-api';
 
 import { createCircuit, createCircuitLayout, getCircuit } from 'routes/circuit';
 import { createDriver, editDriver, getDriver } from 'routes/driver';
+import { getCircuits, getDrivers } from 'routes/search';
 import { createSeason } from 'routes/season';
-import { getDrivers } from 'routes/search';
 
 export const routing: Routing = {
   v1: {
@@ -24,6 +24,7 @@ export const routing: Routing = {
     },
     search: {
       drivers: getDrivers,
+      circuits: getCircuits,
     },
     season: {
       '': createSeason,

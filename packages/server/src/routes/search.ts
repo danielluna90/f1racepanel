@@ -24,3 +24,20 @@ export const getDrivers = endpointFactory.build({
     };
   },
 });
+
+export const getCircuits = endpointFactory.build({
+  method: 'get',
+  input: getDriversQueriesSchema,
+  output: ResponseTypes.Circuits,
+  handler: async ({ input }) => {
+    const circuits = await prisma.circuit.findMany();
+
+    return {
+      href: 'http://localhost:3000/v1/circuits',
+      limit: input.limit,
+      next: null,
+      offset: input.offset,
+      items: circuits,
+    };
+  },
+});

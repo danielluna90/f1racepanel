@@ -1,7 +1,20 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import Card from "../../components/Card.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getAllCircuits } from "../../services/circuits";
+
+const circuits = await getAllCircuits();
 ---
 
-<BaseLayout title="Circuits">
-  <p>All Circuits Page</p>
-</BaseLayout>
+<PageLayout title="Circuits" titleText="Circuits">
+  {
+    circuits.map((circuit) => {
+      return (
+        <Card title={circuit.name}>
+          <h3>{circuit.date_opened}</h3>
+          <h3>{circuit.country}</h3>
+        </Card>
+      );
+    })
+  }
+</PageLayout>
