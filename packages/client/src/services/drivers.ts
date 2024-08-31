@@ -31,3 +31,7 @@ export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
 
   return rv;
 }
+
+export const toDriverPath = (name: string): string => {
+  return name.toLowerCase().replace(" ", "-");
+}
