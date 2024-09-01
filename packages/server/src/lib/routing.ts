@@ -3,7 +3,8 @@ import { DependsOnMethod, type Routing, ServeStatic } from 'express-zod-api';
 import { createCircuit, createCircuitLayout, getCircuit } from 'routes/circuit';
 import { createDriver, editDriver, getDriver } from 'routes/driver';
 import { getCircuits, getDrivers } from 'routes/search';
-import { createSeason } from 'routes/season';
+import { createGPWeekend } from 'routes/session';
+import { createSeason, getSeason } from 'routes/season';
 
 export const routing: Routing = {
   v1: {
@@ -22,6 +23,9 @@ export const routing: Routing = {
         post: editDriver,
       }),
     },
+    gpweekend: {
+      '': createGPWeekend,
+    },
     search: {
       drivers: getDrivers,
       circuits: getCircuits,
@@ -29,7 +33,7 @@ export const routing: Routing = {
     season: {
       '': createSeason,
       ':year': {
-        '': createSeason,
+        '': getSeason,
         ':round': {
           '': createSeason,
           ':session': createSeason,

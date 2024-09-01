@@ -3,6 +3,7 @@ import {
   CircuitLayoutSchema,
   CircuitSchema,
   DriverSchema,
+  GPWeekendSchema,
   SeasonSchema,
 } from './prisma';
 
@@ -20,6 +21,9 @@ export namespace DatabaseTypes {
 
   export const Season = SeasonSchema.describe('Season');
   export type Season = z.infer<typeof Season>;
+
+  export const GPWeekend = GPWeekendSchema.describe('GP Weekend');
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 export namespace InputTypes {
@@ -38,6 +42,11 @@ export namespace InputTypes {
 
   export const Season = DatabaseTypes.Season.describe('Season');
   export type Season = z.infer<typeof Season>;
+
+  export const GPWeekend = DatabaseTypes.GPWeekend.omit({ id: true }).describe(
+    'GP Weekend'
+  );
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 export namespace ResponseTypes {
@@ -72,6 +81,9 @@ export namespace ResponseTypes {
 
   export const Season = DatabaseTypes.Season;
   export type Season = z.infer<typeof ResponseTypes.Season>;
+
+  export const GPWeekend = DatabaseTypes.GPWeekend;
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 const ErrorResponse = z.object({

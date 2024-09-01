@@ -90,8 +90,8 @@ model WeekendSession {
 model GPWeekend {
   id String @id @default(uuid())
 
-  start_date DateTime @unique /// @zod.custom.use(z.string().date())
-  end_date   DateTime @unique /// @zod.custom.use(z.string().date())
+  start_date String @unique /// @zod.custom.use(z.string().date())
+  end_date   String @unique /// @zod.custom.use(z.string().date())
 
   round_number Int
 
