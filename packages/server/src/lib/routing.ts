@@ -1,10 +1,19 @@
 import { DependsOnMethod, type Routing, ServeStatic } from 'express-zod-api';
 
-import { createCircuit, createCircuitLayout, getCircuit } from 'routes/circuit';
+import {
+  createCircuit,
+  createCircuitLayout,
+  getCircuit,
+  getCircuitLayout,
+} from 'routes/circuit';
 import { createDriver, editDriver, getDriver } from 'routes/driver';
+import {
+  createGPWeekend,
+  getGPWeekendByID,
+  getGPWeekendByYearAndRound,
+} from 'routes/session';
 import { createSeason, getSeason } from 'routes/season';
 import { getCircuits, getDrivers } from 'routes/search';
-import { createGPWeekend } from 'routes/session';
 
 export const routing: Routing = {
   v1: {
@@ -13,7 +22,7 @@ export const routing: Routing = {
       ':CircuitID': getCircuit,
       layout: {
         '': createCircuitLayout,
-        ':CircuitLayoutID': createCircuitLayout,
+        ':CircuitLayoutID': getCircuitLayout,
       },
     },
     driver: {
@@ -25,6 +34,8 @@ export const routing: Routing = {
     },
     gpweekend: {
       '': createGPWeekend,
+      ':SessionID': getGPWeekendByID,
+      latest: getGPWeekendByID,
     },
     search: {
       drivers: getDrivers,
@@ -35,7 +46,7 @@ export const routing: Routing = {
       ':year': {
         '': getSeason,
         ':round': {
-          '': createSeason,
+          '': getGPWeekendByYearAndRound,
           ':session': createSeason,
         },
       },

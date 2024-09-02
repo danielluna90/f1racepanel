@@ -105,6 +105,8 @@ model GPWeekend {
   season_id Int
   // team_entries Team[] <- Many-to-Many
   Driver    Driver[]
+
+  @@unique([season_id, round_number])
 }
 
 // Drivers (pre-2013) car numbers were based on performance in the previous
