@@ -50,6 +50,8 @@ model CircuitLayout {
   race_lap_record_id String?        @unique /// @zod.string.uuid()
   circuit            Circuit        @relation(fields: [circuit_id], references: [id])
   circuit_id         String /// @zod.string.uuid()
+
+  gp_weekends GPWeekend[] // @zod.object.array(.min(1))
 }
 
 model Circuit {
@@ -103,7 +105,10 @@ model GPWeekend {
   round_number Int
 
   circuit    Circuit @relation(fields: [circuit_id], references: [id])
-  circuit_id String  @unique /// @zod.string.uuid()
+  circuit_id String /// @zod.string.uuid()
+
+  circuit_layout    CircuitLayout? @relation(fields: [circuit_layout_id], references: [id])
+  circuit_layout_id String? /// @zod.string.uuid()
   // sessions Sessions[] <- One-to-Many
 
   status WeekendStatus @default(FUTURE)

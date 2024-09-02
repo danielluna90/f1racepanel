@@ -16,6 +16,7 @@ export enum APIErrorCodes {
 
   // KNOWN ERRORS (5xxx)
   LATEST_WEEKEND_UNAVAILABLE = 5001,
+  LATEST_SEASON_UNAVAILABLE = 5002,
 
   // Unknown / Critical errors (9xxx)
   UNKNOWN_ERROR = 9001,

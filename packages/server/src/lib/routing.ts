@@ -13,7 +13,7 @@ import {
   getGPWeekendByYearAndRound,
   getLatestGPWeekend,
 } from 'routes/session';
-import { createSeason, getSeason } from 'routes/season';
+import { createSeason, getLatestSeason, getSeason } from 'routes/season';
 import { getCircuits, getDrivers } from 'routes/search';
 
 export const routing: Routing = {
@@ -45,6 +45,7 @@ export const routing: Routing = {
     },
     season: {
       '': createSeason,
+      latest: getLatestSeason,
       ':year': {
         '': getSeason,
         ':round': {

@@ -1,13 +1,14 @@
-import type { ZodType } from "astro/zod";
+import type { z } from "astro/zod";
 import { getSecret } from "astro:env/server";
 import { ErrorResponse } from "f1racepanel-server";
 
 interface APIResult<T> {
   status: number,
-  content: T
+  content?: T,
+  error?: ErrorResponse
 }
 
-export const getFromV1API = async <T extends ZodType>(endpoint: string, schema: T): Promise<APIResult<T | ErrorResponse>> => {
+export const getFromV1API = async <T extends z.ZodTypeAny>(endpoint: string, schema: T): Promise<APIResult<z.infer<T>>> => {
   const API_URL = getSecret("API_URL");
   const API_ENDPOINT_URL = `${API_URL}/${endpoint}`;
 
@@ -19,12 +20,12 @@ export const getFromV1API = async <T extends ZodType>(endpoint: string, schema: 
   if (res.status != 200) {
     return {
       status: res.status,
-      content: ErrorResponse.parse(resJSON)
+      error: ErrorResponse.parse(resJSON)
     }
   }
 
   return {
     status: res.status,
-    content: schema.parse(resJSON)
+    content: schema.parse(resJSON) as z.infer<T>
   };
 }

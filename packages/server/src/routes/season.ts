@@ -29,7 +29,7 @@ export const getSeason = endpointFactory.build({
   }),
   output: ResponseTypes.Season.and(
     z.object({
-      weekends: DatabaseTypes.GPWeekend.array().min(1),
+      weekends: DatabaseTypes.GPWeekend.array().min(0),
     })
   ),
   handler: async ({ input }) => {
@@ -46,6 +46,28 @@ export const getSeason = endpointFactory.build({
       throw new APIException(
         'Season not Found',
         APIErrorCodes.ENTITY_NOT_FOUND
+      );
+    }
+
+    return season;
+  },
+});
+
+export const getLatestSeason = endpointFactory.build({
+  method: 'get',
+  input: z.object({}),
+  output: ResponseTypes.Season,
+  handler: async () => {
+    const season = await prisma.season.findFirst({
+      where: {
+        is_current_season: true,
+      },
+    });
+
+    if (!season) {
+      throw new APIException(
+        'Latest Season Not Available',
+        APIErrorCodes.LATEST_SEASON_UNAVAILABLE
       );
     }
 

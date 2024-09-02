@@ -29,6 +29,7 @@ export function getAPIExceptionStatusCode(errorCode: APIErrorCodes): number {
     case APIErrorCodes.SEASON_NOT_FOUND:
     case APIErrorCodes.ENTITY_NOT_FOUND:
     case APIErrorCodes.LATEST_WEEKEND_UNAVAILABLE:
+    case APIErrorCodes.LATEST_SEASON_UNAVAILABLE:
     case APIErrorCodes.UNIMPLEMENTED:
       return 404;
 

@@ -65,14 +65,12 @@ export const createCircuitLayout = endpointFactory.build({
 export const getCircuitLayout = endpointFactory.build({
   method: 'get',
   input: z.object({
-    CircuitID: z.string().uuid(),
     CircuitLayoutID: z.string().uuid(),
   }),
   output: ResponseTypes.CircuitLayout,
   handler: async ({ input }) => {
     const layout = await prisma.circuitLayout.findUnique({
       where: {
-        circuit_id: input.CircuitID,
         id: input.CircuitLayoutID,
       },
     });
