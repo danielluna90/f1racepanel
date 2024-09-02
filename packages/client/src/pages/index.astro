@@ -1,9 +1,16 @@
 ---
+import { ResponseTypes } from "f1racepanel-server";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getFromV1API } from "../services/api";
+
+const latestWeekend = await getFromV1API(
+  "gpweekend/latest",
+  ResponseTypes.GPWeekend
+);
 ---
 
 <BaseLayout title="Home">
-  <div></div>
+  {latestWeekend.status === 200 && <div>Hi</div>}
 </BaseLayout>
 
 <style></style>
