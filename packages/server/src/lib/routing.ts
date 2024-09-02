@@ -35,8 +35,9 @@ export const routing: Routing = {
     },
     gpweekend: {
       '': createGPWeekend,
-      ':SessionID': getGPWeekendByID,
+      // Order Matters, this takes precedent over ':SessionID' wildcard route!
       latest: getLatestGPWeekend,
+      ':SessionID': getGPWeekendByID,
     },
     search: {
       drivers: getDrivers,
