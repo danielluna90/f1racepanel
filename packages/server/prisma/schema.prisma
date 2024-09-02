@@ -79,12 +79,19 @@ model WeekendSession {
   id String @id @default(uuid())
 
   session_number Int
-  session_status SessionStatus
+  session_status SessionStatus @default(FUTURE)
 
   driver_entries DriverEntry[]
 
   gp_weekend    GPWeekend @relation(fields: [gp_weekend_id], references: [id])
   gp_weekend_id String
+}
+
+enum WeekendStatus {
+  UNKNOWN
+  COMPLETED
+  CURRENT
+  FUTURE
 }
 
 model GPWeekend {
@@ -98,6 +105,8 @@ model GPWeekend {
   circuit    Circuit @relation(fields: [circuit_id], references: [id])
   circuit_id String  @unique /// @zod.string.uuid()
   // sessions Sessions[] <- One-to-Many
+
+  status WeekendStatus @default(FUTURE)
 
   sessions WeekendSession[] /// @zod.object.array(.min(1))
 

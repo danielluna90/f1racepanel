@@ -1,6 +1,6 @@
-import { APIErrorCodes, getAPIExceptionStatusCode } from './lib';
-import type { ErrorResponse } from 'types';
+import { APIErrorCodes, type ErrorResponse } from 'types';
 import { Prisma } from '@prisma/client';
+import { getAPIExceptionStatusCode } from './lib';
 
 export function ProcessPrismaErrorHandler(
   err: Prisma.PrismaClientKnownRequestError

@@ -11,6 +11,7 @@ import {
   createGPWeekend,
   getGPWeekendByID,
   getGPWeekendByYearAndRound,
+  getLatestGPWeekend,
 } from 'routes/session';
 import { createSeason, getSeason } from 'routes/season';
 import { getCircuits, getDrivers } from 'routes/search';
@@ -35,7 +36,7 @@ export const routing: Routing = {
     gpweekend: {
       '': createGPWeekend,
       ':SessionID': getGPWeekendByID,
-      latest: getGPWeekendByID,
+      latest: getLatestGPWeekend,
     },
     search: {
       drivers: getDrivers,

@@ -69,3 +69,38 @@ export const getGPWeekendByYearAndRound = endpointFactory.build({
     return weekend;
   },
 });
+
+export const getLatestGPWeekend = endpointFactory.build({
+  method: 'get',
+  input: z.object({}),
+  output: ResponseTypes.GPWeekend,
+  handler: async () => {
+    const latest = await prisma.gPWeekend.findFirst({
+      where: {
+        season: {
+          is_current_season: true,
+        },
+        OR: [
+          {
+            status: 'CURRENT',
+          },
+          {
+            status: 'FUTURE',
+          },
+        ],
+      },
+      orderBy: {
+        round_number: 'asc',
+      },
+    });
+
+    if (!latest) {
+      throw new APIException(
+        'Could not find latest GP Weekend. We could be transitioning to new Season.',
+        APIErrorCodes.LATEST_WEEKEND_UNAVAILABLE
+      );
+    }
+
+    return latest;
+  },
+});
