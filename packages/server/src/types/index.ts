@@ -1,5 +1,11 @@
 /* eslint-disable @typescript-eslint/no-namespace */
-import { DriverSchema, SeasonSchema } from './prisma';
+import {
+  CircuitLayoutSchema,
+  CircuitSchema,
+  DriverSchema,
+  GPWeekendSchema,
+  SeasonSchema,
+} from './prisma';
 
 import z from 'zod';
 
@@ -7,8 +13,17 @@ export namespace DatabaseTypes {
   export const Driver = DriverSchema;
   export type Driver = z.infer<typeof Driver>;
 
+  export const Circuit = CircuitSchema;
+  export type Circuit = z.infer<typeof Circuit>;
+
+  export const CircuitLayout = CircuitLayoutSchema;
+  export type CircuitLayout = z.infer<typeof CircuitLayout>;
+
   export const Season = SeasonSchema.describe('Season');
   export type Season = z.infer<typeof Season>;
+
+  export const GPWeekend = GPWeekendSchema.describe('GP Weekend');
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 export namespace InputTypes {
@@ -16,6 +31,22 @@ export namespace InputTypes {
     'Driver'
   );
   export type Driver = z.infer<typeof Driver>;
+
+  export const Circuit = DatabaseTypes.Circuit.omit({ id: true }).describe('');
+  export type Circuit = z.infer<typeof Circuit>;
+
+  export const CircuitLayout = DatabaseTypes.CircuitLayout.omit({
+    id: true,
+  }).describe('Circuit Layout');
+  export type CircuitLayout = z.infer<typeof CircuitLayout>;
+
+  export const Season = DatabaseTypes.Season.describe('Season');
+  export type Season = z.infer<typeof Season>;
+
+  export const GPWeekend = DatabaseTypes.GPWeekend.omit({ id: true }).describe(
+    'GP Weekend'
+  );
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 export namespace ResponseTypes {
@@ -34,6 +65,29 @@ export namespace ResponseTypes {
 
   export const Drivers = getPagedResponse<typeof Driver>(Driver);
   export type Drivers = z.infer<typeof Drivers>;
+
+  export const CircuitLayout = DatabaseTypes.CircuitLayout;
+  export type CircuitLayout = DatabaseTypes.CircuitLayout;
+
+  export const Circuit = DatabaseTypes.Circuit.and(
+    z.object({
+      layouts: ResponseTypes.CircuitLayout.array().optional(),
+    })
+  );
+  export type Circuit = z.infer<typeof ResponseTypes.Circuit>;
+
+  export const Circuits = getPagedResponse<typeof Circuit>(Circuit);
+  export type Circuits = z.infer<typeof Circuit>;
+
+  export const Season = DatabaseTypes.Season.and(
+    z.object({
+      weekends: DatabaseTypes.GPWeekend.array().min(0),
+    })
+  );
+  export type Season = z.infer<typeof ResponseTypes.Season>;
+
+  export const GPWeekend = DatabaseTypes.GPWeekend;
+  export type GPWeekend = z.infer<typeof GPWeekend>;
 }
 
 const ErrorResponse = z.object({

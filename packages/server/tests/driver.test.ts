@@ -69,13 +69,21 @@ describe('/driver', () => {
     });
   });
 
-  describe('[POST] /:driverID', () => {
-    it('should respond with status `200` and driver details', () => {
-      expect(true).toBe(true);
+  describe('[GET] /:driverID', () => {
+    describe('[Axios]', () => {
+      it('should respond with status `200` and driver details', () => {
+        expect(true).toBe(true);
+      });
+    });
+
+    describe('[Supertest]', () => {
+      it('should respond with status `200` and driver details', () => {
+        expect(true).toBe(true);
+      });
     });
   });
 
-  describe('[GET] /:driverID', () => {
+  describe('[POST] /:driverID', () => {
     it('should respond with status `200` and driver details', () => {
       expect(true).toBe(true);
     });

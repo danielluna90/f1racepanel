@@ -1,14 +1,14 @@
 import { getSecret } from "astro:env/server";
 import { ResponseTypes } from "f1racepanel-server";
 
-export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
-  let rv: ResponseTypes.Driver[] = [];
+export const getAllCircuits = async (): Promise<ResponseTypes.Circuit[]> => {
+  let rv: ResponseTypes.Circuit[] = [];
 
   const API_URL = getSecret("API_URL");
-  const API_DRIVERS_URL = `${API_URL}/search/drivers`;
-  
+  const API_CIRCUITS_URL = `${API_URL}/search/circuits`;
+
   let complete: boolean = false;
-  let url: string = API_DRIVERS_URL;
+  let url: string = API_CIRCUITS_URL;
   
   while (!complete) {
     const rawRes = await fetch(url);
@@ -18,7 +18,7 @@ export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
     }
 
     const resJSON = await rawRes.json();
-    const res = ResponseTypes.Drivers.parse(resJSON);
+    const res = ResponseTypes.Circuits.parse(resJSON);
   
     rv.push(...res.items);
   
@@ -30,8 +30,4 @@ export const getAllDrivers = async (): Promise<ResponseTypes.Driver[]> => {
   }
 
   return rv;
-}
-
-export const toDriverPath = (name: string): string => {
-  return name.toLowerCase().replace(" ", "-");
 }

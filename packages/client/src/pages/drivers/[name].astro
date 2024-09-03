@@ -5,7 +5,7 @@ import PageLayout from "../../layouts/PageLayout.astro";
 import { ResponseTypes } from "f1racepanel-server";
 
 //import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
-import { getAllDrivers } from "../../services/drivers";
+import { getAllDrivers, toDriverPath } from "../../services/drivers";
 
 export async function getStaticPaths() {
   let rv: GetStaticPathsResult = [];
@@ -14,7 +14,7 @@ export async function getStaticPaths() {
   drivers.forEach((driver: ResponseTypes.Driver) => {
     rv.push({
       props: { driverData: driver },
-      params: { name: driver.name.toLowerCase().replace(" ", "-") },
+      params: { name: toDriverPath(driver.name) },
     });
   });
 
@@ -50,3 +50,11 @@ const { driverData } = Astro.props;
 
   <h2>Race Entries</h2>
 </PageLayout>
+
+<script>
+  // import { createSwapy } from "swapy";
+
+  // const container = document.querySelector(".stats");
+  // const swapy = createSwapy(container);
+  // swapy.enable(true);
+</script>

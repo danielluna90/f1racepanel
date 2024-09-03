@@ -1,9 +1,17 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { ResponseTypes } from "f1racepanel-server";
+import { getFromV1API } from "../services/api";
+import LatestRace from "../components/home/LatestRace.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+
+const latestWeekend = await getFromV1API(
+  "gpweekend/latest",
+  ResponseTypes.GPWeekend
+);
 ---
 
-<BaseLayout title="Home">
-  <div></div>
-</BaseLayout>
+<PageLayout title="Home" titleText="Upcoming Race Weekend">
+  {latestWeekend.content && <LatestRace weekend={latestWeekend.content} />}
+</PageLayout>
 
 <style></style>

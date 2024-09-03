@@ -1,5 +1,6 @@
-import { InputTypes, ParamTypes, ResponseTypes } from 'types';
+import { APIErrorCodes, InputTypes, ParamTypes, ResponseTypes } from 'types';
 
+import { APIException } from 'middleware/errorHandling';
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
 
@@ -8,7 +9,6 @@ export const createDriver = endpointFactory.build({
   input: InputTypes.Driver,
   output: ResponseTypes.Driver,
   handler: async ({ input }) => {
-    console.log(input);
     const driver = await prisma.driver.create({
       data: {
         ...input,
@@ -31,13 +31,11 @@ export const getDriver = endpointFactory.build({
     });
 
     if (!driver) {
-      throw new Error(
-        `Could not find driver with DriverID: ${input.DriverID}`
-        //APIErrorCodes.USER_NOT_FOUND
+      throw new APIException(
+        `Could not find driver with DriverID: ${input.DriverID}`,
+        APIErrorCodes.USER_NOT_FOUND
       );
     }
-
-    console.log(driver);
 
     return driver;
   },

@@ -1,7 +1,8 @@
 ---
 import type { ResponseTypes } from "f1racepanel-server";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getAllDrivers } from "../../services/drivers";
+import { getAllDrivers, toDriverPath } from "../../services/drivers";
+import { getFlagEmoji as emoji } from "../../services/utils";
 import Card from "../../components/Card.astro";
 
 const drivers = await getAllDrivers();
@@ -12,11 +13,16 @@ const drivers = await getAllDrivers();
     drivers.map((driver: ResponseTypes.Driver) => {
       return (
         <Card title={driver.name}>
-          <h3>Nationality: US</h3>
-          <p>Debut Season: 2004</p>
+          <h3>
+            Nationality: {driver.nationality} {emoji(driver.nationality)}
+          </h3>
+          <p>Debut Season: 2000</p>
           <p>Wins: 0</p>
           <p>Championships: 0</p>
-          <a href="/" class="btn btn-primary">
+          <a
+            href={`/drivers/${toDriverPath(driver.name)}`}
+            class="btn btn-primary"
+          >
             Visit
           </a>
         </Card>
