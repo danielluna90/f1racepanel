@@ -1,138 +1,83 @@
 ---
-import { ViewTransitions } from "astro:transitions";
-
+import Sidebar from "../components/Sidebar.astro";
 import Navbar from "../components/Navbar.astro";
 import Footer from "../components/Footer.astro";
 
-export interface Props {
-  title?: string;
+import "@fontsource-variable/montserrat";
+import "@fontsource-variable/open-sans";
+
+interface Props {
+  title?: string | undefined;
+  admin?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, admin = false } = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <title>{title ? `F1 Race Panel - ${title}` : "F1 Race Panel"}</title>
-    <meta name="description" content="View Information for F1 Races" />
 
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8404752187792760"
-      crossorigin="anonymous"></script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-QVXK1NK8DZ"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-QVXK1NK8DZ");
+    <script is:inline>
+      if (localStorage.getItem("theme") === null) {
+        document.documentElement.setAttribute("data-theme", "light");
+      } else
+        document.documentElement.setAttribute(
+          "data-theme",
+          localStorage.getItem("theme")
+        );
     </script>
-
-    <ViewTransitions />
+    <script>
+      import { themeChange } from "theme-change";
+      themeChange();
+    </script>
   </head>
   <body>
-    <Navbar />
-    <main transition:animate="slide">
-      <slot />
-    </main>
-    <Footer />
-    <style is:global>
-      h1 {
-        text-align: center;
-      }
-
-      :root {
-        --bg-color: #050505;
-        --text-color: #fafafa;
-
-        --primary-color: #2c333a;
-        --primary-color-rgb: 44 51 58;
-        --secondary-color: #0c3131;
-
-        --accent-color: #bebaa7;
-
-        --vertical-margin: 2rem;
-        --side-margin: 3rem;
-      }
-
-      html {
-        font-family: system-ui, sans-serif;
-        background-color: var(--bg-color);
-        color: var(--text-color);
-      }
-
-      body {
-        display: grid;
-
-        grid-template-areas:
-          "a a a"
-          "b nav c"
-          "d d d"
-          "e main f"
-          "g g g"
-          "h footer i"
-          "j j j";
-        grid-template-columns: var(--side-margin) 1fr var(--side-margin);
-        grid-template-rows:
-          var(--vertical-margin) auto 0 1fr var(--vertical-margin)
-          auto var(--vertical-margin);
-
-        overscroll-behavior-x: none;
-        overscroll-behavior-y: none;
-        min-height: 100vh;
-
-        margin: 0;
-      }
-
-      nav {
-        grid-area: nav;
-      }
-
-      main {
-        grid-area: main;
-      }
-
-      footer {
-        grid-area: footer;
-      }
-
-      a {
-        color: #ffffff;
-        text-decoration: none;
-      }
-
-      a:visited {
-        color: #ffffff;
-      }
-
-      a:hover,
-      button:hover {
-        cursor: pointer;
-      }
-
-      @media screen and (max-width: 1024px) {
-        :root {
-          --side-margin: 2rem;
-        }
-      }
-
-      @media screen and (max-width: 640px) {
-        :root {
-          --vertical-margin: 1rem;
-          --side-margin: 1rem;
-        }
-      }
-    </style>
+    <Sidebar admin={admin}>
+      <Navbar admin={admin} />
+      <main>
+        <slot />
+      </main>
+      <Footer />
+    </Sidebar>
   </body>
 </html>
+
+<style is:global lang="scss">
+  @use "../styles/variables" as *;
+
+  .drawer-content {
+    margin: $page-margin;
+    min-height: calc(100vh - 2 * $page-y-margin);
+
+    display: grid;
+    grid-template-areas:
+      "navbar"
+      "main"
+      "footer";
+    grid-template-rows: auto 1fr auto;
+    gap: 1rem;
+  }
+
+  nav {
+    grid-area: navbar;
+  }
+
+  main {
+    grid-area: main;
+  }
+
+  footer {
+    grid-area: footer;
+  }
+
+  .nav-open {
+    overflow: hidden;
+  }
+</style>

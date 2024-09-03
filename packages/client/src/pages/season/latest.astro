@@ -1,0 +1,20 @@
+---
+import { ResponseTypes } from "f1racepanel-server";
+import { getFromV1API } from "../../services/api";
+import PageLayout from "../../layouts/PageLayout.astro";
+import Card from "../../components/Card.astro";
+
+const latestSeason = await getFromV1API("season/latest", ResponseTypes.Season);
+
+if (latestSeason.content == undefined) {
+  throw new Error("Latest Season not Available");
+}
+
+const data = latestSeason.content;
+---
+
+<PageLayout title={data.year.toString()} titleText={`${data.year} Season`}>
+  <Card title="Basic Statistics">
+    <h3>Number of Rounds: {data.num_of_rounds}</h3>
+  </Card>
+</PageLayout>

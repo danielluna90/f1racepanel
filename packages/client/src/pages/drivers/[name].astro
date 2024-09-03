@@ -1,0 +1,60 @@
+---
+import type { GetStaticPathsResult } from "astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+import { ResponseTypes } from "f1racepanel-server";
+
+//import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
+import { getAllDrivers, toDriverPath } from "../../services/drivers";
+
+export async function getStaticPaths() {
+  let rv: GetStaticPathsResult = [];
+
+  const drivers = await getAllDrivers();
+  drivers.forEach((driver: ResponseTypes.Driver) => {
+    rv.push({
+      props: { driverData: driver },
+      params: { name: toDriverPath(driver.name) },
+    });
+  });
+
+  return rv;
+}
+
+interface Props {
+  driverData: ResponseTypes.Driver;
+}
+
+const { driverData } = Astro.props;
+---
+
+<PageLayout title={driverData.name} titleText={driverData.name}>
+  <!-- <DriverBioCard data={driverData} /> -->
+  <h2>Race Statistics</h2>
+  <div class="stats stats-vertical md:stats-horizontal shadow">
+    <div class="stat">
+      <div class="stat-title">Entries</div>
+      <div class="stat-value">100</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Podiums</div>
+      <div class="stat-value">50</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Wins</div>
+      <div class="stat-value">50</div>
+    </div>
+  </div>
+
+  <h2>Race Entries</h2>
+</PageLayout>
+
+<script>
+  // import { createSwapy } from "swapy";
+
+  // const container = document.querySelector(".stats");
+  // const swapy = createSwapy(container);
+  // swapy.enable(true);
+</script>

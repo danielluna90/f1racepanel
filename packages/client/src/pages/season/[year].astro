@@ -1,0 +1,57 @@
+---
+import type { GetStaticPathsResult } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getFromV1API } from "../../services/api";
+import { ResponseTypes } from "f1racepanel-server";
+import Card from "../../components/Card.astro";
+import iso3311a2 from "iso-3166-1-alpha-2";
+
+interface Props {
+  year: number;
+}
+
+const { year } = Astro.props;
+
+export async function getStaticPaths() {
+  let rv: GetStaticPathsResult = [];
+
+  const currentYear = new Date().getFullYear();
+  for (let i = currentYear; i >= 1950; i--) {
+    rv.push({
+      props: { year: i },
+      params: { year: i },
+    });
+  }
+
+  return rv;
+}
+
+const season = await getFromV1API(`season/${year}`, ResponseTypes.Season);
+---
+
+<BaseLayout title=`${year}`>
+  <h1 class="text-3xl text-center font-bold pb-6">{year} Season</h1>
+
+  <div class="grid grid-cols-4 gap-4">
+    {
+      season.content &&
+        season.content.weekends.map(
+          async (weekend: ResponseTypes.GPWeekend) => {
+            const circuit = await getFromV1API(
+              `circuit/${weekend.circuit_id}`,
+              ResponseTypes.Circuit
+            );
+
+            return (
+              <Card title={`Round ${weekend.round_number}`}>
+                <h2>
+                  {iso3311a2.getCountry(circuit.content?.country as string)}
+                  Grand Prix
+                </h2>
+              </Card>
+            );
+          }
+        )
+    }
+  </div>
+</BaseLayout>

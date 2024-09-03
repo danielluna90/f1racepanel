@@ -1,0 +1,24 @@
+{
+  "name": "f1racepanel-common",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "gen:prisma": "prisma generate",
+    "gen:api": "redocly bundle f1racepanel@v1 --config='./redocly.yml' -o './f1racepanel-v1.yml'",
+    "postinstall": "run-p gen:*"
+  },
+  "devDependencies": {
+    "@redocly/cli": "^1.18.1",
+    "@types/bun": "latest",
+    "dotenv": "^16.4.5",
+    "npm-run-all2": "^6.2.2",
+    "prisma": "^5.17.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "5.17.0",
+    "zod": "^3.23.8"
+  }
+}

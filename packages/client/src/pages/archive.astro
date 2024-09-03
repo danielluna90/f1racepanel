@@ -1,72 +1,44 @@
 ---
+import PageLayout from "../layouts/PageLayout.astro";
 import Card from "../components/Card.astro";
-import ArchiveCard from "../components/cards/ArchiveCard.astro";
-import BaseLayout from "../layouts/BaseLayout.astro";
 
-import { CollectionEntry, getCollection } from "astro:content";
+import { DatabaseTypes } from "f1racepanel-server";
+import { getSecret } from "astro:env/server";
 
-const gpEntries = await getCollection("gpData");
-const gpByYear: Map<string, CollectionEntry<"gpData">[]> = new Map();
+const currentYear = new Date().getFullYear();
+let gpSeasons: (DatabaseTypes.Season | null)[] = [];
 
-gpEntries.forEach((gpEntry) => {
-  const [year, _] = gpEntry.id.split("/");
+const API_URL = getSecret("API_URL");
 
-  if (!gpByYear.get(year)) gpByYear.set(year, [gpEntry]);
-  else gpByYear.get(year)!.push(gpEntry);
-});
+for (let i = currentYear; i >= 1950; i--) {
+  const API_SEASONS_URL = `${API_URL}/season/${i}`;
+
+  const rawRes = await fetch(API_SEASONS_URL);
+
+  if (rawRes.status === 404) {
+    gpSeasons.push(null);
+    continue;
+  }
+
+  const rawJSON = await rawRes.json();
+  const season = DatabaseTypes.Season.parse(rawJSON);
+
+  gpSeasons.push(season);
+}
 ---
 
-<BaseLayout title="Archive">
-  <h1>Race Archive</h1>
-  {
-    Array.from(gpByYear).map(([year, races]) => {
-      return (
-        <>
-          <details>
-            <summary>
-              <Card nonselectable>
-                <h2 class="year-heading">{year}</h2>
-              </Card>
-            </summary>
-            <div class="gp-container">
-              {races.map((race) => {
-                return <ArchiveCard race={race} />;
-              })}
-            </div>
-          </details>
-        </>
-      );
-    })
-  }
-</BaseLayout>
+<PageLayout title="Archive" titleText="The Archive">
+  <div class="grid grid-cols-4 gap-4">
+    {
+      gpSeasons.map((season: DatabaseTypes.Season | null, index: number) => {
+        const year = currentYear - index;
 
-<style>
-  .gp-container {
-    display: grid;
-
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-
-    gap: 1rem;
-  }
-
-  summary {
-    list-style-type: none;
-  }
-
-  summary::-webkit-details-marker {
-    display: none;
-  }
-
-  summary:hover {
-    cursor: pointer;
-  }
-
-  .year-heading {
-    text-align: center;
-  }
-
-  details[open]:not(:last-child),
-  summary:not(:last-child) {
-    padding-bottom: 2rem;
-  }
-</style>
+        return (
+          <Card title={`${year}`}>
+            { season ? <a href=`/season/${year}` class="btn btn-primary">Visit</a> : <p>Not Available</p> }
+          </Card>
+        );
+      })
+    }
+  </div>
+</PageLayout>
