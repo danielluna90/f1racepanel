@@ -15,8 +15,6 @@ export const getFromV1API = async <T extends z.ZodTypeAny>(endpoint: string, sch
   const res = await fetch(API_ENDPOINT_URL);
   const resJSON = await res.json();
 
-  console.log(resJSON);
-
   if (res.status != 200) {
     return {
       status: res.status,
