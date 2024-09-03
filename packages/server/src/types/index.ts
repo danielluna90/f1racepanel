@@ -79,7 +79,11 @@ export namespace ResponseTypes {
   export const Circuits = getPagedResponse<typeof Circuit>(Circuit);
   export type Circuits = z.infer<typeof Circuit>;
 
-  export const Season = DatabaseTypes.Season;
+  export const Season = DatabaseTypes.Season.and(
+    z.object({
+      weekends: DatabaseTypes.GPWeekend.array().min(0),
+    })
+  );
   export type Season = z.infer<typeof ResponseTypes.Season>;
 
   export const GPWeekend = DatabaseTypes.GPWeekend;

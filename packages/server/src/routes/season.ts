@@ -1,4 +1,4 @@
-import { APIErrorCodes, DatabaseTypes, InputTypes, ResponseTypes } from 'types';
+import { APIErrorCodes, InputTypes, ResponseTypes } from 'types';
 import { APIException } from 'middleware/errorHandling';
 import { endpointFactory } from 'lib/createServerFactory';
 import { prisma } from 'lib/prisma';
@@ -27,18 +27,18 @@ export const getSeason = endpointFactory.build({
   input: z.object({
     year: z.coerce.number(),
   }),
-  output: ResponseTypes.Season.and(
-    z.object({
-      weekends: DatabaseTypes.GPWeekend.array().min(0),
-    })
-  ),
+  output: ResponseTypes.Season,
   handler: async ({ input }) => {
     const season = await prisma.season.findUnique({
       where: {
         year: input.year,
       },
       include: {
-        weekends: true,
+        weekends: {
+          orderBy: {
+            round_number: 'asc',
+          },
+        },
       },
     });
 
@@ -61,6 +61,13 @@ export const getLatestSeason = endpointFactory.build({
     const season = await prisma.season.findFirst({
       where: {
         is_current_season: true,
+      },
+      include: {
+        weekends: {
+          orderBy: {
+            round_number: 'asc',
+          },
+        },
       },
     });
 

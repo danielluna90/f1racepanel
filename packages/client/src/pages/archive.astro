@@ -35,7 +35,7 @@ for (let i = currentYear; i >= 1950; i--) {
 
         return (
           <Card title={`${year}`}>
-            { season ? <p>Not Available</p> :  <a href=`/season/${year}` class="btn btn-primary">Visit</a> }
+            { season ? <a href=`/season/${year}` class="btn btn-primary">Visit</a> : <p>Not Available</p> }
           </Card>
         );
       })
