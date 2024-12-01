@@ -5,11 +5,13 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro check && astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio"
   },
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@astrojs/tailwind": "^5.1.2",
     "@types/bun": "^1.1.14",
