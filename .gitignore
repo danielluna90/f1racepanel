@@ -39,3 +39,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+## Server Stuff ##
+src/server/drizzle
