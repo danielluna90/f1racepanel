@@ -5,7 +5,7 @@ export const appRouter = router({
   userList: publicProcedure
     .input(z.string())
     .query(() => {
-      return ["Test", "Test 2"];
+      return ["Test", "Test 2", "Test 3"];
     })
 });
 

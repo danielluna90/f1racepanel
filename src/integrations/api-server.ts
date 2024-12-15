@@ -1,6 +1,7 @@
 import { createHTTPServer } from "@trpc/server/adapters/standalone";
 import { appRouter } from "../server/api";
 import type { AstroIntegration } from "astro";
+import { createContext } from "../server/api/context"
 
 const plugin = (): AstroIntegration => {
   return {
@@ -9,6 +10,7 @@ const plugin = (): AstroIntegration => {
       'astro:config:done': async () => {
         const server = createHTTPServer({
           router: appRouter,
+          createContext,
         });
         
         server.listen(3000);

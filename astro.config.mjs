@@ -14,15 +14,13 @@ export default defineConfig({
   site: url,
   srcDir: './src/client',
   integrations: [sitemap(), tailwind(), react(), F1RacePanelServer()],
-  experimental: {
-    env: {
-      schema: {
-        API_URL: envField.string({
-          context: 'server',
-          access: 'secret',
-          default: ""
-        })
-      }
+  env: {
+    schema: {
+      API_URL: envField.string({
+        context: 'server',
+        access: 'secret',
+        default: ""
+      })
     }
   }
 });
