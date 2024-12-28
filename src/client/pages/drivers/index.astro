@@ -1,16 +1,16 @@
 ---
-import type { ResponseTypes } from "f1racepanel-server";
 import PageLayout from "../../layouts/PageLayout.astro";
-import { getAllDrivers, toDriverPath } from "../../services/drivers";
+import { toDriverPath } from "../../services/drivers";
 import { getFlagEmoji as emoji } from "../../services/utils";
 import Card from "../../components/Card.astro";
+import { trpc } from "../../services/client";
 
-const drivers = await getAllDrivers();
+const drivers = await trpc.drivers.all.query();
 ---
 
 <PageLayout title="Drivers" titleText="Drivers">
   {
-    drivers.map((driver: ResponseTypes.Driver) => {
+    drivers.map((driver) => {
       return (
         <Card title={driver.name}>
           <h3>

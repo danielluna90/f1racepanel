@@ -2,16 +2,16 @@
 import type { GetStaticPathsResult } from "astro";
 import PageLayout from "../../layouts/PageLayout.astro";
 
-import { ResponseTypes } from "f1racepanel-server";
-
 //import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
-import { getAllDrivers, toDriverPath } from "../../services/drivers";
+import { toDriverPath } from "../../services/drivers";
+import { trpc, type RouterOutput } from "../../services/client";
 
 export async function getStaticPaths() {
   let rv: GetStaticPathsResult = [];
 
-  const drivers = await getAllDrivers();
-  drivers.forEach((driver: ResponseTypes.Driver) => {
+  const drivers = await trpc.drivers.all.query();
+
+  drivers.forEach((driver) => {
     rv.push({
       props: { driverData: driver },
       params: { name: toDriverPath(driver.name) },
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  driverData: ResponseTypes.Driver;
+  driverData: RouterOutput["drivers"]["all"] extends (infer U)[] ? U : unknown;
 }
 
 const { driverData } = Astro.props;
