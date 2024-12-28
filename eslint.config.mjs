@@ -24,6 +24,5 @@ export default tseslint.config(
       'sort-imports': 'error',
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   prettierConfig
 );
