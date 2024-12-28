@@ -7,7 +7,7 @@ const plugin = (): AstroIntegration => {
   return {
     name: "@f1racepanel/server-astro-integration",
     hooks: {
-      'astro:config:done': async () => {
+      'astro:config:done': () => {
         const server = createHTTPServer({
           router: appRouter,
           createContext,

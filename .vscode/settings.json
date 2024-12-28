@@ -5,18 +5,10 @@
   "files.insertFinalNewline": true,
 
   "eslint.validate": ["javascript", "typescript"],
-  "eslint.workingDirectories": [
-    {"mode": "auto"}
-  ],
-  
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": false,
 
-  "cSpell.words": [
-    "Astro",
-    "openapi",
-    "pgadmin",
-    "racepanel",
-    "tsdoc"
-  ]
+  "cSpell.words": ["Astro", "openapi", "pgadmin", "racepanel", "tsdoc"]
 }

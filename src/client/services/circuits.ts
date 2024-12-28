@@ -2,12 +2,12 @@ import { getSecret } from "astro:env/server";
 import { ResponseTypes } from "f1racepanel-server";
 
 export const getAllCircuits = async (): Promise<ResponseTypes.Circuit[]> => {
-  let rv: ResponseTypes.Circuit[] = [];
+  const rv: ResponseTypes.Circuit[] = [];
 
   const API_URL = getSecret("API_URL");
   const API_CIRCUITS_URL = `${API_URL}/search/circuits`;
 
-  let complete: boolean = false;
+  let complete = false;
   let url: string = API_CIRCUITS_URL;
   
   while (!complete) {

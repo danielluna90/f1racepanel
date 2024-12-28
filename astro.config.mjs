@@ -1,12 +1,11 @@
-import sitemap from "@astrojs/sitemap";
-import react from "@astrojs/react";
-import tailwind from "@astrojs/tailwind";
-
-import F1RacePanelServer from "./src/integrations/api-server.ts";
-
 import { defineConfig, envField } from 'astro/config';
 
-const url = "https://f1racepanel.com";
+import F1RacePanelServer from './src/integrations/api-server.ts';
+import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
+import tailwind from '@astrojs/tailwind';
+
+const url = 'https://f1racepanel.com';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,8 +18,8 @@ export default defineConfig({
       API_URL: envField.string({
         context: 'server',
         access: 'secret',
-        default: ""
-      })
-    }
-  }
+        default: '',
+      }),
+    },
+  },
 });
