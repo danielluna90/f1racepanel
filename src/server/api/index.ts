@@ -1,8 +1,9 @@
-import { z } from "zod";
-import { publicProcedure, router } from "./trpc";
-import { db } from "../db";
-import { eq } from "drizzle-orm";
-import { driver } from "../db/schema";
+import { publicProcedure, router } from './trpc';
+
+import { db } from '../db';
+import { driver } from '../db/schema';
+import { eq } from 'drizzle-orm';
+import { z } from 'zod';
 
 export const appRouter = router({
   drivers: {
@@ -12,17 +13,19 @@ export const appRouter = router({
       return res;
     }),
     withID: publicProcedure
-    .input(z.object({
-      id: z.string()
-    }))
-    .query(async (opts) => {
-      const res = await db.query.driver.findFirst({
-        where: eq(driver.id, opts.input.id)
-      });
+      .input(
+        z.object({
+          id: z.string(),
+        })
+      )
+      .query(async opts => {
+        const res = await db.query.driver.findFirst({
+          where: eq(driver.id, opts.input.id),
+        });
 
-      return res;
-    })
-  }
+        return res;
+      }),
+  },
 });
 
 export type AppRouter = typeof appRouter;

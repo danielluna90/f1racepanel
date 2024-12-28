@@ -1,3 +1,3 @@
 export const toDriverPath = (name: string): string => {
-  return name.toLowerCase().replace(" ", "-");
-}
+  return name.toLowerCase().replace(' ', '-');
+};
