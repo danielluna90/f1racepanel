@@ -42,3 +42,6 @@ pnpm-debug.log*
 
 ## Server Stuff ##
 src/server/drizzle
+
+## Code Coverage Output ##
+html
