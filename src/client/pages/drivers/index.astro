@@ -1,16 +1,16 @@
 ---
-import PageLayout from "../../layouts/PageLayout.astro";
-import { toDriverPath } from "../../services/drivers";
-import { getFlagEmoji as emoji } from "../../services/utils";
-import Card from "../../components/Card.astro";
-import { trpc } from "../../services/client";
+import PageLayout from '../../layouts/PageLayout.astro';
+import { api } from '../../services/client';
+import { toDriverPath } from '../../services/drivers';
+import { getFlagEmoji as emoji } from '../../services/utils';
+import Card from '../../components/Card.astro';
 
-const drivers = await trpc.drivers.all.query();
+const drivers = await api.drivers.all.query();
 ---
 
 <PageLayout title="Drivers" titleText="Drivers">
   {
-    drivers.map((driver) => {
+    drivers.map(driver => {
       return (
         <Card title={driver.name}>
           <h3>

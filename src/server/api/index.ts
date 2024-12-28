@@ -12,7 +12,7 @@ export const appRouter = router({
 
       return res;
     }),
-    withID: publicProcedure
+    byID: publicProcedure
       .input(
         z.object({
           id: z.string(),
@@ -25,6 +25,17 @@ export const appRouter = router({
 
         return res;
       }),
+  },
+  circuits: {
+    all: publicProcedure.query(async () => {
+      const res = await db.query.circuit.findMany({
+        with: {
+          layouts: true,
+        },
+      });
+
+      return res;
+    }),
   },
 });
 

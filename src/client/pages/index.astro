@@ -1,10 +1,10 @@
 ---
 // import LatestRace from "../components/home/LatestRace.astro";
-import PageLayout from "../layouts/PageLayout.astro";
+import PageLayout from '../layouts/PageLayout.astro';
 
-import { trpc } from "../services/client";
+import { api } from '../services/client';
 
-const latestWeekend = await trpc.drivers.all.query();
+const latestWeekend = await api.drivers.all.query();
 ---
 
 <PageLayout title="Home" titleText="Upcoming Race Weekend">
