@@ -4,7 +4,7 @@ import PageLayout from '../../layouts/PageLayout.astro';
 
 //import DriverBioCard from "../../components/cards/driver/DriverBioCard.astro";
 import { toDriverPath } from '../../services/drivers';
-import { api, type RouterOutput } from '../../services/client';
+import { api, type APIOutput } from '../../services/client';
 
 export async function getStaticPaths() {
   let rv: GetStaticPathsResult = [];
@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  driverData: RouterOutput['drivers']['all'] extends (infer U)[] ? U : unknown;
+  driverData: APIOutput['drivers']['all'] extends (infer U)[] ? U : unknown;
 }
 
 const { driverData } = Astro.props;

@@ -1,7 +1,7 @@
 import * as t from 'drizzle-orm/pg-core';
 
 import { pgTable, primaryKey } from 'drizzle-orm/pg-core';
-import { relations } from 'drizzle-orm';
+import { relations, sql } from 'drizzle-orm';
 
 export const driver = pgTable('driver', {
   id: t.uuid().primaryKey().notNull().defaultRandom(),
@@ -143,3 +143,59 @@ export const driverEntryToWeekendSessionRelations = relations(
     }),
   })
 );
+
+export const weekendStatusEnum = t.pgEnum('weekend_status', [
+  'UNKNOWN',
+  'COMPLETED',
+  'CURRENT',
+  'FUTURE',
+]);
+
+export const weekend = pgTable(
+  'weekend',
+  {
+    id: t.uuid().primaryKey().notNull().defaultRandom(),
+
+    startDate: t.date().notNull().unique(),
+    endDate: t.date().notNull().unique(),
+
+    roundNumber: t.integer().notNull(),
+
+    circuitID: t.uuid().notNull(),
+    circuitLayoutID: t.uuid().notNull(),
+    seasonID: t.integer().notNull(),
+
+    status: weekendStatusEnum().default('FUTURE'),
+  },
+  table => [t.unique('season_round_unq').on(table.seasonID, table.roundNumber)]
+);
+
+export const weekendRelations = relations(weekend, ({ one }) => ({
+  circuit: one(circuit, {
+    fields: [weekend.circuitID],
+    references: [circuit.id],
+  }),
+  circuitLayout: one(circuitLayout, {
+    fields: [weekend.circuitLayoutID],
+    references: [circuitLayout.id],
+  }),
+  season: one(season, {
+    fields: [weekend.seasonID],
+    references: [season.year],
+  }),
+}));
+
+export const season = pgTable(
+  'season',
+  {
+    year: t.integer().notNull().unique(),
+
+    numberOfRounds: t.integer().notNull(),
+    isCurrentSeason: t.boolean().notNull().default(false),
+  },
+  table => [t.check('year_check', sql`${table.year} > 0`)]
+);
+
+export const seasonConstraints = relations(season, ({ many }) => ({
+  weekends: many(weekend),
+}));

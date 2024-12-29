@@ -1,9 +1,9 @@
 ---
-import type { RouterOutput } from '../../../services/client';
+import type { APIOutput } from '../../../services/client';
 import Card from '../../Card.astro';
 
 interface Props {
-  data: RouterOutput['drivers']['all'] extends (infer U)[] ? U : unknown;
+  data: APIOutput['drivers']['all'] extends (infer U)[] ? U : unknown;
 }
 
 const { data } = Astro.props;

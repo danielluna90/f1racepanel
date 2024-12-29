@@ -12,4 +12,4 @@ export const api = createTRPCClient<AppRouter>({
   ],
 });
 
-export type RouterOutput = inferRouterOutputs<AppRouter>;
+export type APIOutput = inferRouterOutputs<AppRouter>;

@@ -1,4 +1,5 @@
 ---
+import { api } from '../../services/client';
 import Card from '../Card.astro';
 
 import iso3311a2 from 'iso-3166-1-alpha-2';
@@ -9,28 +10,23 @@ interface Props {
 
 const { weekend } = Astro.props;
 
-const circuit = await getFromV1API(
-  `circuit/${weekend.circuit_id}`,
-  ResponseTypes.Circuit
-);
-
-const circuitLayout = await getFromV1API(
-  `circuit/layout/${weekend.circuit_layout_id}`,
-  ResponseTypes.CircuitLayout
-);
+const circuit = await api.circuits.byID.query({ id: weekend.circuitID });
+const circuitLayout = await api.circuits.layout.byID.query({
+  id: weekend.circuitLayoutID,
+});
 ---
 
 <div class="grid gap-6">
   <Card
-    title={`${iso3311a2.getCountry(circuit.content?.country as string)} Grand Prix`}
+    title={`${iso3311a2.getCountry(circuit?.country as string)} Grand Prix`}
   >
     <h3>{weekend.start_date} to {weekend.end_date}</h3>
   </Card>
 
   <div class="grid grid-cols-2 gap-6">
     <Card title="Circuit Stats">
-      <h4>Date Opened: {circuit.content?.date_opened}</h4>
-      <h4>Circuit Distance: {circuitLayout.content?.track_length} KM</h4>
+      <h4>Date Opened: {circuit?.dateOpened}</h4>
+      <h4>Circuit Distance: {circuitLayout?.trackLength} KM</h4>
     </Card>
     <Card title="Sessions" />
     <Card title="Standings" />
