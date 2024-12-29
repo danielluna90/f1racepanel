@@ -1,42 +1,10 @@
-import { publicProcedure, router } from './trpc';
-
-import { db } from '../db';
-import { driver } from '../db/schema';
-import { eq } from 'drizzle-orm';
-import { z } from 'zod';
+import { circuitsRouter } from './routes/circuits';
+import { driversRouter } from './routes/drivers';
+import { router } from './trpc';
 
 export const appRouter = router({
-  drivers: {
-    all: publicProcedure.query(async () => {
-      const res = await db.query.driver.findMany();
-
-      return res;
-    }),
-    byID: publicProcedure
-      .input(
-        z.object({
-          id: z.string(),
-        })
-      )
-      .query(async opts => {
-        const res = await db.query.driver.findFirst({
-          where: eq(driver.id, opts.input.id),
-        });
-
-        return res;
-      }),
-  },
-  circuits: {
-    all: publicProcedure.query(async () => {
-      const res = await db.query.circuit.findMany({
-        with: {
-          layouts: true,
-        },
-      });
-
-      return res;
-    }),
-  },
+  drivers: driversRouter,
+  circuits: circuitsRouter,
 });
 
 export type AppRouter = typeof appRouter;
