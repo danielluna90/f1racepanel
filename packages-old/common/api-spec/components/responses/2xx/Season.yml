@@ -1,5 +1,0 @@
-description: A season.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/objects/Season.yml

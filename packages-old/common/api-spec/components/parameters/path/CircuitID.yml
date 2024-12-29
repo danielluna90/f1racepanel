@@ -1,7 +1,0 @@
-in: path
-name: CircuitID
-description: UUID of a specific circuit.
-schema:
-  type: string
-  format: uuid
-required: true

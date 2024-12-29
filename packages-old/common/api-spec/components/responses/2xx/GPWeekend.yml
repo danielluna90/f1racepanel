@@ -1,5 +1,0 @@
-description: A Grand Prix Weekend.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/objects/GPWeekend.yml

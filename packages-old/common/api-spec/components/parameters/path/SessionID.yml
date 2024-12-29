@@ -1,7 +1,0 @@
-in: path
-name: SessionID
-description: UUID of a specific GP Session.
-schema:
-  type: string
-  format: uuid
-required: true

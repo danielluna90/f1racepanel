@@ -1,5 +1,0 @@
-description: A driver.
-content:
-  application/json:
-    schema:
-      $ref: ../../schemas/objects/Driver.yml
