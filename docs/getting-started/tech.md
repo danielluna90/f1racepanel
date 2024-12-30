@@ -5,8 +5,8 @@
 
 ## Backend
 - Language: [Typescript](https://www.typescriptlang.org)
-- Server: [ExpressJS](https://expressjs.com)
-- ORM: [Prisma](https://www.prisma.io)
+- Server: [trpct](https://trpc.io)
+- ORM: [Drizzle](https://orm.drizzle.team)
 - Tests: [Vitest](https://vitest.dev)
 
 ## Common
@@ -15,7 +15,3 @@
 ## Code Standardization & Formatting
 - Linter: [ESLint](https://eslint.org)
 - Formatter: [Prettier](https://prettier.io)
-
-## API Spec & Documentation
-- API Spec: [OpenAPI Spec 3.0](https://swagger.io/specification/v3/)
-- Documentation Generator: [Elements by Stoplight](https://stoplight.io/open-source/elements)

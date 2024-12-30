@@ -5,8 +5,8 @@
 ### Getting Started
 - [Tech Stack](./getting-started/tech.md)
 
-### Client
-- [README.md](../packages/client/README.md)
+### API (trpc)
+- [README.md](./api/README.md)
 
-### API / Server
-- [README.md](../packages/server/README.md)
+### Client
+- [README.md](./client/README.md)
