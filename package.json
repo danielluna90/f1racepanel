@@ -4,7 +4,6 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build-script": "bun scripts/build.ts",
     "build": "astro check && astro build",
     "preview": "astro preview",
     "db:generate": "drizzle-kit generate",
@@ -23,7 +22,7 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/iso-3166-1-alpha-2": "^1.0.2",
     "@types/pg": "^8.11.10",
-    "@typescript-eslint/parser": "^8.18.2",
+    "@typescript-eslint/parser": "^8.19.0",
     "@vitest/coverage-istanbul": "2.1.8",
     "@vitest/ui": "2.1.8",
     "daisyui": "^4.12.23",
@@ -45,11 +44,11 @@
     "@astrojs/react": "^4.1.2",
     "@astrojs/sitemap": "^3.2.1",
     "@eslint/js": "^9.17.0",
-    "@fontsource-variable/montserrat": "^5.1.0",
-    "@fontsource-variable/open-sans": "^5.1.0",
+    "@fontsource-variable/montserrat": "^5.1.1",
+    "@fontsource-variable/open-sans": "^5.1.1",
     "@playwright/test": "^1.49.1",
-    "@trpc/client": "^11.0.0-rc.666",
-    "@trpc/server": "^11.0.0-rc.666",
+    "@trpc/client": "^11.0.0-rc.682",
+    "@trpc/server": "^11.0.0-rc.682",
     "@types/react": "^19.0.2",
     "@types/react-dom": "^19.0.2",
     "astro": "^5.1.1",
@@ -61,6 +60,6 @@
     "react-dom": "^19.0.0",
     "swapy": "^1.0.3",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.18.2"
+    "typescript-eslint": "^8.19.0"
   }
 }

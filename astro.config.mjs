@@ -15,11 +15,11 @@ export default defineConfig({
   integrations: [sitemap(), tailwind(), react(), F1RacePanelServer()],
   env: {
     schema: {
-      API_URL: envField.string({
+      DATABASE_URL: envField.string({
         context: 'server',
         access: 'secret',
-        default: '',
       }),
     },
+    validateSecrets: true,
   },
 });

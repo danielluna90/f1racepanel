@@ -8,11 +8,11 @@
 .
 ├── docs - Has documentation about the project
 ├── public - 
-└── src
-    ├── client - 
-    ├── integrations - 
-    ├── server - 
-    └── tests - 
+├── src
+│   ├── client - 
+│   ├── integrations - 
+│   ├── server - 
+└── tests - 
 ```
 
 ## Quick Start
