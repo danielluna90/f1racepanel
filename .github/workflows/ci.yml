@@ -40,21 +40,20 @@ jobs:
       - name: Install Packages
         run: bun install --frozen-lockfile
 
-      # - name: Generate Types
-      #   working-directory: ./packages/server
-      #   run: bun run db:gen
-
       - name: Check Formatting
         run: bun run lint
+
+      - name: Check Formatting (Astro)
+        run: bun astro check
 
       - name: Run API Tests
         run: bun run test
 
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          directory: ./packages/server/html/coverage
+          directory: ./html/coverage
 
   build:
     name: Build Repository
