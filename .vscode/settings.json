@@ -10,5 +10,6 @@
   "prettier.requireConfig": true,
   "prettier.useEditorConfig": false,
 
-  "cSpell.words": ["Astro", "openapi", "pgadmin", "racepanel", "tsdoc"]
+  "cSpell.words": ["Astro", "openapi", "pgadmin", "racepanel", "tsdoc"],
+  "tailwindCSS.experimental.configFile": "./src/client/styles/global.css"
 }
