@@ -3,7 +3,7 @@ import { defineConfig, envField } from 'astro/config';
 import F1RacePanelServer from './src/integrations/api-server.ts';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 
 const url = 'https://f1racepanel.com';
 
@@ -12,7 +12,10 @@ export default defineConfig({
   output: 'static',
   site: url,
   srcDir: './src/client',
-  integrations: [sitemap(), tailwind(), react(), F1RacePanelServer()],
+  vite: {
+    plugins: [tailwindcss()],
+  },
+  integrations: [sitemap(), react(), F1RacePanelServer()],
   env: {
     schema: {
       DATABASE_URL: envField.string({
