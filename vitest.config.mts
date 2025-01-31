@@ -7,11 +7,8 @@ export default defineConfig({
       enabled: true,
       provider: 'istanbul',
       exclude: [
-        'packages/**',
-        'packages-old/**',
         'src/client/**',
         'src/integrations/**',
-        'scripts/**',
         'tests/**',
         'html/**',
         '*.{mjs,ts}',

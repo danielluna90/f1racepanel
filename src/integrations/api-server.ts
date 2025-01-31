@@ -8,6 +8,9 @@ const plugin = (): AstroIntegration => {
   return {
     name: '@f1racepanel/server-astro-integration',
     hooks: {
+      // 'astro:config:setup': ({ config, addWatchFile }) => {
+      //   addWatchFile(new URL('./src/server/api/index.ts', config.root));
+      // },
       'astro:config:done': () => {
         const server = createHTTPServer({
           router: appRouter,

@@ -4,5 +4,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "react",
   },
-  "exclude": ["packages", "html", "node_modules"]
+  "exclude": ["html", "node_modules"]
 }
