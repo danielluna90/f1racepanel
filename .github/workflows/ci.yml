@@ -34,8 +34,7 @@ jobs:
         with:
           path: ./node_modules
           key:
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{
-            hashFiles('./bun.lockb') }}
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./bun.lock') }}
 
       - name: Install Packages
         run: bun install --frozen-lockfile
@@ -76,8 +75,7 @@ jobs:
         with:
           path: ./node_modules
           key:
-            ${{ runner.os }}-build-${{ env.cache-name }}-${{
-            hashFiles('./bun.lockb') }}
+            ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('./bun.lock') }}
 
       - name: Install Packages
         run: bun install --frozen-lockfile
@@ -88,14 +86,12 @@ jobs:
       - name: Pull Vercel Environment Information (Dev)
         if: ${{ github.ref_name != 'master' }}
         run:
-          vercel pull --yes --environment=preview --token=${{
-          secrets.VERCEL_TOKEN }}
+          vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Pull Vercel Environment Information (Prod)
         if: ${{ github.ref_name == 'master' }}
         run:
-          vercel pull --yes --environment=production --token=${{
-          secrets.VERCEL_TOKEN }}
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: Add Database File
         run:
