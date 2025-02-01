@@ -18,11 +18,26 @@ export default defineConfig({
   integrations: [sitemap(), react(), F1RacePanelServer()],
   env: {
     schema: {
-      DATABASE_URL: envField.string({
+      POSTGRES_USER: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+      POSTGRES_PASSWORD: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+      POSTGRES_DB: envField.string({
+        context: 'server',
+        access: 'secret',
+      }),
+      POSTGRES_HOST: envField.string({
         context: 'server',
         access: 'secret',
       }),
     },
     validateSecrets: true,
+  },
+  server: {
+    host: '0.0.0.0',
   },
 });

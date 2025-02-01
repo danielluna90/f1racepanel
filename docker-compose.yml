@@ -2,33 +2,36 @@ name: F1RacePanel
 
 services:
   db:
+    container_name: db
     image: postgres:17-alpine
-    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - pgdata:/var/lib/postgres/data
+      - pgdata:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready"]
+      test: ["CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
+    restart: unless-stopped
 
   app:
+    container_name: app
     build: .
     command: bash -c "bun run dev"
+    env_file:
+      - .env
     volumes:
       - ./src:/f1racepanel/src
-    restart: unless-stopped
+      - ./public:/f1racepanel/public
     ports:
       - 4321:4321
     depends_on:
       db:
         condition: service_healthy
-    environment:
-      DATABASE_URL: ${DATABASE_URL}
+    restart: unless-stopped
 
 volumes:
   pgdata:
