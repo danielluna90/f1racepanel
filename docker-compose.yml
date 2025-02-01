@@ -39,9 +39,8 @@ services:
     env_file:
       - .env
     volumes:
-      - ./public:/f1racepanel/public
-      - ./src:/f1racepanel/src
-      - ./test:/f1racepanel/tests
+      - .:/f1racepanel
+      - /f1racepanel/node_modules
     ports:
       - 4321:4321
     depends_on:
